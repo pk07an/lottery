@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- Demo -->
+	<!-- 包名一般以模块名称命名，可以增加更具体的业务名称，如 demo.functionname -->
+	<package name="boss" extends="struts-default" namespace="/boss">
+		
+		<global-results>
+			<result name="inputError">/common/parameterError.jsp</result>
+		</global-results>
+		<!--会员投注時的商鋪號登錄號-->
+		<action name="shopLogin" class="com.npc.lottery.member.action.MemberAction" method="shopLogin">
+			<result name="success">/jsp/member/chooseLogin.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<!--总管登录 默认页面为商铺信息维护-->
+		<action name="bossLogin" class="com.npc.lottery.controller.BossAction" method="bossLogin">
+			<result name="success" type="chain">shopManager</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<!--打开商铺注册页面-->
+		<action name="shopRegister" class="com.npc.lottery.controller.BossAction" method="shopRegister">
+			<result name="success">/jsp/boss/shopRegister.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<!--商铺注册提交-->
+		<action name="shopRegisterSubmit" class="com.npc.lottery.controller.BossAction" method="shopRegisterSubmit">			
+			<result name="success" type="chain">shopManager</result>
+			<result name="input">/jsp/boss/shopRegister.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>	
+		</action>
+		<!-- 进入默认交易设定界面-->
+		<action name="queryCommissionDefault" class="com.npc.lottery.controller.CommissionAction" method="queryCommission">
+			<result name="default">/jsp/boss/commissionDefault.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+			<result name="success">/jsp/boss/findcommission.jsp</result>
+        </action>
+		<!-- 添加默认交易设定-->
+		<action name="saveCommissionDefault" class="com.npc.lottery.controller.CommissionAction" method="saveCommission">
+			<result name="success">/jsp/boss/findcommission.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>		
+		<!-- 修改默认交易设定-->
+		<action name="updateCommissionDefault" class="com.npc.lottery.controller.CommissionAction" method="updateCommission">
+			<result name="success" type="redirect">queryCommissionDefault.action?shopsCode=${shopsCode}</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--查询所有商铺列表-->
+		<action name="shopManager" class="com.npc.lottery.controller.BossAction" method="shopManager">			
+			<result name="success">/jsp/boss/shopManager.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+		</action>
+		<!--查询单个商铺-->
+		<action name="queryShop" class="com.npc.lottery.controller.BossAction" method="queryShop">			
+			<result name="success">/jsp/boss/shopModify.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+		</action>
+		<!--商铺修改确认-->
+		<action name="modifyShop" class="com.npc.lottery.controller.BossAction" method="modifyShop">			
+			<result name="success" type="chain">shopManager</result>	
+			<result name="input">/common/infoPage.jsp</result>	
+		</action>
+		<!--开奖结果-->
+		<action name="enterLotResultHistoryBoss" class="com.npc.lottery.controller.LotResultAction" method="enter">
+			<result name="gdlotResultHistory">/jsp/boss/gdklsfLotResultHistory.jsp</result>
+			<result name="nclotResultHistory">/jsp/boss/ncLotResultHistory.jsp</result>
+			<result name="cqlotResultHistory">/jsp/boss/cqsscLotResultHistory.jsp</result>
+			<result name="bjlotResultHistory">/jsp/boss/bjscLotResultHistory.jsp</result>
+			<result name="k3lotResultHistory">/jsp/boss/jssbLotResultHistory.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<!--查询单注广东快乐十分开奖结果-->
+		<action name="queryGdklsfLotResult" class="com.npc.lottery.controller.LotResultAction" method="queryGdklsfLotResult">
+			<result name="success">/jsp/boss/gdklsfLotResultModify.jsp</result>
+			<result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--修改广东快乐十分开奖结果-->
+		<action name="modifyGdklsfLotResult" class="com.npc.lottery.controller.LotResultAction" method="modifyGdklsfLotResult">
+			<result name="success" type="redirectAction">enterLotResultHistoryBoss</result>
+			<result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--修改广东快乐十分历史开奖结果-->
+		<action name="modifyGdklsfHistoryResult" class="com.npc.lottery.controller.LotResultAction" method="modifyGdklsfHistoryResult">
+			<result name="success" type="redirectAction">enterLotResultHistoryBoss</result>
+			<result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--查询单注NC开奖结果-->
+		<action name="queryNCLotResult" class="com.npc.lottery.controller.LotResultAction" method="queryNCLotResult">
+			<result name="success">/jsp/boss/ncLotResultModify.jsp</result>
+			<result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--修改NC开奖结果-->
+		<action name="modifyNCLotResult" class="com.npc.lottery.controller.LotResultAction" method="modifyNCLotResult">
+			<result name="success" type="redirectAction">enterLotResultHistoryBoss?subType=NC</result>
+			<result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--修改NC历史开奖结果-->
+		<action name="modifyNCHistoryResult" class="com.npc.lottery.controller.LotResultAction" method="modifyNCHistoryResult">
+			<result name="success" type="redirectAction">enterLotResultHistoryBoss?subType=NC</result>
+			<result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--查询单注快3开奖结果-->
+		<action name="queryK3LotResult" class="com.npc.lottery.controller.LotResultAction" method="queryK3LotResult">
+			<result name="success">/jsp/boss/k3LotResultModify.jsp</result>
+			<result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--修改快3开奖结果-->
+		<action name="modifyK3LotResult" class="com.npc.lottery.controller.LotResultAction" method="modifyK3LotResult">
+			<result name="success" type="redirectAction">enterLotResultHistoryBoss?subType=K3</result>
+			<result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--修改快3历史开奖结果-->
+		<action name="modifyK3HistoryResult" class="com.npc.lottery.controller.LotResultAction" method="modifyK3HistoryResult">
+			<result name="success" type="redirectAction">enterLotResultHistoryBoss?subType=K3</result>
+			<result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--查询单注北京賽車开奖结果-->
+		<action name="queryBJSCLotResult" class="com.npc.lottery.controller.LotResultAction" method="queryBjscLotResult">
+			<result name="success">/jsp/boss/bjscLotResultModify.jsp</result>
+			<result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--修改北京賽車开奖结果-->
+		<action name="modifyBJSCLotResult" class="com.npc.lottery.controller.LotResultAction" method="modifyBjscLotResult">
+			<result name="success" type="redirectAction">enterLotResultHistoryBoss?subType=BJSC</result>
+			<result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--修改北京賽車历史开奖结果-->
+		<action name="modifyBJSCHistoryResult" class="com.npc.lottery.controller.LotResultAction" method="modifyBjscHistoryResult">
+			<result name="success" type="redirectAction">enterLotResultHistoryBoss?subType=BJSC</result>
+			<result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--查询单注重庆时时彩开奖结果-->
+		<action name="queryCqsscLotResult" class="com.npc.lottery.controller.LotResultAction" method="queryCqsscLotResult">
+			<result name="success">/jsp/boss/cqsscLotResultModify.jsp</result>
+			<result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--修改重庆时时彩开奖结果-->
+		<action name="modifyCqsscLotResult" class="com.npc.lottery.controller.LotResultAction" method="modifyCqsscLotResult">
+			<result name="success" type="redirectAction">enterLotResultHistoryBoss?subType=CQSSC</result>
+			<result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--修改重庆时时彩历史开奖结果-->
+		<action name="modifyCqsscHistoryResult" class="com.npc.lottery.controller.LotResultAction" method="modifyCqsscHistoryResult">
+			<result name="success" type="redirectAction">enterLotResultHistoryBoss?subType=CQSSC</result>
+			<result name="input">/common/infoPage.jsp</result>
+		</action>
+		
+		<!--广东盘期管理-->
+		<action name="queryGDResultPeriods" class="com.npc.lottery.controller.PeriodsInfoAction" method="queryGDResultPeriods">
+			<result name="success">/jsp/periods/GDPeriodsResultManager.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--农场盘期管理-->
+		<action name="queryNCResultPeriods" class="com.npc.lottery.controller.PeriodsInfoAction" method="queryNCResultPeriods">
+			<result name="success">/jsp/periods/NCPeriodsResultManager.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--重庆盘期管理-->
+		<action name="queryCQResultPeriods" class="com.npc.lottery.controller.PeriodsInfoAction" method="queryCQResultPeriods">
+			<result name="success">/jsp/periods/CQPeriodsResultManager.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+		 </action>
+		<!--北京赛车盘期管理-->
+		<action name="queryBJResultPeriods" class="com.npc.lottery.controller.PeriodsInfoAction" method="queryBJResultPeriods">
+			<result name="success">/jsp/periods/BJPeriodsResultManager.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--K3盘期管理-->
+		<action name="queryK3ResultPeriods" class="com.npc.lottery.controller.PeriodsInfoAction" method="queryK3ResultPeriods">
+			<result name="success">/jsp/periods/K3PeriodsResultManager.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<!--手动提交重庆期數-->
+		<action name="cqPeriodsInfo" class="com.npc.lottery.controller.PeriodsInfoAction" method="cqPeriodsInfo">
+			<result name="success">/common/infoPage.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--手动提交广东期數-->
+		<action name="gdPeriodsInfo" class="com.npc.lottery.controller.PeriodsInfoAction" method="gdPeriodsInfo">
+			<result name="success">/common/infoPage.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--手动提交农场期數-->
+		<action name="ncPeriodsInfo" class="com.npc.lottery.controller.PeriodsInfoAction" method="ncPeriodsInfo">
+			<result name="success">/common/infoPage.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--手动提交快3盘期-->
+		<action name="k3PeriodsInfo" class="com.npc.lottery.controller.PeriodsInfoAction" method="k3PeriodsInfo">
+			<result name="success">/common/infoPage.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--手动删除广东盘期-->
+		<action name="delGDPeriodsInfo" class="com.npc.lottery.controller.PeriodsInfoAction" method="delGDPeriodsInfo">
+			<result name="success">/common/infoPage.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--手动删除重庆盘期-->
+		<action name="delCQPeriodsInfo" class="com.npc.lottery.controller.PeriodsInfoAction" method="delCQPeriodsInfo">
+			<result name="success">/common/infoPage.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+        <!--手动删除北京盘期-->
+		<action name="delBjPeriodsEnter" class="com.npc.lottery.controller.PeriodsInfoAction" method="delBjPeriodsEnter">
+			<result name="success">/jsp/periods/delBJPeriods.jsp</result>	
+        </action>
+		<!--手动删除北京盘期-->
+		<action name="delBJPeriodsInfo" class="com.npc.lottery.controller.PeriodsInfoAction" method="delBJPeriodsInfo">
+			<result name="success">/common/infoPage.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--手动删除快3盘期-->
+		<action name="delK3PeriodsInfo" class="com.npc.lottery.controller.PeriodsInfoAction" method="delK3PeriodsInfo">
+			<result name="success">/common/infoPage.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--手动删除农场盘期-->
+		<action name="delNCPeriodsInfo" class="com.npc.lottery.controller.PeriodsInfoAction" method="delNCPeriodsInfo">
+			<result name="success">/common/infoPage.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--手动生成北京赛车期數的界面-->
+		<action name="bjPeriodsInfoEnter" class="com.npc.lottery.controller.PeriodsInfoAction" method="bjPeriodsInfoEnter">
+			<result name="success">/jsp/periods/BJPeriods.jsp</result>	
+        </action>
+		<!--手动生成农场期數的界面-->
+		<action name="ncPeriodsInfoEnter" class="com.npc.lottery.controller.PeriodsInfoAction" method="ncPeriodsInfoEnter">
+			<result name="success">/jsp/periods/NCPeriods.jsp</result>	
+        </action>
+		<!--手动生成北京赛车期數-->
+		<action name="bjPeriodsInfo" class="com.npc.lottery.controller.PeriodsInfoAction" method="bjPeriodsInfo">
+			<result name="success">/common/infoPage.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--手动提交恢复可用信用额度-->
+		<action name="updateMemberTotalCreditLine" class="com.npc.lottery.controller.PeriodsInfoAction" method="updateMemberTotalCreditLine">
+			<result name="success">/common/infoPage.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<!--公告查看 -->
+		<action name="queryManagerMessage" class="com.npc.lottery.controller.ShopsDeclarattonAction" method="queryManagerMessage">
+			 <result name="success">/jsp/boss/shopsManageDeclaratton.jsp</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>	
+		
+		<!--创建公告 -->
+		<action name="saveFindMessage" class="com.npc.lottery.controller.ShopsDeclarattonAction" method="saveFindMessage">
+			 <result name="success">/jsp/boss/shopChiefRegister.jsp</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		
+		<!--保存公告 -->
+		<action name="saveMessage" class="com.npc.lottery.controller.ShopsDeclarattonAction" method="saveMessage">
+			 <result name="success" type="redirect">/boss/queryManagerMessage.action</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		
+		<!--删除公告 -->
+		<action name="deleteMessage" class="com.npc.lottery.controller.ShopsDeclarattonAction" method="deleteMessage">
+			 <result name="success" type="redirect">/boss/queryManagerMessage.action</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		
+		<!--修改公告 -->
+		<action name="updateFindMessage" class="com.npc.lottery.controller.ShopsDeclarattonAction" method="updateFindMessage">
+			 <result name="success">/jsp/boss/shopMessageUpdate.jsp</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--提交修改公告 -->
+		<action name="updateMessage" class="com.npc.lottery.controller.ShopsDeclarattonAction" method="updateMessage">
+			 <result name="success" type="redirect">/boss/queryManagerMessage.action</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--公告 end-->
+		<!-- 異常日誌列表 -->		
+		<action name="queryBossLog" class="com.npc.lottery.controller.BossLogAction" method="queryBossLog">
+			 <result name="success">/jsp/boss/selectloglist.jsp</result>
+			 <result name="exception">/common/infoPage.jsp</result>
+		</action>
+		
+		<!-- 手动生成报表  -->
+		<action name="queryReport" class="com.npc.lottery.controller.SettledGetReportAction" method="queryReport">
+			<result name="success" type="redirect">/boss/shopManager.action</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		
+		<!-- 数据校验入口  -->
+		<action name="queryCheckPetEntry" class="com.npc.lottery.controller.BossAction" method="checkPetEntry">
+			<result name="success">/jsp/boss/checkPet.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		
+		<!--登录模块start-->
+		<!-- 用户登陆 -->
+		<action name="loginBoss" class="com.npc.lottery.controller.LoginAction" method="loginBoss">
+			<result name="success_system" type="redirect">/sysmge/manageruser/list.action</result>
+			<result name="success_manager" type="redirect">/boss/bossLogin.action</result>
+			<result name="userUnexist" type="redirect">/boss/loginFailureBoss.action?ERROR_TYPE=userUnexist</result>
+			<result name="pwdIncorrect" type="redirect">/boss/loginFailureBoss.action?ERROR_TYPE=pwdIncorrect</result>
+			<result name="safetyCodeUnLogin" type="redirect">/index.jsp</result>
+			<result name="safetyCodeError" type="redirect">/index.jsp</result>
+			<result name="userForbid" type="redirect">/boss/loginFailureBoss.action?ERROR_TYPE=userForbid</result>
+			<result name="userFreeze" type="redirect">/boss/loginFailureBoss.action?ERROR_TYPE=userFreeze</result>
+			<result name="failure" type="redirect">/boss/loginFailureBoss.action</result>
+			<result name="reLogin" type="redirect">/boss/loginFailureBoss.action?ERROR_TYPE=pwdIncorrect</result>
+			<result name="userAlreadyLoginLocal" type="redirect">/boss/loginFailureBoss.action?ERROR_TYPE=userAlreadyLoginLocal&amp;userName=${userName}</result>
+		</action>
+		
+		<!-- 验证码校验 -->
+		<action name="ajaxCheckCode" class="com.npc.lottery.controller.LoginAction" method="ajaxCheckCode">
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<!-- 管理用户登出 -->
+		<action name="logoutBoss" class="com.npc.lottery.controller.LoginAction" method="logoutBoss">
+			<result name="success">/bossLogin.jsp</result>  
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<!-- 管理用户登陆失败 -->
+		<action name="loginFailureBoss" class="com.npc.lottery.controller.LoginAction" method="loginFailureBoss">
+			<result name="failure">/common/loginFailureAlert.jsp</result>
+        </action>
+		<!--登录模块end-->
+	</package>
+</struts>
+
+

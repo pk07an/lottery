@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.periods.entity">
+	<class
+		name="HKPeriods"
+		table="TB_SHOPS_HKLHC_PERIODS"
+	>
+		<id
+			name="ID"
+			type="long"
+			column="ID"
+		>
+			 <generator class="sequence">
+				<param name="sequence">SEQ_TB_SHOPS_HKLHC_PERIODS</param>
+			</generator>
+		</id>
+
+		<property
+			name="periodsInfoID"
+			column="PERIODS_INFO_ID"
+			type="long"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="shopsCode"
+			column="SHOPS_CODE"
+			type="string"
+			not-null="true"
+			length="4"
+		/>
+		<property
+			name="periodsState"
+			column="PERIODS_STATE"
+			type="string"
+			not-null="true"
+			length="1"
+		/>
+		<property
+			name="modifyUser"
+			column="MODIFY_USER"
+			type="long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="modifyTime"
+			column="MODIFY_TIME"
+			type="timestamp"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="openQuotTime"
+			column="OPEN_QUOT_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+		/>
+		<property
+			name="stopQuotTime"
+			column="STOP_QUOT_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+		/>
+		<property
+			name="autoStopOuot"
+			column="AUTO_STOP_QUOT"
+			type="integer"
+			not-null="false"
+			length="7"
+		/>
+	</class>	
+</hibernate-mapping>

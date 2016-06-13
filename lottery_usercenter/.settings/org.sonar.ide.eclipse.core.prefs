@@ -1,0 +1,6 @@
+analyseLocally=false
+eclipse.preferences.version=1
+extraProperties=sonar.host.url\=http\://192.168.1.252\:9000/sonar\r\nsonar.jdbc.password\=sonar\r\nsonar.jdbc.username\=sonar\r\nsonar.jdbc.url\=jdbc\:oracle\:thin\:@192.168.1.252/orcl
+projectKey=com.npc\:lot
+serverUrl=http\://192.168.1.252\:9000/sonar
+version=2

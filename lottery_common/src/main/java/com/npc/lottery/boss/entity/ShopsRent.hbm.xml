@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.boss.entity">
+	<class
+		name="ShopsRent"
+		table="TB_SHOPS_RENT"
+	>
+		<meta attribute="sync-DAO">false</meta>
+        <id name="ID" type="java.lang.Long" column="ID">
+			<generator class="sequence">
+			    <param name="sequence">SEQ_TB_SHOPS_RENT</param>
+		    </generator>
+		</id>
+		<property
+			name="expityTime"
+			column="EXPITY_TIME"
+			type="date"
+			not-null="true"
+			length="7"
+		/>
+		<property
+			name="expityWarningTime"
+			column="EXPITY_WARNING_TIME"
+			type="date"
+			not-null="true"
+			length="7"
+		/>
+		<property
+			name="lastModifyUser"
+			column="LAST_MODIFY_USER"
+			type="java.lang.Long"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="lastModifyDate"
+			column="LAST_MODIFY_DATE"
+			type="timestamp"
+			not-null="true"
+			length="7"
+		/>
+		<property
+			name="remark"
+			column="REMARK"
+			type="java.lang.String"
+			not-null="false"
+			length="400"
+		/>
+        <many-to-one name="shopsInfo" column="SHOPS_CODE" 
+			class="com.npc.lottery.boss.entity.ShopsInfo" 
+			cascade="none" 
+			lazy="false" 
+			property-ref="shopsCode"
+			insert="true"
+		/>  
+
+	</class>	
+</hibernate-mapping>

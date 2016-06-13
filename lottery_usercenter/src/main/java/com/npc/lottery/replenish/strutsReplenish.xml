@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="replenish" extends="default" namespace="/replenish">
+	 	<!-- 增加统一异常处理 start -->
+        <global-results>
+			<!-- 下面定义的结果对所有的Action都有效 -->
+			<result name="exception">/common/error.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="exception"/>
+		</global-exception-mappings>
+		<!-- 增加统一异常处理 end -->
+       <!-- 进入下注的入口页面 action-->
+		 <action name="replenishSet" class="com.npc.lottery.replenish.action.ReplenishAction" method="enterReplenishSet">
+		   <!--总监start-->  
+			  <result name="klsfBall2">/jsp/replenish/gdklsfBallChief.jsp</result>
+			  <result name="other">/jsp/replenish/otherMain.jsp</result>
+			  <result name="klsfStraightthrough">/jsp/replenish/gdklsfStraightthroughMain.jsp</result>
+			 
+			 <result name="failure">/common/infoPage.jsp</result>	
+			 <result name="notKp">/jsp/replenish/adminNotkp.jsp</result>
+			 <result name="illegalityData">/common/illegalityDataError.jsp</result>		
+			 	
+			 <!--其他管理end-->
+			 		
+        </action>
+		
+		<!--广东补货菜单-->
+		<action name="gdReplenishEnter" class="com.npc.lottery.replenish.action.ReplenishAction" method="gdReplenishEnter">	 		 
+			<result name="success">/jsp/admin/frame/topMenu.jsp</result>				
+        </action>
+		<!--农场补货菜单-->
+		<action name="ncReplenishEnter" class="com.npc.lottery.replenish.action.ReplenishAction" method="ncReplenishEnter">	 		 
+			<result name="success">/jsp/admin/frame/topMenu.jsp</result>				
+        </action>
+		<!--重庆补货菜单-->
+		<action name="cqReplenishEnter" class="com.npc.lottery.replenish.action.ReplenishAction" method="cqReplenishEnter">	 		 
+			<result name="success">/jsp/admin/frame/topMenu.jsp</result>				
+        </action>
+		<!--补货明細-->
+		<action name="replenishDetail" class="com.npc.lottery.replenish.action.ReplenishAction" method="replenishDetail">	 		 
+			<result name="success">/jsp/replenish/detail.jsp</result>					
+        </action>
+		<!--实时滚单-->
+		<action name="realTimeDetail" class="com.npc.lottery.replenish.action.ReplenishAction" method="realTimeDetail">	 		 
+			<result name="success">/jsp/replenish/realTimeDetail.jsp</result>					
+        </action>
+		<!--实时滚单-->
+		<action name="ajaxRealTimeDetail" class="com.npc.lottery.replenish.action.ReplenishAjax" method="getRealTimeDetail">	 		 
+			<result name="input">/common/infoPage.jsp</result>					
+        </action>
+		<!--备份-点击菜单时的判断是否要转圈-->
+		<action name="backupDetailCheck" class="com.npc.lottery.replenish.action.ZhangdanAction" method="backupDetailCheck">	 		 
+			<result name="GDKLSF" type="redirect">/replenish/backupDetail.action?subType=GDKLSF</result>	
+			<result name="NC" type="redirect">/replenish/backupDetail.action?subType=NC</result>	
+			<result name="CQSSC" type="redirect">/replenish/backupDetail.action?subType=CQSSC</result>	
+			<result name="BJ" type="redirect">/replenish/backupDetail.action?subType=BJ</result>	
+			<result name="K3" type="redirect">/replenish/backupDetail.action?subType=K3</result>	
+			<result name="noZhanDang">/jsp/replenish/notZhanDang.jsp</result>
+			<result name="notKp">/jsp/replenish/adminNotkp.jsp</result>	
+			<result name="input">/common/infoPage.jsp</result>					
+        </action>
+		<!--备份-->
+		<action name="backupDetail" class="com.npc.lottery.replenish.action.ReplenishAjax" method="backupDetail">	 		 
+			<result name="input">/common/infoPage.jsp</result>					
+        </action>
+		<!--北京賽車补货菜单-->
+		<action name="bjReplenishEnter" class="com.npc.lottery.replenish.action.ReplenishAction" method="bjReplenishEnter">	 		 
+			<result name="success">/jsp/admin/frame/topMenu.jsp</result>				
+        </action>
+		<!--K3补货菜单-->
+		<action name="k3ReplenishEnter" class="com.npc.lottery.replenish.action.ReplenishAction" method="k3ReplenishEnter">	 		 
+			<result name="success">/jsp/admin/frame/topMenu.jsp</result>				
+        </action>
+		
+		<!--补货操作-->
+		<action name="ajaxReplenishSubmit" class="com.npc.lottery.replenish.action.ReplenishAjax" method="replenishSubmit">	 		 
+			<result name="input">/common/infoPage.jsp</result>				
+        </action>
+		
+		<!--补货結果显示-->
+		<action name="ajaxFinishReplenish" class="com.npc.lottery.replenish.action.ReplenishAjax" method="queryFinishReplenish">		 
+			 <result name="input">/common/infoPage.jsp</result>							
+        </action>
+		
+		<!--补货結果显示-->
+		<action name="ajaxFinishReplenishLM" class="com.npc.lottery.replenish.action.ReplenishAjax" method="queryFinishReplenish_LM">		 
+			 <result name="input">/common/infoPage.jsp</result>							
+        </action>
+		
+		<!--连码无页面刷新显示补货信息-->
+		<action name="ajaxReplenishLM" class="com.npc.lottery.replenish.action.ReplenishAction" method="ajaxReplenishLM">		 
+			 <result name="input">/common/infoPage.jsp</result>							
+        </action>
+		<action name="ajaxReplenishLmMain" class="com.npc.lottery.replenish.action.ReplenishAction" method="ajaxReplenishLmAttribute">		 
+			 <result name="input">/common/infoPage.jsp</result>							
+        </action>
+		<action name="ajaxReplenishNCLmMain" class="com.npc.lottery.replenish.action.ReplenishAction" method="ajaxReplenishNCLmAttribute">		 
+			 <result name="input">/common/infoPage.jsp</result>							
+        </action>
+		<!--GD CQ HK 查询封盘状态 -->
+		<action name="getTypeCodeState" class="com.npc.lottery.replenish.action.ReplenishAjax" method="getTypeCodeState">		 
+			 <result name="input">/common/infoPage.jsp</result>							
+        </action>
+        
+		<!-- 补货时获取当前实时赔率 -->
+        <action name="ajaxQueryRealOdds" class="com.npc.lottery.replenish.action.ReplenishAjax" method="queryRealOdds">
+			 <result name="input">/common/infoPage.jsp</result>		
+        </action>
+		
+		<!-- 查询某个用户有没有补货记录 -->
+        <action name="ajaxFindReplenishPet" class="com.npc.lottery.replenish.action.ReplenishAjax" method="findReplenishPet">
+			 <result name="input">/common/infoPage.jsp</result>		
+        </action>
+		
+		<!--TEST-->
+        <action name="test" class="com.npc.lottery.replenish.action.ReplenishAjax" method="test">
+			 <result name="input">/common/infoPage.jsp</result>		
+        </action>
+		
+		<action name="replenishSetContent" class="com.npc.lottery.replenish.action.ReplenishAction" method="enterReplenishSetContent">
+		   <!--总监start-->  
+			  <result name="klsfBallChief2">/jsp/replenish/gdklsfBallChiefContent.jsp</result>
+			  <result name="klsfBallChief3">/jsp/replenish/gdklsfBallChief3Content.jsp</result>
+			  <result name="klsfSumDragonTigerChief">/jsp/replenish/gdklsfSumDragonTigerChief.jsp</result>
+			  <result name="klsfStraightthroughChief">/jsp/replenish/gdklsfStraightthroughChief.jsp</result>
+			
+			  <result name="ncBallChief2">/jsp/replenish/ncBallChiefContent.jsp</result>
+			  <result name="ncBallChief3">/jsp/replenish/ncBallChief3Content.jsp</result>
+			  <result name="ncSumDragonTigerChief">/jsp/replenish/ncSumDragonTigerChief.jsp</result>
+			  <result name="ncStraightthroughChief">/jsp/replenish/ncStraightthroughChief.jsp</result>
+			
+			  <result name="cqsscBallChief">/jsp/replenish/cqsscBallChief.jsp</result>
+		  <!--北京賽車-->
+			  <result name="bjscFirstChief">/jsp/replenish/bjscFirstChief.jsp</result>
+			  <result name="bjscThirdChief">/jsp/replenish/bjscThirdChief.jsp</result>
+			  <result name="bjscSeventhChief">/jsp/replenish/bjscSeventhChief.jsp</result>
+		  <!--K3-->
+			  <result name="k3Chief">/jsp/replenish/k3Chief.jsp</result>
+		  <!--总监end-->  
+			 <!--其他管理start-->
+			 <result name="klsfBall2">/jsp/replenish/gdklsfBall.jsp</result>
+			 <result name="klsfBall3">/jsp/replenish/gdklsfBall3.jsp</result>
+			 <result name="klsfSumDragonTiger">/jsp/replenish/gdklsfSumDragonTiger.jsp</result>
+			 <result name="klsfStraightthrough">/jsp/replenish/gdklsfStraightthrough.jsp</result>
+			
+			 <result name="ncBall2">/jsp/replenish/ncBall.jsp</result>
+			 <result name="ncBall3">/jsp/replenish/ncBall3.jsp</result>
+			 <result name="ncSumDragonTiger">/jsp/replenish/ncSumDragonTiger.jsp</result>
+			 <result name="ncStraightthrough">/jsp/replenish/ncStraightthrough.jsp</result>
+			
+			 <result name="cqsscBall">/jsp/replenish/cqsscBall.jsp</result>
+			 
+			  <!--北京賽車-->
+			  <result name="bjscFirst">/jsp/replenish/bjscFirst.jsp</result>
+			  <result name="bjscThird">/jsp/replenish/bjscThird.jsp</result>
+			  <result name="bjscSeventh">/jsp/replenish/bjscSeventh.jsp</result>	
+			
+			 <!--K3-->
+			  <result name="k3">/jsp/replenish/k3.jsp</result>
+			 
+			 <result name="failure">/common/infoPage.jsp</result>	
+			 <result name="notKp">/jsp/replenish/adminNotkp.jsp</result>
+			 <result name="illegalityData">/common/illegalityDataError.jsp</result>	
+			 <!--其他管理end-->
+			 		
+        </action>
+		
+		 <!-- 右栏的统两面长龙 统一信息action 通过<s:action 标签在页面上进行显示 -->		
+		 <action name="twoSideAndDragonRank" class="com.npc.lottery.member.action.TwoSideAndDragonRankAction" method="getSideAndDragonRank">
+			<result name="rankResult">/jsp/replenish/twoSideAndDragonRank.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>			
+         </action>
+		
+		 <action name="ajaxtwoSideAndDragonRank" class="com.npc.lottery.member.action.AJAXTwoSideAndDragonRankAction" method="getSideAndDragonRank">
+			<result name="rankResult">/jsp/replenish/doubleRankRightStatistics.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>			
+         </action>
+		
+		 <action name="replenishRightBar" class="com.npc.lottery.replenish.action.ZhangdanAction" method="replenishRightBar">
+			<result name="gd">/jsp/replenish/gdRightTotal.jsp</result>	
+			<result name="bj">/jsp/replenish/bjRightTotal.jsp</result>	
+			<result  name="failure">/common/infoPage.jsp</result>			
+         </action>
+		
+		 <!--取今天输赢-->
+		<action name="ajaxGetTodayWin" class="com.npc.lottery.replenish.action.ReplenishAjax" method="getTodayWin">
+			<result name="input">/common/infoPage.jsp</result>				
+         </action>
+		
+        
+    </package>
+	
+</struts>
+
+

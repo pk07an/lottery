@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.user.entity">
+	<joined-subclass
+		name="SubAccountInfo"
+		table="TB_SUB_STAFF_EXT"
+		extends="com.npc.lottery.sysmge.entity.ManagerStaff"
+	>
+		<key column="MANAGER_STAFF_ID"/>
+		<property
+			name="managerStaffID"
+			column="MANAGER_STAFF_ID"
+			type="java.lang.Long"
+			not-null="false"
+			insert="false" update="false"
+		>
+		</property>
+		
+		<property
+			name="parentStaff"
+			column="PARENT_STAFF"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="genAgentStaff"
+			column="GEN_AGENT_STAFF"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="stockholderStaff"
+			column="STOCKHOLDER_STAFF"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="branchStaff"
+			column="BRANCH_STAFF"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="chiefStaff"
+			column="CHIEF_STAFF"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="parentUserType"
+			column="PARENT_USER_TYPE"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		
+	</joined-subclass>	
+</hibernate-mapping>

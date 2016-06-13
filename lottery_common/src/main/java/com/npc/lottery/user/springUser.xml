@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+		<!-- 代理用户 数据库处理类实例 -->
+	<bean id="agentStaffExtDao" class="com.npc.lottery.user.dao.hibernate.AgentStaffExtDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 代理用户 逻辑处理类实例 -->
+	<bean id="agentStaffExtLogic" class="com.npc.lottery.user.logic.spring.AgentStaffExtLogic">
+		<property name="agentStaffExtDao" ref="agentStaffExtDao"/>
+		<property name="genAgentStaffExtDao" ref="genAgentStaffExtDao"/>
+		<property name="stockholderStaffExtDao" ref="stockholderStaffExtDao"/>
+		<property name="chiefStaffExtDao" ref="chiefStaffExtDao"/>
+		<property name="branchStaffExtDao" ref="branchStaffExtDao"/>
+		<property name="subAccountActionDao" ref="subAccountActionDao"/>
+		<property name="commonUserLogic" ref="commonUserLogic"/>
+		<property name="userCommissionLogic" ref="userCommissionLogic"/>
+		<property name="replenishAutoSetLogLogic" ref="replenishAutoSetLogLogic"/>
+	</bean>
+	
+	<!-- 分公司 数据库处理类实例 -->
+	<bean id="branchStaffExtDao" class="com.npc.lottery.user.dao.hibernate.BranchStaffExtDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 分公司 逻辑处理类实例 -->
+	<bean id="branchStaffExtLogic" class="com.npc.lottery.user.logic.spring.BranchStaffExtLogic">
+		<property name="branchStaffExtDao" ref="branchStaffExtDao"/>
+		<property name="chiefStaffExtDao" ref="chiefStaffExtDao"/>
+		<property name="subAccountActionDao" ref="subAccountActionDao"/>
+		<property name="userCommissionLogic" ref="userCommissionLogic"/>
+		<property name="commonUserLogic" ref="commonUserLogic"/>
+		<property name="userCommissionDefaultLogic" ref="userCommissionDefaultLogic"/>
+	</bean>
+	
+		<!-- 总监 数据库处理类实例 -->
+	<bean id="chiefStaffExtDao" class="com.npc.lottery.user.dao.hibernate.ChiefStaffExtDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 总监 逻辑处理类实例 -->
+	<bean id="chiefStaffExtLogic" class="com.npc.lottery.user.logic.spring.ChiefStaffExtLogic">
+		<property name="chiefStaffExtDao" ref="chiefStaffExtDao"/>
+		<property name="subAccountActionDao" ref="subAccountActionDao"/>
+	</bean>
+	
+			<!-- 会员 数据库处理类实例 -->
+	<bean id="memberStaffExtDao" class="com.npc.lottery.user.dao.hibernate.MemberStaffExtDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	<!-- 会员 逻辑处理类实例 -->
+	<bean id="memberStaffExtLogic" class="com.npc.lottery.user.logic.spring.MemberStaffExtLogic">
+		<property name="memberStaffExtDao" ref="memberStaffExtDao"/>
+		<property name="agentStaffExtDao" ref="agentStaffExtDao"/>
+		<property name="branchStaffExtDao" ref="branchStaffExtDao"/>
+		<property name="chiefStaffExtDao" ref="chiefStaffExtDao"/>
+		<property name="genAgentStaffExtDao" ref="genAgentStaffExtDao"/>
+		<property name="stockholderStaffExtDao" ref="stockholderStaffExtDao"/>
+		<property name="subAccountActionDao" ref="subAccountActionDao"/>
+		<property name="commonUserLogic" ref="commonUserLogic"/>
+		<property name="userCommissionLogic" ref="userCommissionLogic"/>
+		<property name="replenishAutoSetLogLogic" ref="replenishAutoSetLogLogic"/>
+	</bean>
+	
+			<!-- 总代理 数据库处理类实例 -->
+	<bean id="genAgentStaffExtDao" class="com.npc.lottery.user.dao.hibernate.GenAgentStaffExtDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 总代理 逻辑处理类实例 -->
+	<bean id="genAgentStaffExtLogic" class="com.npc.lottery.user.logic.spring.GenAgentStaffExtLogic">
+		<property name="genAgentStaffExtDao" ref="genAgentStaffExtDao"/>
+		<property name="stockholderStaffExtDao" ref="stockholderStaffExtDao"/>
+		<property name="chiefStaffExtDao" ref="chiefStaffExtDao"/>
+		<property name="branchStaffExtDao" ref="branchStaffExtDao"/>
+		<property name="subAccountActionDao" ref="subAccountActionDao"/>
+		<property name="commonUserLogic" ref="commonUserLogic"/>
+		<property name="userCommissionLogic" ref="userCommissionLogic"/>
+	</bean>	
+	
+		<!-- 股东 数据库处理类实例 -->
+	<bean id="stockholderStaffExtDao" class="com.npc.lottery.user.dao.hibernate.StockholderStaffExtDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 股东 逻辑处理类实例 -->
+	<bean id="stockholderStaffExtLogic" class="com.npc.lottery.user.logic.spring.StockholderStaffExtLogic">
+		<property name="stockholderStaffExtDao" ref="stockholderStaffExtDao"/>
+		<property name="chiefStaffExtDao" ref="chiefStaffExtDao"/>
+		<property name="branchStaffExtDao" ref="branchStaffExtDao"/>
+		<property name="subAccountActionDao" ref="subAccountActionDao"/>
+		<property name="userCommissionLogic" ref="userCommissionLogic"/>
+		<property name="commonUserLogic" ref="commonUserLogic"/>
+	</bean>	
+	
+		<!-- 用户佣金 数据库处理类实例 -->
+	<bean id="userCommissionDao" class="com.npc.lottery.user.dao.hibernate.UserCommissionDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+		<!-- 用户佣金 数据库处理类实例 -->
+	<bean id="userCommissionJDBCDao" class="com.npc.lottery.user.dao.hibernate.UserCommissionJDBCDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	<!-- 用户佣金 逻辑处理类实例 -->
+	<bean id="userCommissionLogic" class="com.npc.lottery.user.logic.spring.UserCommissionLogic">
+		<property name="userCommissionDao" ref="userCommissionDao"/>
+		<property name="branchStaffExtDao" ref="branchStaffExtDao"/>
+		<property name="stockholderStaffExtDao" ref="stockholderStaffExtDao"/>
+		<property name="genAgentStaffExtDao" ref="genAgentStaffExtDao"/>
+		<property name="agentStaffExtDao" ref="agentStaffExtDao"/>
+		<property name="userCommissionJDBCDao" ref="userCommissionJDBCDao"/>
+	</bean>	
+	
+		<!-- 佣金默认 数据库处理类实例 -->
+	<bean id="userCommissionDefaultDao" class="com.npc.lottery.user.dao.hibernate.UserCommissionDefaultDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	<!-- 佣金默认 逻辑处理类实例 -->
+	<bean id="userCommissionDefaultLogic" class="com.npc.lottery.user.logic.spring.UserCommissionDefaultLogic">
+		<property name="userCommissionDefaultDao" ref="userCommissionDefaultDao"/>
+	</bean>		
+	
+		<!-- 子帳號 数据库处理类实例 -->
+	<bean id="subAccountActionDao" class="com.npc.lottery.user.dao.hibernate.SubAccountActionDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 子帳號 逻辑处理类实例 -->
+	<bean id="subAccountInfoLogic" class="com.npc.lottery.user.logic.spring.SubAccountInfoLogic">
+		<property name="branchStaffExtLogic" ref="branchStaffExtLogic"/>
+		<property name="stockholderStaffExtLogic" ref="stockholderStaffExtLogic"/>
+		<property name="genAgentStaffExtLogic" ref="genAgentStaffExtLogic"/>
+		<property name="agentStaffExtLogic" ref="agentStaffExtLogic"/>
+		<property name="authorizLogic" ref="authorizLogic"/>
+		<property name="subAccountActionDao" ref="subAccountActionDao"/>
+	</bean>	
+	<bean id="commonUserDao" class="com.npc.lottery.user.dao.hibernate.CommonUserDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	<bean id="commonUserLogic" class="com.npc.lottery.user.logic.spring.CommonUserLogic">
+		<property name="branchStaffExtLogic" ref="branchStaffExtLogic"/>
+		<property name="stockholderStaffExtLogic" ref="stockholderStaffExtLogic"/>
+		<property name="genAgentStaffExtLogic" ref="genAgentStaffExtLogic"/>
+		<property name="agentStaffExtLogic" ref="agentStaffExtLogic"/>
+		<property name="commonUserDao" ref="commonUserDao"/>
+
+	</bean>
+	
+	<bean id="userOutReplenishDao" class="com.npc.lottery.user.dao.hibernate.UserOutReplenishDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="userOutReplenishJdbcDao" class="com.npc.lottery.user.dao.hibernate.UserOutReplenishJdbcDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	<bean id="userOutReplenishLogic" class="com.npc.lottery.user.logic.spring.UserOutReplenishLogic">
+		<property name="userOutReplenishDao" ref="userOutReplenishDao"/>
+		<property name="userOutReplenishJdbcDao" ref="userOutReplenishJdbcDao"/>
+		<property name="userCommissionDao" ref="userCommissionDao"/>
+		<property name="commonUserDao" ref="commonUserDao"/>
+	</bean>
+	
+		
+</beans>

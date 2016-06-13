@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>  <!-- Log4J Configuration for online -->
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!-- Console Appender -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+	    <!-- 如果这里定义了局部的级别，则以这里定义的级别为准 -->
+		<param name="Threshold" value="info"></param>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%p [%d] [%t] %c{1} %l |%X{ssoUserId}| %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- File Appender -->
+    <appender name="fileAppender" class="org.apache.log4j.RollingFileAppender">
+       <param name="File" value="${catalina.home}/logs/lottery-job.log" />
+       <param name="ImmediateFlush" value="true"/>
+       <param name="Encoding" value="UTF-8"/>
+       <param name="Threshold" value="info"></param>  
+        <param name="Append" value="true"></param>  
+        <param name="MaxFileSize" value="100MB"></param>  
+        <param name="MaxBackupIndex" value="10"></param> 
+       <layout class="org.apache.log4j.PatternLayout">
+           <param name="ConversionPattern" value="%p [%d] [%t] %c{1} %l |%X{ssoUserId}| %m%n" />
+       </layout>
+     </appender>
+     
+    <!-- Error Appender -->
+	<appender name="errorAppender" class="org.apache.log4j.RollingFileAppender">
+       <param name="File" value="${catalina.home}/logs/lottery-joberror.log" />
+       <param name="ImmediateFlush" value="true"/>
+       <param name="Encoding" value="UTF-8"/>
+       <param name="Threshold" value="error"></param>  
+        <param name="Append" value="true"></param>  
+        <param name="MaxFileSize" value="10MB"></param>
+        <param name="MaxBackupIndex" value="10"></param> 
+       <layout class="org.apache.log4j.PatternLayout">
+           <param name="ConversionPattern" value="%p [%d] [%t] %c{1} %l |%X{ssoUserId}| %m%n" />
+       </layout>     
+     </appender>
+		
+		
+	<!-- Root Logger -->
+	<root>
+		<priority value="info" />
+		<appender-ref ref="console" />
+		<appender-ref ref="fileAppender" />
+		<appender-ref ref="errorAppender" />
+	</root>
+	
+</log4j:configuration>

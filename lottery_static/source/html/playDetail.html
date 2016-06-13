@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<script type="text/javascript">
+
+</script>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" rel="stylesheet" href="../css/main.css">
+	<script>
+		function forwardToPlayDetail(optValue) {
+			alert(optValue);
+			window.parent.mainFrame.location.href = "/member/enterPlayDetail.do?subType="
+					+ optValue;
+		}
+	</script>
+</head>
+<body style="width: 95%">
+	<table cellspacing="0" cellpadding="0" border="0" width="804">
+		<tbody>
+			<tr>
+				<!-- 中间内容开始 -->
+				<td align="left" width="804" valign="top">
+					<div class="main">
+						<div class="top_content"></div>
+						<table cellspacing="0" cellpadding="0" border="0" width="88%" class="king" style="line-height: 16px;" id="resultData">
+							<colgroup>
+								<col width="19%">
+								<col width="17%">
+								<col width="30%">
+								<col width="17%">
+								<col width="17%">
+							</colgroup>
+							<tbody id="palyDetail">
+								<script language="javascript" src="../js/Forbid.js"	type="text/javascript"></script>
+								<script language="javascript" src="../js/jquery-1.4.2.min.js" type="text/javascript"></script>
+								<script language="javascript" src="../js/jquery.form.js" type="text/javascript"></script>
+								<script language="javascript" src="../js/jquery.json-2.4.js" type="text/javascript"></script>
+								<script language="javascript" src="../js/lottery.js" type="text/javascript"></script>
+								<script type="text/javascript">
+									//数据填充
+									function dataFill(json){
+										var html="<tr style=\"line-height: 24px;\"><th>注單號/時間</th><th>下注類型</th><th>注單明細</th><th>下注金額</th><th>可贏金額</th></tr>";
+										var tr="<tr onmouseout=\"this.style.backgroundColor=''\"onmouseover=\"this.style.backgroundColor='#FFFFA2'\" class='$even'>";
+										var td1="<td>$orderNo#<br>$bettingDate</td><td>$playTypeName <br><span class=\"green\">$periodsNum&nbsp;期</span></td>";
+										var td2="<td><span class=\"blue\" >$subTypeName 『$finalName』</span>@<b><span class=\"red\">$odds</span></b>$count <br>$attribute</td>";
+										var	td3="<td width=\"6%\" class=\"t_right\">$money&nbsp;</td>";
+										var td4="<td width=\"6%\" class=\"t_right\">$winMoney&nbsp;</td></tr>";
+										var end="<tr onmouseout=\"this.style.backgroundColor=''\" onmouseover=\"this.style.backgroundColor='#FFFFA2'\" style=\"background-color: rgb(255, 255, 162);\" >"+
+										"<td colspan=\"2\" bgcolor=\"#E8DCCF\"><b>合計</b></td><td bgcolor=\"#E8DCCF\"><b id=\"totalCount\">0筆</b></td><td bgcolor=\"#E8DCCF\" class=\"t_right\"><b id=\"total1\">0.0</b></td>"+
+										"<td bgcolor=\"#E8DCCF\" class=\"t_right\"><b id=\"total2\">0.0</b></td></tr>"; 
+										if(json.result.length>0){
+											for(var i=0;i<json.result.length;i++){
+												var trHtml= i%2 !=0 ? tr.replace('$even','even') : tr;
+												var result=json.result[i];
+												var playTypeName=getPlayTypeName(result.typeCode);
+												var td1Html=td1.replace('$orderNo',result.orderNo).replace('$bettingDate',result.bettingDate).replace('$playTypeName',playTypeName).replace('$periodsNum',result.periodsNum);
+												var attribute='';
+												var count='';
+												var money=result.money;
+												if(result.count>1){
+													var moneyText=money+"X"+result.count+"组<br/>";
+													money=parseInt(money)*parseInt(result.count);
+													moneyText=moneyText+money;
+													count='<br/>复式『'+result.count+'组』';
+													var td3Html=td3.replace('$money',moneyText);
+												}else{
+													var td3Html=td3.replace('$money',money);
+												}
+												if(result.attribute){
+													attribute=result.attribute;
+												}
+												var td2Html=td2.replace('$odds',result.odds).replace('$count',count).replace('$attribute',attribute).replace('$subTypeName',result.subTypeName).replace('$finalName',result.finalName);
+												
+												var td4Html=td4.replace('$winMoney',result.winMoney);
+												html+=trHtml+td1Html+td2Html+td3Html+td4Html;
+											}
+										}
+										html+=end
+										$("#palyDetail").html(html);
+									}
+									function getPlayTypeName(typeCode){
+										var ret='';
+										if(typeCode.indexOf("GDKLSF")>-1) ret='廣東快樂十分';
+								        if(typeCode.indexOf("CQSSC")>-1) ret='重慶時時彩';
+								        if(typeCode.indexOf("BJ")>-1) ret='北京賽車(PK10)';
+								        if(typeCode.indexOf("K3")>-1) ret='江苏骰寶(快3)';
+								        if(typeCode.indexOf("NC")>-1) ret='幸运农场';
+								        return ret;
+								    }
+									function initData(){
+										var strUrl = context+'/getPlayDetail.json';
+										var queryUrl = encodeURI(encodeURI(strUrl));
+										var obj = $.ajax({
+											url : queryUrl,
+											async : true,
+											dataType : "json",
+											type : "POST",
+											success : function(json) {
+												dataFill(json.data);
+												if(null != json.data.result && json.data.result.length>0){
+													$('#totalCount').text(json.data.totalCount+'筆');
+													$('#total1').text(json.data.totalMoney);
+													$('#total2').text(json.data.totalWinMoney);
+												}else{
+													$("#noData").show();
+												}
+											}
+										});
+									}
+									$(document).ready(function() {
+										initData();
+									});
+								</script>
+							</tbody>
+						</table>
+						<div style="width: 88%">
+							<table cellspacing="0" cellpadding="0" border="0" width="100%" class="page" style="display: none;" id="noData" style=" ">
+								<tbody>
+									<tr onmouseout="this.style.backgroundColor=''" onmouseover="this.style.backgroundColor='#FFFFA2'" align="center">
+							       		<td colspan="5" class="dark"><font color="red">當前沒有數據......</font></td>
+							     	</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

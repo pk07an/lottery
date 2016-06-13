@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.replenish.entity">
+	<class
+		name="ReplenishAuto"
+		table="TB_REPLENISH_AUTO"
+	>
+		<id name="ID" type="java.lang.Long" >
+		 <column name="ID" precision="12" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">SEQ_tb_replenish_auto</param>
+			</generator>
+		</id>
+
+		<property
+			name="shopsID"
+			column="SHOPS_ID"
+			type="long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="type"
+			column="TYPE"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="moneyLimit"
+			column="MONEY_LIMIT"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="date"
+			not-null="false"
+			length="30"
+		/>	
+						
+		<property
+			name="typeCode"
+			column="TYPE_CODE"
+			type="string"
+			not-null="false"
+			length="30"
+		/>
+		
+						
+		<property
+			name="moneyRep"
+			column="MONEY_REP"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+						
+		<property
+			name="state"
+			column="STATE"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="createUserType"
+			column="CREATE_USER_TYPE"
+			type="string"
+			not-null="false"
+			length="2"
+		/>
+		
+	</class>	
+</hibernate-mapping>

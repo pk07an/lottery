@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 用户信息处理逻辑类 -->
+	<bean id="userLogic" class="com.npc.lottery.sysmge.logic.spring.UserLogic">
+		<property name="staffLogic" ref="staffLogic"/>
+		<property name="orgLogic" ref="orgLogic"/>
+		<property name="orgDao" ref ="orgDao"/>
+	</bean>
+	
+	<!-- 人员信息处理逻辑类 -->
+	<bean id="staffLogic" class="com.npc.lottery.sysmge.logic.spring.StaffLogic">
+		<property name="staffDao" ref="staffDao"/>
+	</bean>
+	 
+	<!-- 人员信息数据库处理类 -->
+	<bean id="staffDao" class="com.npc.lottery.sysmge.dao.hibernate.StaffDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 机构信息处理逻辑类 -->
+	<bean id="orgLogic" class="com.npc.lottery.sysmge.logic.spring.OrgLogic">
+		<property name="orgDao" ref="orgDao"/>
+		<property name="orgExtLogic" ref="orgExtLogic"/>
+	</bean>	
+
+	<!-- 机构信息数据库处理类 -->
+	<bean id="orgDao" class="com.npc.lottery.sysmge.dao.hibernate.OrgDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 机构扩展信息处理逻辑类 -->
+	<bean id="orgExtLogic" class="com.npc.lottery.sysmge.logic.spring.OrgExtLogic">
+		<property name="orgExtDao" ref="orgExtDao"/>
+	</bean>	
+
+	<!-- 机构扩展信息数据库处理类 -->
+	<bean id="orgExtDao" class="com.npc.lottery.sysmge.dao.hibernate.OrgExtDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 管理用户登录信息处理逻辑类 -->
+	<bean id="loginManagerLogic" class="com.npc.lottery.sysmge.logic.spring.LoginManagerLogic">
+		<property name="managerUserLogic" ref="managerUserLogic"/>
+		<property name="authorizLogic" ref="authorizLogic"/>
+		<property name="shopsLogic" ref="shopsLogic"/>
+		<property name="chiefStaffExtLogic" ref="chiefStaffExtLogic"/>
+		<property name="branchStaffExtLogic" ref="branchStaffExtLogic"/>
+		<property name="stockholderStaffExtLogic" ref="stockholderStaffExtLogic"/>
+		<property name="genAgentStaffExtLogic" ref="genAgentStaffExtLogic"/>
+		<property name="agentStaffExtLogic" ref="agentStaffExtLogic"/>
+		<property name="subAccountInfoLogic" ref="subAccountInfoLogic"/>
+	</bean>
+	
+	<!-- 会员用户登录信息处理逻辑类 -->
+	<bean id="loginMemberLogic" class="com.npc.lottery.sysmge.logic.spring.LoginMemberLogic">
+		<property name="memberUserLogic" ref="memberUserLogic"/>
+		<property name="authorizLogic" ref="authorizLogic"/>
+		<property name="shopsLogic" ref="shopsLogic"/>
+		<property name="memberStaffExtLogic" ref="memberStaffExtLogic"/>
+		<property name="chiefStaffExtLogic" ref="chiefStaffExtLogic"/>
+	</bean>
+	
+	<!-- 资源信息处理逻辑类 -->
+	<bean id="resourceLogic" class="com.npc.lottery.sysmge.logic.spring.ResourceLogic">
+		<property name="resourceDao" ref="resourceDao"/>
+	</bean>
+	
+	<!-- 资源信息数据库处理类 -->
+	<bean id="resourceDao" class="com.npc.lottery.sysmge.dao.hibernate.ResourceDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 功能数据库处理类 -->
+	<bean id="functionDao" class="com.npc.lottery.sysmge.dao.hibernate.FunctionDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 功能处理逻辑类 -->
+	<bean id="functionLogic" class="com.npc.lottery.sysmge.logic.spring.FunctionLogic">
+		<property name="functionDao" ref="functionDao"/>		
+	</bean>
+
+	<!-- 授权处理逻辑类 -->
+	<bean id="authorizLogic" class="com.npc.lottery.sysmge.logic.spring.AuthorizLogic">
+		<property name="functionLogic" ref="functionLogic"/>
+		<property name="roleFuncLogic" ref="roleFuncLogic"/>
+		<property name="staffRoleLogic" ref="staffRoleLogic"/>
+		<property name="rolesLogic" ref="rolesLogic"/>
+		<property name="subAccountInfoLogic" ref="subAccountInfoLogic"/>
+		<property name="managerUserLogic" ref="managerUserLogic"/>
+	</bean>
+	
+	<!-- 角色数据库处理类 -->
+	<bean id="rolesDao" class="com.npc.lottery.sysmge.dao.hibernate.RolesDao">
+	     <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>   
+	<!-- 角色数据库逻辑类  -->  
+	<bean id ="rolesLogic" class="com.npc.lottery.sysmge.logic.spring.RolesLogic">
+	     <property name="rolesDao" ref="rolesDao"/>
+	     <property name="managerUserLogic" ref="managerUserLogic"/>
+		 <property name="memberUserLogic" ref="memberUserLogic"/>
+	</bean>
+	<!--参数类别处理类 -->
+	<bean id = "paramDao" class ="com.npc.lottery.sysmge.dao.hibernate.ParamDao">
+	     <property name="sessionFactory" ref ="sessionFactory"/>
+	</bean>
+	<!-- 参数类别逻辑类 -->
+	<bean id = "paramLogic" class="com.npc.lottery.sysmge.logic.spring.ParamLogic">
+		 <property name="paramValueLogic" ref="paramValueLogic"/>
+	     <property name="paramDao" ref="paramDao"/>
+	</bean>
+	<!--参数类别处理类 -->
+	<bean id = "paramValueDao" class ="com.npc.lottery.sysmge.dao.hibernate.ParamValueDao">
+	     <property name="sessionFactory" ref ="sessionFactory"/>
+	</bean>
+	<!-- 参数类别逻辑类 -->
+	<bean id = "paramValueLogic" class="com.npc.lottery.sysmge.logic.spring.ParamValueLogic">
+	     <property name="paramValueDao" ref="paramValueDao"/>
+	</bean>
+	
+	<!--角色所拥有的功能数据库处理类 -->
+	<bean id = "roleFuncDao" class ="com.npc.lottery.sysmge.dao.hibernate.RoleFuncDao">
+	     <property name="sessionFactory" ref ="sessionFactory"/>
+	</bean>
+	<!-- 角色所拥有的功能逻辑类 -->
+	<bean id = "roleFuncLogic" class="com.npc.lottery.sysmge.logic.spring.RoleFuncLogic">
+	     <property name="roleFuncDao" ref="roleFuncDao"/>
+	</bean>
+	
+	<!-- 用户所拥有的角色数据库处理类 -->
+	<bean id = "staffRoleDao" class ="com.npc.lottery.sysmge.dao.hibernate.StaffRoleDao">
+	     <property name="sessionFactory" ref ="sessionFactory"/>
+	</bean>
+	<!-- 用户所拥有的角色逻辑类 -->
+	<bean id = "staffRoleLogic" class="com.npc.lottery.sysmge.logic.spring.StaffRoleLogic">
+	     <property name="staffRoleDao" ref="staffRoleDao"/>
+	</bean>
+	
+	<!-- 基础管理用户信息处理逻辑类 -->
+	<bean id="managerStaffLogic" class="com.npc.lottery.sysmge.logic.spring.ManagerStaffLogic">
+		<property name="managerStaffDao" ref="managerStaffDao"/>
+	</bean>
+	 
+	<!-- 基础管理用户信息数据库处理类 -->
+	<bean id="managerStaffDao" class="com.npc.lottery.sysmge.dao.hibernate.ManagerStaffDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 管理用户信息处理逻辑类 -->
+	<bean id="managerUserLogic" class="com.npc.lottery.sysmge.logic.spring.ManagerUserLogic">
+		<property name="managerStaffLogic" ref="managerStaffLogic"/>
+	</bean>
+	
+	<!-- 会员用户信息处理逻辑类 -->
+	<bean id="memberUserLogic" class="com.npc.lottery.sysmge.logic.spring.MemberUserLogic">
+		<property name="memberStaffLogic" ref="memberStaffLogic"/>
+	</bean>
+	
+	<!-- 基础会员用户信息处理逻辑类 -->
+	<bean id="memberStaffLogic" class="com.npc.lottery.sysmge.logic.spring.MemberStaffLogic">
+		<property name="memberStaffDao" ref="memberStaffDao"/>
+	</bean>
+	 
+	<!-- 基础会员用户信息数据库处理类 -->
+	<bean id="memberStaffDao" class="com.npc.lottery.sysmge.dao.hibernate.MemberStaffDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 日誌 -->
+	<bean id="shopsPlayOddsLogDao" class="com.npc.lottery.sysmge.dao.hibernate.ShopsPlayOddsLogDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 日誌 -->
+	<bean id="shopsPlayOddsLogLogic" class="com.npc.lottery.sysmge.logic.spring.ShopsPlayOddsLogLogic">
+		<property name="shopsPlayOddsLogDao" ref="shopsPlayOddsLogDao"/>
+	</bean>
+	<bean id="bossLogDao" class="com.npc.lottery.sysmge.dao.hibernate.BossLogDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 系統日誌  -->
+	<bean id="bossLogLogic" class="com.npc.lottery.sysmge.logic.spring.BossLogLogic">
+		<property name="bossLogDao" ref="bossLogDao"/>
+	</bean>
+	
+	<!-- 系统监控信息处理逻辑类 -->
+	<bean id="monitorLogic" class="com.npc.lottery.sysmge.logic.spring.MonitorLogic">
+	
+	</bean>
+	
+	<!-- 登陆日志 -->
+	<bean id = "loginLogInfoDao" class ="com.npc.lottery.sysmge.dao.hibernate.LoginLogInfoDao">
+	     <property name="sessionFactory" ref ="sessionFactory"/>
+	</bean>
+	<!-- 登陆日志 -->
+	<bean id = "loginLogInfoLogic" class="com.npc.lottery.sysmge.logic.spring.LoginLogInfoLogic">
+	     <property name="loginLogInfoDao" ref="loginLogInfoDao"/>
+	</bean>
+</beans>

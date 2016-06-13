@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.user.entity">
+	<joined-subclass
+		name="BranchStaffExt"
+		table="TB_BRANCH_STAFF_EXT"
+		extends="com.npc.lottery.sysmge.entity.ManagerStaff"
+	>
+		<key column="MANAGER_STAFF_ID"/>
+		<property
+			name="managerStaffID"
+			column="MANAGER_STAFF_ID"
+			type="java.lang.Long"
+			not-null="false"
+			insert="false" update="false"
+		>
+		</property>
+		
+		<property
+			name="parentStaff"
+			column="PARENT_STAFF"
+			type="integer"
+			not-null="false"
+			length="10"
+			insert="false"
+			update="false"
+		/>
+		<property
+			name="replenishment"
+			column="REPLENISHMENT"
+			type="string"
+			not-null="true"
+			length="1"
+		/>
+		<property
+			name="leftOwner"
+			column="LEFTOWNER"
+			type="string"
+			not-null="true"
+			length="1"
+		/>
+		
+		<property
+			name="openReport"
+			column="OPENREPORT"
+			type="string"
+			not-null="true"
+			length="1"
+		/>
+		
+		<property
+			name="chiefRate"
+			column="CHIEF_RATE"
+			type="integer"
+			not-null="false"
+			length="5"
+		/>
+		<property
+			name="companyRate"
+			column="COMPANY_RATE"
+			type="integer"
+			not-null="false"
+			length="5"
+		/>
+		<property
+			name="totalCreditLine"
+			column="TOTAL_CREDIT_LINE"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="availableCreditLine"
+			column="AVAILABLE_CREDIT_LINE"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="defaultCommission"
+			column="DEFAULT_COMMISSION"
+			type="integer"
+			not-null="false"
+			length="1"
+		/>
+		<many-to-one name="chiefStaffExt" class="com.npc.lottery.user.entity.ChiefStaffExt" >
+            <column name="PARENT_STAFF" />
+        </many-to-one>
+		
+		<set name="stockholderStaffExtSet"  inverse="true" lazy= "true">
+            <key>
+                <column name="PARENT_STAFF" />
+            </key>
+            <one-to-many class="com.npc.lottery.user.entity.StockholderStaffExt" />
+        </set>		
+		
+		<set name="memberStaffExtSet"  inverse="true" lazy= "true">
+            <key>
+                <column name="PARENT_STAFF" />
+            </key>
+            <one-to-many class="com.npc.lottery.user.entity.MemberStaffExt" />
+        </set>	
+		
+		<set name="subAccountInfoSet" inverse="true" lazy= "true">
+            <key>
+                <column name="PARENT_STAFF" />
+            </key>
+            <one-to-many class="com.npc.lottery.user.entity.SubAccountInfo" />
+        </set>	
+		
+	</joined-subclass>	
+</hibernate-mapping>

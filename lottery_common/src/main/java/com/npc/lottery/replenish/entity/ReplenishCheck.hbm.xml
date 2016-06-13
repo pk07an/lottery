@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.replenish.entity">
+	<class
+		name="ReplenishCheck"
+		table="tb_replenish_check"
+	>
+		<id name="ID" type="java.lang.Long" >
+		 <column name="ID" precision="12" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">SEQ_TB_REPLENISH_CHECK</param>
+			</generator>
+		</id>
+
+		<property
+			name="orderNo"
+			column="ORDER_NO"
+			type="string"
+			not-null="false"
+			length="8"
+		/>
+		<property
+			name="typeCode"
+			column="TYPE_CODE"
+			type="string"
+			not-null="false"
+			length="30"
+		/>
+		<property
+			name="money"
+			column="MONEY"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="replenishUserId"
+			column="REPLENISH_USER_ID"
+			type="long"
+			not-null="false"
+			length="10"
+		/>
+		
+		<property
+			name="replenishAccUserId"
+			column="REPLENISH_ACC_USER_ID"
+			type="long"
+			not-null="false"
+			length="10"
+		/>	
+
+		<property
+			name="periodsNum"
+			column="PERIODS_NUM"
+			type="string"
+			not-null="false"
+			length="11"
+		/>	
+
+		<property
+			name="plate"
+			column="PLATE"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+						
+		<property
+			name="bettingDate"
+			column="BETTING_DATE"
+			type="timestamp"
+			not-null="false"
+			length="7"
+		/> 
+						
+		<property
+			name="winState"
+			column="WIN_STATE"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		
+		<property
+			name="winAmount"
+			column="WIN_AMOUNT"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+
+		<property
+			name="odds"
+			column="ODDS"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		
+		<property
+			name="commission"
+			column="COMMISSION"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		
+		<property
+			name="rate"
+			column="RATE"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="long"
+			not-null="false"
+			length="10"
+		/>
+								
+		<property
+			name="updateDate"
+			column="UPDATE_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+		/>
+										
+		<property
+			name="remark"
+			column="REMARK"
+			type="string"
+			not-null="false"
+			length="200"
+		/>
+		
+		<property
+			name="attribute"
+			column="ATTRIBUTE"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		
+		<property
+			name="chiefStaff"
+			column="CHIEFSTAFF"
+			type="long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="branchStaff"
+			column="BRANCHSTAFF"
+			type="long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="stockHolderStaff"
+			column="STOCKHOLDERSTAFF"
+			type="long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="genAgenStaff"
+			column="GENAGENSTAFF"
+			type="long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="agentStaff"
+			column="AGENTSTAFF"
+			type="long"
+			not-null="false"
+			length="10"
+		/>
+		
+		<property
+			name="rateChief"
+			column="RATE_CHIEF"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		<property
+			name="rateBranch"
+			column="RATE_BRANCH"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		<property
+			name="rateStockHolder"
+			column="RATE_STOCKHOLDER"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		<property
+			name="rateGenAgent"
+			column="RATE_GEN_AGENT"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		<property
+			name="rateAgent"
+			column="RATE_AGENT"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		
+		<property
+			name="commissionChief"
+			column="COMMISSION_CHIEF"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		<property
+			name="commissionBranch"
+			column="COMMISSION_BRANCH"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		<property
+			name="commissionStockHolder"
+			column="COMMISSION_STOCKHOLDER"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		<property
+			name="commissionGenAgent"
+			column="COMMISSION_GEN_AGENT"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		<property
+			name="commissionAgent"
+			column="COMMISSION_AGENT"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		<property
+			name="commissionMember"
+			column="COMMISSION_MEMBER"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		
+		<property
+			name="odds2"
+			column="ODDS2"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		
+		<property
+			name="commissionType"
+			column="COMMISSION_TYPE"
+			type="string"
+			not-null="false"
+			length="20"
+		/>
+		
+		<property
+			name="selectedOdds"
+			column="SELECT_ODDS"
+			type="string"
+			not-null="false"
+			length="20"
+		/>
+		
+	</class>	
+</hibernate-mapping>

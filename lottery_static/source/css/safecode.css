@@ -1,0 +1,39 @@
+@charset "utf-8";
+/*
+ * FileName: global.css
+ * CreateTime: 2013-05-27
+ * Author: Charming Honest Romantic Intellegent Smiling
+ * Copyright NPC All Rights Reserved
+ */
+body {margin:0; padding:0; color:#fff; font-size:14px; line-height:18px; font-family:Microsoft Yahei,"微软雅黑",arial;text-align:left;vertical-align:baseline;background:#275680;}
+div,table,tr,th,td,form,p,ul,li,dl,dt,dd,a,span,img{margin:0; padding:0;}
+table,tr,th,td,form,p {border:none 0;}
+ul,li {margin:0; padding:0; list-style:none; }
+dl,dt,dd,h1,h2,h3,h4,h5{margin:0; padding:0;}
+img {border:none 0;}
+a{color:#333;text-decoration:none;}
+a:hover{color:#c60500;text-decoration:none;}
+/* float */
+.fl{float:left;}
+.fr{float:right;}
+.nofont{font-size:0;line-height:0;overflow:hidden;}
+.ml10{margin-left:10px;}
+.mr10{margin-right:10px;}
+.mt10{margin-top:10px;}
+.mt15{margin-top:15px;}
+.mb10{margin-bottom:10px;}
+.mt5{margin-top:5px;}
+.red{color:#d9362b;}
+.btn_code,.ip_code{background:url(../images/safecode/part-code.png) no-repeat 0 0;}
+.btn_code{width:169px;height:40px;background-position:0 -80px;cursor:pointer;border:medium none;}
+.btn_code:hover{background-position:0 -120px;}
+.ip_code{vertical-align:middle;width:280px;height:40px;line-height:40px;font-size:18px;font-weight:bold;font-family:arial;color:#000;border:medium none;background-position:0 0;overflow:hidden;padding:0 10px;}
+.ip_code:hover{background-position:0 -40px;}
+/* clear float */
+.clear{clear:both;height:0;font-size:0;overflow:hidden;display:block;line-height:0;}
+/* clearfix */
+.clearfix:after{ content:"."; display:block; height:0; clear:both; visibility:hidden; } 
+.clearfix{display:inline-block; } 
+.clearfix{display:block;}
+
+.code_bg{margin:0 auto;background:url(../images/safecode/code_bg.jpg) no-repeat center center;width:642px;height:309px;padding-top:313px;padding-left:158px;}

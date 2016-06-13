@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 广东快乐十分盘期 数据库处理类实例 -->
+	<bean id="shopOddsDao" class="com.npc.lottery.odds.dao.hibernate.ShopOddsDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	<!-- 开盘赔率 数据库处理类实例 -->
+	<bean id="openPlayOddsDao" class="com.npc.lottery.odds.dao.hibernate.OpenPlayOddsDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 开盘赔率 -->
+	<bean id="openPlayOddsLogic" class="com.npc.lottery.odds.logic.spring.OpenPlayOddsLogic">
+		<property name="openPlayOddsDao" ref="openPlayOddsDao"/>
+	</bean>
+	
+	<!--  -->
+	<bean id="openPlayOddsJdbcDao" class="com.npc.lottery.odds.dao.hibernate.OpenPlayOddsJdbcDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	<!-- 广东快乐十分盘期 逻辑处理类实例 -->
+	<bean id="shopOddsLogic" class="com.npc.lottery.odds.logic.spring.ShopOddsLogic">
+		<property name="shopOddsDao" ref="shopOddsDao"/>
+		<property name="shopsDao" ref="shopsDao"/>
+		<property name="openPlayOddsDao" ref="openPlayOddsDao"/>
+		<property name="managerStaffDao" ref="managerStaffDao"/>
+		<property name="openPlayOddsJdbcDao" ref="openPlayOddsJdbcDao"/>
+		<property name="shopsPlayOddsLogLogic" ref="shopsPlayOddsLogLogic"/>
+		<property name="skperiodsInfoLogic" ref="skperiodsInfoLogic"/>
+		<property name="openPlayOddsLogic" ref="openPlayOddsLogic"/>
+		<property name="shopsPlayOddsLogDao" ref="shopsPlayOddsLogDao"/>
+		<property name="bjscPeriodsInfoLogic" ref="bjscPeriodsInfoLogic"/>
+		<property name="icqPeriodsInfoLogic" ref="icqPeriodsInfoLogic"/>
+		<property name="periodsInfoLogic" ref="periodsInfoLogic"/>
+	</bean>
+	
+</beans>

@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.replenish.entity">
+	<class
+		name="ReplenishAutoSetLog"
+		table="TB_REPLENISH_AUTO_SET_LOG"
+	>
+		<id name="ID" type="java.lang.Long" >
+		 <column name="ID" precision="12" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">SEQ_TB_REPLENISH_AUTO_SET_LOG</param>
+			</generator>
+		</id>
+
+		<property
+			name="shopID"
+			column="SHOP_ID"
+			type="long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="type"
+			column="TYPE"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="typeCode"
+			column="TYPE_CODE"
+			type="string"
+			not-null="false"
+			length="20"
+		/>
+		<property
+			name="moneyOrgin"
+			column="MONEY_ORGIN"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="moneyNew"
+			column="MONEY_New"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="createUserID"
+			column="CREATE_USERID"
+			type="long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="createUserType"
+			column="CREATE_USERTYPE"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="30"
+		/>	
+						
+		<property
+			name="stateOrgin"
+			column="STATE_ORGIN"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="stateNew"
+			column="STATE_NEW"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="ip"
+			column="IP"
+			type="string"
+			not-null="false"
+			length="20"
+		/>
+		<property
+			name="changeType"
+			column="CHANGE_TYPE"
+			type="string"
+			not-null="false"
+			length="300"
+		/>
+		<property
+			name="changeSubType"
+			column="CHANGE_SUB_TYPE"
+			type="string"
+			not-null="false"
+			length="300"
+		/>
+		<property
+			name="orginalValue"
+			column="ORGINAL_VALUE"
+			type="string"
+			not-null="false"
+			length="300"
+		/>
+		<property
+			name="newValue"
+			column="NEW_VALUE"
+			type="string"
+			not-null="false"
+			length="300"
+		/>
+		<property
+			name="updateUserID"
+			column="UPDATE_USERID"
+			type="long"
+			not-null="false"
+			length="300"
+		/>
+		<property
+			name="updateUserType"
+			column="UPDATE_USERTYPE"
+			type="integer"
+			not-null="false"
+			length="300"
+		/>
+		<many-to-one property-ref="typeCode" name="playType" column="TYPE_CODE" update="false" insert="false" unique="true" />
+ 		<many-to-one name="shopsInfo" column="SHOP_ID" update="false" insert="false" unique="true"   />
+	    <many-to-one name="userAccount" column="CREATE_USERID" update="false" insert="false" unique="true" />
+	</class>	
+</hibernate-mapping>

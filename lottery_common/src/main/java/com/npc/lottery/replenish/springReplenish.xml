@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 补货 数据库处理类实例 -->
+	<bean id="replenishDao" class="com.npc.lottery.replenish.dao.hibernate.ReplenishDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	<!-- 帳單 -->
+	<bean id="zhangdanDao" class="com.npc.lottery.replenish.dao.hibernate.ZhangdanDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	<!-- 自动补货 -->
+	<bean id="replenishAutoSetJDBCDao" class="com.npc.lottery.replenish.dao.hibernate.ReplenishAutoSetJDBCDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	<!-- 补货的Hibernate DAO -->
+	<bean id="replenishHibDao" class="com.npc.lottery.replenish.dao.hibernate.ReplenishHibDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 补货Check的Hibernate DAO -->
+	<bean id="replenishCheckDao" class="com.npc.lottery.replenish.dao.hibernate.ReplenishCheckDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	<bean id="replenishHisDao" class="com.npc.lottery.replenish.dao.hibernate.ReplenishHisDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	<!-- 商鋪 逻辑处理类实例 -->
+	<bean id="replenishLogic" class="com.npc.lottery.replenish.logic.spring.ReplenishLogic">
+		<property name="replenishDao" ref="replenishDao"/>
+		<property name="checkDao" ref="checkDao"/>
+		<property name="replenishHisDao" ref="replenishHisDao"/>
+		<property name="replenishHibDao" ref="replenishHibDao"/>
+		<property name="replenishCheckDao" ref="replenishCheckDao"/>
+		<property name="playAmountDao" ref="playAmountDao"/>
+		<property name="shopOddsLogic" ref="shopOddsLogic"/>
+		<property name="bossLogLogic" ref="bossLogLogic"/>
+		<property name="playTypeLogic" ref="playTypeLogic"/>
+		<property name="subAccountInfoLogic" ref="subAccountInfoLogic"/>
+		<property name="userCommissionLogic" ref="userCommissionLogic"/>
+		<property name="memberStaffExtLogic" ref="memberStaffExtLogic"/>
+		<property name="userCommissionDefaultLogic" ref="userCommissionDefaultLogic"/>
+		<property name="branchStaffExtLogic" ref="branchStaffExtLogic"/>
+		<property name="stockholderStaffExtLogic" ref="stockholderStaffExtLogic"/>
+		<property name="genAgentStaffExtLogic" ref="genAgentStaffExtLogic"/>
+		<property name="agentStaffExtLogic" ref="agentStaffExtLogic"/>
+		<property name="replenishLogic" ref="replenishLogic"/>
+		<property name="replenishAutoLogic" ref="replenishAutoLogic"/>
+		<property name="periodsInfoLogic" ref="periodsInfoLogic"/>
+		<property name="shopsLogic" ref="shopsLogic"/>
+		<property name="shopsPlayOddsLogLogic" ref="shopsPlayOddsLogLogic"/>
+		<property name="ncPeriodsInfoLogic" ref="ncPeriodsInfoLogic"/>
+		<property name="chiefStaffExtLogic" ref="chiefStaffExtLogic"/>
+	</bean>
+
+	<bean id="replenishOrderNoGenerator" class="org.springframework.jdbc.support.incrementer.OracleSequenceMaxValueIncrementer">
+		    <property name="incrementerName" value="seq_tb_replenish"/> 
+			<property name="dataSource" ref="dataSource"/>
+    </bean>		
+	
+	<!-- 自動补货-->
+	<bean id="replenishAutoDao" class="com.npc.lottery.replenish.dao.hibernate.ReplenishAutoDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="replenishAutoLogic" class="com.npc.lottery.replenish.logic.spring.ReplenishAutoLogic">
+		<property name="replenishAutoDao" ref="replenishAutoDao"/>
+		<property name="replenishLogic" ref="replenishLogic"/>
+		<property name="icqPeriodsInfoLogic" ref="icqPeriodsInfoLogic"/>
+		<property name="jssbPeriodsInfoLogic" ref="jssbPeriodsInfoLogic"/>
+		<property name="periodsInfoLogic" ref="periodsInfoLogic"/>
+		<property name="managerUserLogic" ref="managerUserLogic"/>
+		<property name="memberStaffExtLogic" ref="memberStaffExtLogic"/>
+		<property name="managerStaffLogic" ref="managerStaffLogic"/>
+		<property name="shopsLogic" ref="shopsLogic"/>
+		<property name="replenishAutoLogLogic" ref="replenishAutoLogLogic"/>
+		<property name="bjscPeriodsInfoLogic" ref="bjscPeriodsInfoLogic"/>
+		<property name="replenishAutoSetLogLogic" ref="replenishAutoSetLogLogic"/>
+		<property name="replenishAutoSetJDBCDao" ref="replenishAutoSetJDBCDao"/>
+		<property name="branchStaffExtDao" ref="branchStaffExtDao"/>
+		<property name="ncPeriodsInfoLogic" ref="ncPeriodsInfoLogic"/>
+		
+	</bean>
+	<bean id="replenishAutoSetLogDao" class="com.npc.lottery.replenish.dao.hibernate.ReplenishAutoSetLogDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="replenishAutoSetLogLogic" class="com.npc.lottery.replenish.logic.spring.ReplenishAutoSetLogLogic">
+		<property name="replenishAutoSetLogDao" ref="replenishAutoSetLogDao"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+		<!-- add by peter for 异步执行用户退水日志记录 -->
+		<property name="wcpTaskExecutor" ref="wcpTaskExecutor"/>
+	</bean>
+	<!-- 自動补货 日誌 -->
+	<bean id="replenishAutoLogDao" class="com.npc.lottery.replenish.dao.hibernate.ReplenishAutoLogDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="replenishAutoLogLogic" class="com.npc.lottery.replenish.logic.spring.ReplenishAutoLogLogic">
+		<property name="replenishAutoLogDao" ref="replenishAutoLogDao"/>
+	</bean>
+	
+	<bean id="zhangdanLogic" class="com.npc.lottery.replenish.logic.spring.ZhangdanLogic">
+		<property name="replenishLogic" ref="replenishLogic"/>
+		<property name="zhangdanDao" ref="zhangdanDao"/>
+	</bean>
+</beans>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+		<constant name="struts.objectFactory" value="spring" />
+		<!--<constant name="struts.configuration.xml.reload" value="true"/>-->
+	<constant name="struts.action.extension" value="do,action" />
+	<include file="com/npc/lottery/user/strutsUser.xml"/><!-- 用户struts配置文件 -->
+	<include file="com/npc/lottery/user/strutsUserAjax.xml"/><!-- 校验用户struts配置文件 -->
+	<include file="com/npc/lottery/odds/strutsOdds.xml"/><!-- 赔率struts配置文件 -->
+	<include file="com/npc/lottery/manage/strutsManage.xml"/>
+	<include file="com/npc/lottery/replenish/strutsReplenish.xml"/>
+	<include file="com/npc/lottery/replenish/strutsReplenishAuto.xml"/>
+	<include file="com/npc/lottery/statreport/strutsUnsettledReport.xml"/><!-- 统计未结算交收报表 模块 -->
+	<include file="com/npc/lottery/statreport/strutsUnClassReport.xml"/><!-- 统计未结算分类报表 模块 -->
+	<include file="com/npc/lottery/statreport/strutsSettledReportEric.xml"/><!-- 统计已结算交收报表Eric 模块 -->
+	<include file="com/npc/lottery/statreport/strutsClassReportEric.xml"/><!-- 统计已结算分类报表Eric 模块 -->
+	<include file="com/npc/lottery/replenish/strutsZhangdan.xml"/><!-- 帐单 -->
+	
+    <package name="default" extends="struts-default" namespace="/login">
+		<default-interceptor-ref name="defaultStack"></default-interceptor-ref>
+		
+        <global-results>
+			<!-- 下面定义的结果对所有的Action都有效 -->
+			<result name="exception">/common/infoPage.jsp</result>
+			<result name="success">/common/infoPage.jsp</result>
+			  
+		</global-results>
+
+	<!-- 	<global-exception-mappings>
+			指Action抛出Exception异常时，转入名为exception的结果。
+			<exception-mapping exception="java.lang.Exception" result="exception"/>
+		</global-exception-mappings> -->
+    </package>
+	
+	<!-- 标签风格 -->
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- 编码类型 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+
+</struts>
+

@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.odds.entity">
+	<class name="OpenPlayOdds" table="TB_OPEN_PLAY_ODDS">
+		<id name="ID" type="java.lang.Long" column="ID">
+			 <generator class="sequence">
+				<param name="sequence">SEQ_TB_OPEN_PLAY_ODDS</param>
+			</generator>
+		</id>
+
+		<property
+			name="shopsCode"
+			column="SHOPS_CODE"
+			type="string"
+			not-null="false"
+			length="4"
+		/>
+		<property
+			name="autoOddsQuotas"
+			column="AUTO_ODDS_QUOTAS"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="autoOdds"
+			column="AUTO_ODDS"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		<property
+			name="oddsType"
+			column="ODDS_TYPE"
+			type="string"
+			not-null="true"
+			length="30"
+		/>
+		<property
+			name="lowestOdds"
+			column="LOWEST_ODDS"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		<property
+			name="openingOdds"
+			column="OPENING_ODDS"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		<property
+			name="openingUpdateDate"
+			column="OPENING_UPDATE_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+		/>
+		<property
+			name="openingUpdateUser"
+			column="OPENING_UPDATE_USER"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="bigestOdds"
+			column="BIGEST_ODDS"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>		
+		<property
+			name="cutOddsB"
+			column="CUT_ODDS_B"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		<property
+			name="cutOddsC"
+			column="CUT_ODDS_C"
+			type="big_decimal"
+			not-null="false"
+			length="12"
+		/>
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="date"
+			not-null="false"
+			length="7"
+		/>
+
+	</class>	
+</hibernate-mapping>

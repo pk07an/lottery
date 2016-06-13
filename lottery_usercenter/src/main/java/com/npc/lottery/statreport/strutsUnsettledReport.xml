@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="unSettledReport" extends="struts-default"  namespace="/statreport">
+		<!-- 定义struts token拦截器 start -->
+        <!--<interceptors>
+        	<interceptor-stack name="tokenStackSession-stack">
+        		<interceptor-ref name="defaultStack"/>
+        		<interceptor-ref name="tokenSession"/>
+        	</interceptor-stack>
+        </interceptors>-->
+        <!-- 定义struts token拦截器 end -->
+		 <!-- 增加统一异常处理 start -->
+        <global-results>
+			<!-- 下面定义的结果对所有的Action都有效 -->
+			<result name="exception">/common/error.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="exception"/>
+		</global-exception-mappings>
+		<!-- 增加统一异常处理 end -->
+		<!--交收报表未结算报表  start-->
+		<action name="unsettledList" class="com.npc.lottery.statreport.action.UnsettledReportAction" method="unsettledList">
+			<result name="list">/jsp/statreport/unsettledList.jsp</result>	
+			<result name="chiefList">/jsp/statreport/unsettledListChief.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>
+			<!--<interceptor-ref name="tokenStackSession-stack"></interceptor-ref>-->		
+        </action>
+		
+		<!--下注明细-->
+		<action name="unsettledDetailedList" class="com.npc.lottery.statreport.action.UnsettledReportAction" method="detail">
+			<result name="hkPlayDetail">/jsp/statreport/unsettledHKdetailedList.jsp</result>	
+			<result name="playDetail">/jsp/statreport/unsettledSSCdetailedList.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+			
+		<!--补货明细-->
+		<action name="unsettledRelenishDetailed" class="com.npc.lottery.statreport.action.UnsettledReportAction" method="unsettledRelenishDetailed">
+			<result name="playDetail">/jsp/statreport/unsettledSSCdetailedList.jsp</result>		
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--交收报表未结算报表  end-->
+    </package>
+</struts>
+
+

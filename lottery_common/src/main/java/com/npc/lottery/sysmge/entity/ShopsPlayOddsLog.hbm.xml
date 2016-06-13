@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.sysmge.entity">
+
+	<class
+		name="ShopsPlayOddsLog"
+		table="TB_SHOPS_PLAY_ODDS_LOG"
+	>		
+		
+		<id name="ID" type="java.lang.Long">
+            <column name="ID" precision="12" scale="0" />
+            <generator class="sequence">
+				<param name="sequence">SEQ_TB_SHOPS_PLAY_ODDS_LOG</param>
+			</generator>
+        </id>	
+
+		<property
+			name="shopCode"
+			column="SHOPS_CODE"
+			type="string"
+			not-null="true"
+			length="4"
+		/>
+		<property
+			name="playTypeCode"
+			column="PLAY_TYPE_CODE"
+			type="string"
+			not-null="true"
+			length="30"
+		/>
+		<property
+			name="oddsType"
+			column="ODDS_TYPE"
+			type="string"
+			not-null="false"
+			length="30"
+		/>
+		<property
+			name="oddsTypeX"
+			column="ODDS_TYPE_X"
+			type="string"
+			not-null="false"
+			length="30"
+		/>
+		<property
+			name="realOddsOrigin"
+			column="REAL_ODDS_ORIGIN"
+			type="big_decimal"
+			not-null="true"
+			length="12"
+		/>
+		<property
+			name="realUpdateDateOrigin"
+			column="REAL_UPDATE_DATE_ORIGIN"
+			type="timestamp"
+			not-null="false"
+		/>
+		<property
+			name="realUpdateUserOrigin"
+			column="REAL_UPDATE_USER_ORIGIN"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="realOddsNew"
+			column="REAL_ODDS_NEW"
+			type="big_decimal"
+			not-null="true"
+			length="12"
+		/>
+		<property
+			name="realUpdateDateNew"
+			column="REAL_UPDATE_DATE_NEW"
+			type="timestamp"
+			not-null="true"
+		/>
+		<property
+			name="realUpdateUserNew"
+			column="REAL_UPDATE_USER_NEW"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="remark"
+			column="REMARK"
+			type="string"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="periodsNum"
+			column="PERIODS_NUM"
+			type="string"
+			not-null="true"
+			length="11"
+		/>
+		<property
+			name="ip"
+			column="IP"
+			type="string"
+			not-null="true"
+			length="20"
+		/>
+		<property
+			name="type"
+			column="TYPE"
+			type="string"
+			not-null="true"
+			length="1"
+		/>
+		  <many-to-one property-ref="typeCode" name="playType" column="PLAY_TYPE_CODE" update="false" insert="false" unique="true"   />
+		  <many-to-one name="realUpdateUserOriginAccount" class="ManagerStaff" column="REAL_UPDATE_USER_ORIGIN" update="false" insert="false" unique="false"   />
+		  <many-to-one name="realUpdateUserNewAccount" class="ManagerStaff" column="REAL_UPDATE_USER_NEW" update="false" insert="false" unique="false"   />
+	</class>	
+</hibernate-mapping>

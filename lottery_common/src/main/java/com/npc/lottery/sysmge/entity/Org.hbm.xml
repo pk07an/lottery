@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.sysmge.entity">
+	<class
+		name="Org"
+		table="TB_FRAME_ORG"
+	>
+		<id	name="orgID" column="ORGID" type="java.lang.Long">
+			
+		</id>
+		<property
+			name="uporgID"
+			column="UPORGID"
+			type="long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="adouName"
+			column="ADOUNAME"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="orgName"
+			column="ORGNAM"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="shortName"
+			column="SHORTNAME"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="showOrder"
+			column="SHOWORDER"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="orgType"
+			column="ORGTYPE"
+			type="long"
+			not-null="false"
+		/>
+		<property
+			name="orgArea"
+			column="ORGAREA"
+			type="string"
+			not-null="false"
+			length="180"
+		/>
+		<property
+			name="suborgNum"
+			column="SUBORGNUM"
+			type="long"
+			not-null="false"
+			length="5"
+		/>
+		<property
+			name="sapID"
+			column="SAPID"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="isRealorg"
+			column="ISREALORG"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="createDate"
+			column="CREATEDATE"
+			type="date"
+			not-null="false"
+			length="7"
+		/>
+		
+		<one-to-one name="orgExtEntity" class="com.npc.lottery.sysmge.entity.OrgExt" 
+			cascade="none" constrained="false" outer-join="true" lazy="proxy" />
+	</class>	
+</hibernate-mapping>

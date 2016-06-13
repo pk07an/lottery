@@ -1,0 +1,252 @@
+@charset "utf-8";
+body,ul,li,dl,dd,dt,form,input,textarea,h1,h2,h3,h4,h5,h6{
+    padding:0;
+    margin:0;
+}
+img{
+    border:0;
+}
+table{
+    border-collapse:collapse;
+}
+ul,li{
+    list-style:none;
+}
+
+td {
+    font-family: "宋体", "Arial", "sans-serif", "serif";
+    font-size: 10pt;
+}
+tr {
+    height: 23px;
+}
+th {
+    background-color: #d1d7f1;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: #FFFFFF;
+    border-right-color: #B1B4D5;
+    border-bottom-color: #B1B4D5;
+    border-left-color: #FFFFFF;
+    height: 22px;
+    text-indent: 4px;
+}
+input {
+    font-family: "宋体", "Arial", "sans-serif", "serif";
+    font-size: 10pt;
+    border: 1px solid #000000;
+    height: 20px;
+}
+frame {
+    border: solid #0066CC;
+}
+span.menu
+{
+    height: 100%;
+    padding: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #3A60A4;
+}
+A {
+    COLOR: #006699;
+    text-decoration: none;
+}
+
+span.button
+{
+    height: 100%;
+    cursor: hand;
+    padding: 2px;
+    border: 1px solid #7288AC;
+    margin-right: 5px;
+
+}
+
+table.mnuList
+{
+    border: #00377a 1px solid;  
+    width: 120px;
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=1, StartColorStr=#efefeb, EndColorStr=#ffffff);
+}
+
+table.mnuBar
+{
+    color: #ffffff;
+    height: 26px;
+    width: 100%;
+    background-color: #3A60A4;
+    border-right: 1px none #889DC2;
+    border-bottom: 1px none #889DC2;
+    border-top: 1px none #abc0e7;
+    border-left: 1px none #abc0e7;
+    vertical-align: middle;
+}
+
+tr.mnuSpacer
+{
+    padding: 0px;
+    font-size: 1px;
+}
+
+td.mnuTitle
+{
+    font-size: 10pt;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: default;
+    color: #ffff00;
+    padding-left: 25px;
+}
+
+td.mnuRight
+{
+    width: 100%;
+    text-align: right;
+    padding-right: 5px;
+}
+
+img.mnuBtn 
+{
+    width: 16px;
+    height: 16px;
+    margin-right: 1px;
+    margin-bottom: -1px;
+    vertical-align: top;
+}
+
+hr.mnuSpacer
+{
+    height: 1px;
+    margin-left: 10px;
+}
+
+col.mnuItm 
+{
+    padding-top: 5px;
+    padding-left: 10px;
+}
+
+col.mnuLeft
+{
+    width: 10px;
+    text-align: center;
+    background-color: #889DC2;
+}
+
+nobr.mnuTitle
+{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+u.mnuKey
+{
+    accelerator: true;
+}
+
+BUTTON {
+    BORDER-RIGHT: #7b9ebd 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #7b9ebd 1px solid; PADDING-LEFT: 5px; FONT-SIZE: 11px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#cecfde); BORDER-LEFT: #7b9ebd 1px solid; CURSOR: hand; BORDER-BOTTOM: #7b9ebd 1px solid
+}
+BODY.stage {
+    PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 20px; PADDING-TOP: 10px; BACKGROUND-COLOR: #efefeb
+}
+
+TABLE.stdTable {
+    TABLE-LAYOUT: fixed; WIDTH: 100%; HEIGHT: 100%
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #006699;
+
+}
+p {
+    line-height: 22px;
+}
+a:link {
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+a:active {
+    text-decoration: none;
+}
+.form-table {
+    width: 100%;
+    background-color: #CCCCCC;
+    border: none;
+}
+.tab-bag {
+    text-align:center;
+    background-image: url(../images/winbh.jpg);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: #FFFFFF;
+    border-right-color: #B1B4D5;
+    border-bottom-color: #B1B4D5;
+    border-left-color: #FFFFFF;
+    height: 22px;
+    text-indent: 4px;
+}
+.list-tr1 {
+    background-color: #f0f0f0;
+    background-position: center;
+    cursor: default;
+
+}
+.list-tr2 {
+    background-color: #ffffff;
+    background-position: center;
+    cursor: default;
+
+}
+.tab-head {
+    height:22px;
+    background-color: #E7F0FF;
+    vertical-align: bottom;
+    border: none;
+    padding-right: 3px;
+    padding-left: 3px;
+    padding-top: 2px;
+    padding-bottom: 1px;
+}
+.goInput {
+    height: 15px;
+    background-color: #E7F0FF;
+    color: #003399;
+    border: 1px solid #000000;
+    font-size: 12px;
+}
+.align-l {
+    text-align: left;
+    padding-right: 2px;
+    padding-left: 2px;
+}
+.align-r {
+    text-align: right;
+    padding-right: 2px;
+    padding-left: 2px;
+}
+.align-c {
+    text-align: center;
+    padding-right: 2px;
+    padding-left: 2px;
+}

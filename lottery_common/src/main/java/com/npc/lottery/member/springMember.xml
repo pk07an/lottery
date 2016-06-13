@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- demo 数据库处理类实例 -->
+	<bean id="funcDao" class="com.npc.lottery.member.dao.hibernate.FuncDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- demo 逻辑处理类实例 -->
+	<bean id="funcLogic" class="com.npc.lottery.member.logic.spring.FuncLogic">
+		<property name="funcDao" ref="funcDao"/>
+	</bean>
+	<!-- 投注类型总额表 -->
+	<bean id="playAmountDao" class="com.npc.lottery.member.dao.hibernate.PlayAmountDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 投注类型总额表 -->
+	<bean id="playAmountJdbcDao" class="com.npc.lottery.member.dao.hibernate.PlayAmountJdbcDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	<!-- 注单注销表 -->
+	<bean id="cancelPetDao" class="com.npc.lottery.member.dao.hibernate.CancelPetDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	<!-- 注单注销恢復操作日誌表 -->
+	<bean id="cancelPetLogDao" class="com.npc.lottery.member.dao.hibernate.CancelPetLogDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	<!-- demo 数据库处理类实例 -->
+	<bean id="betDao" class="com.npc.lottery.member.dao.hibernate.BetDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+		<property name="playTypeDao" ref="playTypeDao"/>
+		<property name="memberStaffLogic" ref="memberStaffLogic"/>
+		<property name="managerStaffLogic" ref="managerStaffLogic"/>
+		<property name="checkDao" ref="checkDao"/>
+	</bean>
+	
+	
+	
+	
+	<bean id="betLogic" class="com.npc.lottery.member.logic.spring.BetLogic">
+		<property name="betDao" ref="betDao"/>
+		<property name="memberStaffExtDao" ref="memberStaffExtDao"/>
+		<property name="playAmountDao" ref="playAmountDao"/>
+		<property name="cancelPetDao" ref="cancelPetDao"/>
+		<property name="cancelPetLogDao" ref="cancelPetLogDao"/>
+		<property name="shopOddsLogic" ref="shopOddsLogic"/>
+		<property name="cqsscHisLogic" ref="cqsscHisLogic"/>
+		<property name="gdklsfHisLogic" ref="gdklsfHisLogic"/>
+		<property name="hklhcHisLogic" ref="hklhcHisLogic"/>
+		<property name="replenishAutoLogic" ref="replenishAutoLogic"/>
+		<property name="shopsPlayOddsLogLogic" ref="shopsPlayOddsLogLogic"/>
+		<property name="wcpTaskExecutor" ref="wcpTaskExecutor"/>
+		<property name="shopsLogic" ref="shopsLogic"/>
+		<property name="replenishLogic" ref="replenishLogic"/>
+		<property name="playAmountJdbcDao" ref="playAmountJdbcDao"/>
+	</bean>
+	<!-- 
+	<bean id="lotteryResultLogic" class="com.npc.lottery.member.logic.spring.LotteryResultLogic">
+		<property name="betDao" ref="betDao"/>
+		<property name="playTypeLogic" ref="playTypeLogic"/>
+		<property name="userCommissionLogic" ref="userCommissionLogic"/>
+		<property name="icqPeriodsInfoLogic" ref="icqPeriodsInfoLogic"/>
+		<property name="periodsInfoLogic" ref="periodsInfoLogic"/>
+		<property name="skperiodsInfoLogic" ref="skperiodsInfoLogic"/>
+		<property name="bjscPeriodsInfoLogic" ref="bjscPeriodsInfoLogic"/>
+		add by peter for K3
+		<property name="jssbPeriodsInfoLogic" ref="jssbPeriodsInfoLogic"/>
+		for report
+		<property name="settledReportEricLogic" ref="settledReportEricLogic"/>
+		<property name="classReportEricLogic" ref="classReportEricLogic"/>
+		<property name="reportStatusLogic" ref="reportStatusLogic"/>
+		add by peter for NC
+		<property name="ncPeriodsInfoLogic" ref="ncPeriodsInfoLogic"/>
+		<property name="checkLogic" ref="checkLogic"/>
+	</bean>
+	 -->
+	
+	<bean id="playTypeDao" class="com.npc.lottery.member.dao.hibernate.PlayTypeDao">
+		<property name="sessionFactory" ref="sessionFactory"/>		
+	</bean>
+	
+	<bean id="playTypeLogic" class="com.npc.lottery.member.logic.spring.PlayTypeLogic">
+		<property name="playTypeDao" ref="playTypeDao"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	
+	<bean id="betOrderNoGenerator" class="org.springframework.jdbc.support.incrementer.OracleSequenceMaxValueIncrementer">
+		    <property name="incrementerName" value="seq_tb_gdklsf_ball_first"/> 
+			<property name="dataSource" ref="dataSource"/>
+    </bean>	
+	
+	<!-- 投注数据校验  start-->
+	<bean id="checkDao" class="com.npc.lottery.member.dao.hibernate.CheckDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	<bean id="checkLogic" class="com.npc.lottery.member.logic.spring.CheckLogic">
+		<property name="checkDao" ref="checkDao"/>
+		<property name="replenishHisDao" ref="replenishHisDao"/>
+		<property name="replenishCheckDao" ref="replenishCheckDao"/>
+		<property name="replenishLogic" ref="replenishLogic"/>
+	</bean>
+	<!-- 投注数据校验  end-->
+</beans>

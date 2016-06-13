@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.manage.entity">
+	<class
+		name="ShopsDeclaratton"
+		table="TB_SHOPS_DECLARATION"
+	>
+		<id name="ID" type="java.lang.Long" >
+		 <column name="ID" precision="12" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">SEQ_TB_SHOPS_DECLARATION</param>
+			</generator>
+		</id>
+
+		<property
+			name="contentInfo"
+			column="CONTENT_INFO"
+			type="string"
+			not-null="false"
+			length="2000"
+		/>
+		<property
+			name="startDate"
+			column="START_DATE"
+			type="timestamp"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="endDate"
+			column="END_DATE"
+			type="timestamp"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="type"
+			column="TYPE"
+			type="string"
+			length="2"
+		/>
+		<property
+			name="fontColor"
+			column="FONT_COLOR"
+			type="string"
+			not-null="false"
+			length="7"
+		/>
+		<property
+			name="remark"
+			column="REMARK"
+			type="string"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="createDate"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="shopsCode"
+			column="SHOPS_CODE"
+			type="string"
+			not-null="false"
+			length="4"
+		/>
+		<property
+			name="managerMessageStatus"
+			column="MANAGER_MESSAGE_STATUS"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="popupMenus"
+			column="POPUP_MENUS"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="memberMessageStatus"
+			column="MEMBER_MESSAGE_STATUS"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+	</class>	
+</hibernate-mapping>

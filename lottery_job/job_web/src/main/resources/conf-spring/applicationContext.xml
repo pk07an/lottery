@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+	default-autowire="byName">
+	
+	<!-- 导入其他配置文件 -->
+	<import resource="classpath:com/npc/lottery/sysmge/springSysmge.xml" /><!-- 系统管理模块 -->
+	<import resource="classpath:com/npc/lottery/member/springMember.xml" /><!-- 会员 模块 -->
+
+	<!-- 盘期 模块 -->
+	<import resource="classpath:com/npc/lottery/periods/springPeriods.xml"/>
+	<import resource="classpath:com/npc/lottery/user/springUser.xml"/><!--创建用户 模块 -->
+	<import resource="classpath:com/npc/lottery/boss/springBoss.xml" /><!-- 總管 模块 -->
+	<import resource="classpath:com/npc/lottery/odds/springOdds.xml" /><!-- 總管 模块 -->
+	<import resource="classpath:com/npc/lottery/manage/springManage.xml" />
+	<import resource="classpath:com/npc/lottery/statreport/springStatreport.xml" /><!--统计报表 模块 -->
+	<import resource="classpath:com/npc/lottery/statreport/springUnsettledReport.xml" /><!--统计未结算交收报表 模块 -->
+	<import resource="classpath:com/npc/lottery/statreport/springUnClassReport.xml" /><!--统计未结算分类报表 模块 -->
+	<import resource="classpath:com/npc/lottery/statreport/springSettledReportEric.xml" /><!--统计已结算交收报表-Eric 模块 -->
+	<import resource="classpath:com/npc/lottery/statreport/springClassReportEric.xml" /><!--统计已结算分類报表-Eric 模块 -->
+	<import resource="classpath:com/npc/lottery/monitoring/springMonitoring.xml"/><!-- 监控模块 -->
+	<!-- 补货 模块 -->
+	<import resource="classpath:com/npc/lottery/replenish/springReplenish.xml" />
+
+	<import resource="classpath:applicationContext-quartz-common.xml"/>
+	<import resource="classpath:applicationContext-quartz-report.xml"/>
+	<!-- memcached模块 -->
+	<import resource="classpath:com/npc/lottery/service/springMemcache.xml" />
+	<!-- 通过JNDI配置数据源，数据库连接部署在tomcat里 -->
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/npc/lot</value>
+		</property>
+	</bean>
+	
+    <!--定义了Hibernate的SessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingResources">
+            <list>
+				<!-- 系统管理模块 start -->
+				<value>com/npc/lottery/sysmge/entity/Staff.hbm.xml</value>				
+				<value>com/npc/lottery/sysmge/entity/Resource.hbm.xml</value>
+				<value>com/npc/lottery/sysmge/entity/Function.hbm.xml</value>
+				<value>com/npc/lottery/sysmge/entity/Org.hbm.xml</value>	
+				<value>com/npc/lottery/sysmge/entity/OrgExt.hbm.xml</value>				
+				<value>com/npc/lottery/sysmge/entity/Roles.hbm.xml</value>
+				<value>com/npc/lottery/sysmge/entity/Param.hbm.xml</value>
+				<value>com/npc/lottery/sysmge/entity/ParamValue.hbm.xml</value>	
+				<value>com/npc/lottery/sysmge/entity/RoleFunc.hbm.xml</value>		
+				<value>com/npc/lottery/sysmge/entity/StaffRole.hbm.xml</value>	
+				<value>com/npc/lottery/sysmge/entity/ManagerStaff.hbm.xml</value>
+				<value>com/npc/lottery/sysmge/entity/MemberStaff.hbm.xml</value>
+				<value>com/npc/lottery/sysmge/entity/LoginLogInfo.hbm.xml</value>
+				<value>com/npc/lottery/replenish/entity/Replenish.hbm.xml</value>	
+				
+				<!-- 退水设置 end -->
+				<value>com/npc/lottery/user/entity/UserCommission.hbm.xml</value>	
+				<!-- 默认退水 end -->
+				<value>com/npc/lottery/user/entity/UserCommissionDefault.hbm.xml</value>		
+				<!-- 系统管理模块 end -->
+				<!--总管管理模块 start -->
+				<value>com/npc/lottery/boss/entity/ShopsInfo.hbm.xml</value><!--商铺信息-->
+				<value>com/npc/lottery/boss/entity/ShopsRent.hbm.xml</value><!--商铺租约-->	
+				<!--广东快乐十分盘期-->
+				<value>com/npc/lottery/periods/entity/GDPeriodsInfo.hbm.xml</value>
+				<!--北京赛车盘期-->
+				<value>com/npc/lottery/periods/entity/BJSCPeriodsInfo.hbm.xml</value>
+				
+				<!--重庆时时彩盘期-->
+				<value>com/npc/lottery/periods/entity/CQPeriodsInfo.hbm.xml</value>
+				<!--香港时时彩盘期-->
+				<value>com/npc/lottery/periods/entity/HKPeriodsInfo.hbm.xml</value>
+				<!--香港时时彩盘期-->
+				<value>com/npc/lottery/periods/entity/HKPeriods.hbm.xml</value>
+				<!--总管管理模块 end -->
+				<value>com/npc/lottery/member/entity/PlayType.hbm.xml</value>
+				<value>com/npc/lottery/member/entity/PlayWinInfo.hbm.xml</value>
+				<value>com/npc/lottery/member/entity/PlayAmount.hbm.xml</value>
+				<value>com/npc/lottery/odds/entity/ShopsPlayOdds.hbm.xml</value>
+				<!--代理管理模块 end -->
+				<value>com/npc/lottery/user/entity/AgentStaffExt.hbm.xml</value>
+				<!--分公司管理模块 end -->
+				<value>com/npc/lottery/user/entity/BranchStaffExt.hbm.xml</value>
+				<!--总监管理模块 end -->
+				<value>com/npc/lottery/user/entity/ChiefStaffExt.hbm.xml</value>
+				<!--子帳號管理模块 end -->
+				<value>com/npc/lottery/user/entity/SubAccountInfo.hbm.xml</value>
+				
+				<value>com/npc/lottery/odds/entity/OpenPlayOdds.hbm.xml</value>
+				<!--总代理管理模块 end -->
+				<value>com/npc/lottery/user/entity/GenAgenStaffExt.hbm.xml</value>
+				<!--会员管理模块 end -->
+				<value>com/npc/lottery/user/entity/MemberStaffExt.hbm.xml</value>
+				<!--股东管理模块 end -->
+				<value>com/npc/lottery/user/entity/StockholderStaffExt.hbm.xml</value>
+				<!--出货会员模块 -->
+				<value>com/npc/lottery/user/entity/OutReplenishStaff.hbm.xml</value>
+				
+				<value>com/npc/lottery/manage/entity/PeriodAutoOdds.hbm.xml</value>	
+				<value>com/npc/lottery/sysmge/entity/ShopsPlayOddsLog.hbm.xml</value>	
+				
+				<!-- 投注历史 -->
+				<value>com/npc/lottery/statreport/entity/HklhcHis.hbm.xml</value>
+				<value>com/npc/lottery/statreport/entity/CqsscHis.hbm.xml</value>	
+				<value>com/npc/lottery/statreport/entity/GdklsfHis.hbm.xml</value>
+				<value>com/npc/lottery/statreport/entity/BjscHis.hbm.xml</value>
+				
+				<!-- 走马灯 -->
+				<value>com/npc/lottery/manage/entity/ShopsDeclaratton.hbm.xml</value>
+				<!-- 自動補貨 -->
+				<value>com/npc/lottery/replenish/entity/ReplenishAuto.hbm.xml</value>
+				<value>com/npc/lottery/replenish/entity/ReplenishAutoLog.hbm.xml</value>
+				<value>com/npc/lottery/replenish/entity/ReplenishAutoSetLog.hbm.xml</value>
+				<!-- 江苏骰宝 -->
+				<value>com/npc/lottery/periods/entity/JSSBPeriodsInfo.hbm.xml</value>
+				
+				<!-- 报表投注统计 -->
+				<value>com/npc/lottery/statreport/entity/ClassReportPetList.hbm.xml</value>
+				<value>com/npc/lottery/statreport/entity/ClassReportRList.hbm.xml</value>
+				<value>com/npc/lottery/statreport/entity/SettledReportPetList.hbm.xml</value>
+				<value>com/npc/lottery/statreport/entity/SettledReportRList.hbm.xml</value>
+				
+				<value>com/npc/lottery/statreport/entity/ClassReportPetPeriod.hbm.xml</value>
+				<value>com/npc/lottery/statreport/entity/ClassReportRPeriod.hbm.xml</value>
+				<value>com/npc/lottery/statreport/entity/SettledReportPetPeriod.hbm.xml</value>
+				<value>com/npc/lottery/statreport/entity/SettledReportRPeriod.hbm.xml</value>
+				
+				<value>com/npc/lottery/statreport/entity/ReportStatus.hbm.xml</value>
+				<!-- 幸运农场 -->
+				<value>com/npc/lottery/periods/entity/NCPeriodsInfo.hbm.xml</value>
+            </list>
+        </property>
+        
+        <!-- 定义hibernate实体类与数据库映射文件 -->
+        <!-- 不建议采用这种目录引入的方式，会影响开发调试，一般采用上面的mappingResources中具体文件单个配置的方式使用 -->
+        <!-- 
+        <property name="mappingDirectoryLocations">  
+            <list>  
+                <value>classpath:com/npc/lottery/sysmge/entity/</value>  
+                <value>classpath:com/npc/lottery/knowledgemge/entity/</value>
+            </list>  
+        </property> 
+         -->
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.hbm2ddl.auto">none</prop>
+                <prop key="hibernate.jdbc.batch_size">20</prop>
+                <prop key="hibernate.jdbc.fetch_size">80</prop>				
+                <prop key="hibernate.format_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+		 <property name="dataSource"><ref bean="dataSource"/></property>
+    </bean>
+    
+    <!-- DAO 基类实例 -->
+	<bean id="baseDao" class="com.npc.lottery.common.dao.BaseDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- Logic 基类实例 -->
+	<bean id="baseLogic" class="com.npc.lottery.common.service.BaseLogic">
+		<property name="baseDao" ref="baseDao"/>
+	</bean>
+    
+    <bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+	    <!--  事务拦截器bean需要依赖注入一个事务管理器 -->
+        <property name="transactionManager" ref="transactionManager"/>
+    	<property name="transactionAttributes">
+		    <!--  下面定义事务传播属性-->
+		    <props>
+			    <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				 <prop key="query*">PROPAGATION_REQUIRED</prop>
+			    <prop key="delete*">PROPAGATION_REQUIRED</prop> 
+	            <prop key="add*">PROPAGATION_REQUIRED</prop> 
+	            <prop key="update*">PROPAGATION_REQUIRED</prop> 
+	            <prop key="save*">PROPAGATION_REQUIRED</prop>
+	            <prop key="finish*">PROPAGATION_REQUIRED</prop> 
+				<prop key="find*">PROPAGATION_REQUIRED</prop> 
+				<prop key="lotteryFor*">PROPAGATION_REQUIRED, ISOLATION_READ_COMMITTED</prop> 
+				<prop key="queryByPeriodsStatus">PROPAGATION_REQUIRED,readOnly</prop> 
+				<prop key="queryStopPeriods">PROPAGATION_REQUIRED,readOnly</prop> 
+				<prop key="findPeriodState">PROPAGATION_REQUIRED,readOnly</prop> 
+				<prop key="findMemberStaffExtByID">PROPAGATION_REQUIRED,readOnly</prop> 
+				<prop key="queryCQSSCRealOdds">PROPAGATION_REQUIRED,readOnly</prop> 
+				<prop key="lotteryUpdate*">PROPAGATION_REQUIRED, ISOLATION_READ_COMMITTED</prop> 
+				<prop key="update*AutoOdds">PROPAGATION_REQUIRED, ISOLATION_READ_COMMITTED</prop> 
+				<prop key="miragationLotDataToHistory">PROPAGATION_REQUIRED, ISOLATION_READ_COMMITTED</prop> 
+				<prop key="saveMonitoringInfo">PROPAGATION_NOT_SUPPORTED</prop> 
+				<prop key="updatePlayTypeWin">PROPAGATION_NOT_SUPPORTED</prop> 
+				<prop key="batchInsertShopLotteryLog">PROPAGATION_NOT_SUPPORTED</prop> 
+				
+		    </props>
+	    </property>
+	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+	</bean>
+
+	<!-- 事物代理 -->
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"> 
+        <property name="beanNames"> 
+           <list> 
+              <value>*Logic</value>
+               <value>*Service</value>
+           </list> 
+        </property> 
+        <property name="interceptorNames"> 
+           <list> 
+              <value>transactionInterceptor</value> 
+           </list> 
+        </property> 
+     </bean>
+	
+	<!--spring 工具类-->
+	<bean id="spring" class="com.npc.lottery.util.SpringUtil" />
+	
+	<!--异步执行-->
+	<bean id="wcpTaskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" lazy-init="default">
+		<property name="corePoolSize" value="50" />
+		<property name="maxPoolSize" value="500" />
+	</bean>
+	
+	<!-- 自动扫描Bean -->
+	<context:component-scan base-package="com.npc.lottery">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	<!--mysql公共库数据源 -->
+	<bean id="dataSource_mysql" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/npc/common</value>
+		</property>
+	</bean>
+	<!--job数据源 -->
+	<bean id="dataSource_job" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/npc/job</value>
+		</property>
+	</bean>
+</beans>

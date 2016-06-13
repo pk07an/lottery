@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.replenish.entity">
+	<class
+		name="ReplenishAutoLog"
+		table="TB_REPLENISH_AUTO_LOG"
+	>
+		<id name="ID" type="java.lang.Long" >
+		 <column name="ID" precision="12" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">SEQ_tb_replenish_auto_LOG</param>
+			</generator>
+		</id>
+
+		<property
+			name="shopID"
+			column="SHOP_ID"
+			type="long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="type"
+			column="PLAY_TYPE"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="typeBH"
+			column="TYPE"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="money"
+			column="MONEY"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="createUserID"
+			column="CREATE_USERID"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="periodsNum"
+			column="PERIODS_NUM"
+			type="string"
+			not-null="false"
+			length="11"
+		/>
+		<property
+			name="createTime"
+			column="CREATE_DATE"
+			type="timestamp"
+			not-null="false"
+			length="30"
+		/>	
+						
+		<property
+			name="typeCode"
+			column="TYPE_CODE"
+			type="string"
+			not-null="false"
+			length="30"
+		/>
+		<many-to-one property-ref="typeCode" name="playType" column="TYPE_CODE" update="false" insert="false" unique="true" />
+ 		<many-to-one name="shopsInfo" column="SHOP_ID" update="false" insert="false" unique="true"   />
+	    <many-to-one name="userAccount" column="CREATE_USERID" update="false" insert="false" unique="true" />
+	</class>	
+</hibernate-mapping>

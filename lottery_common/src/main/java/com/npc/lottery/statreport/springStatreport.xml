@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 投注历史（香港六合彩） 数据库处理类实例 -->
+	<bean id="hklhcHisDao" class="com.npc.lottery.statreport.dao.hibernate.HklhcHisDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 投注历史（香港六合彩） 逻辑处理类实例 -->
+	<bean id="hklhcHisLogic" class="com.npc.lottery.statreport.logic.spring.HklhcHisLogic">
+		<property name="hklhcHisDao" ref="hklhcHisDao"/>
+	</bean>
+	
+	<!-- 投注历史（广东快乐十分） 数据库处理类实例 -->
+	<bean id="gdklsfHisDao" class="com.npc.lottery.statreport.dao.hibernate.GdklsfHisDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 投注历史（广东快乐十分） 逻辑处理类实例 -->
+	<bean id="gdklsfHisLogic" class="com.npc.lottery.statreport.logic.spring.GdklsfHisLogic">
+		<property name="gdklsfHisDao" ref="gdklsfHisDao"/>
+		<property name="statReportLogic" ref="statReportLogic"/>
+	</bean>
+	
+	<!-- 投注历史（重庆时时彩） 数据库处理类实例 -->
+	<bean id="cqsscHisDao" class="com.npc.lottery.statreport.dao.hibernate.CqsscHisDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 投注历史（重庆时时彩） 逻辑处理类实例 -->
+	<bean id="cqsscHisLogic" class="com.npc.lottery.statreport.logic.spring.CqsscHisLogic">
+		<property name="cqsscHisDao" ref="cqsscHisDao"/>
+	</bean>
+	
+	<!-- 交收报表统计 数据库处理类实例 -->
+	<bean id="statReportDao" class="com.npc.lottery.statreport.dao.hibernate.StatReportDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 交收报表统计 逻辑处理类实例 -->
+	<bean id="statReportLogic" class="com.npc.lottery.statreport.logic.spring.StatReportLogic">
+		<property name="statReportDao" ref="statReportDao"/>
+		<property name="replenishLogic2" ref="replenishLogic2"/>
+		<property name="gdklsfHisLogic" ref="gdklsfHisLogic"/>
+		<property name="bjscHisLogic" ref="bjscHisLogic"/>
+	</bean>
+	
+	<!-- 分类报表 数据库处理类实例 -->
+    <bean id="classReportDao" class="com.npc.lottery.statreport.dao.hibernate.ClassReportDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <!-- 分类报表 逻辑处理类实例 -->
+    <bean id="classReportLogic" class="com.npc.lottery.statreport.logic.spring.ClassReportLogic">
+        <property name="classReportDao" ref="classReportDao"/>
+		<property name="statReportDao" ref="statReportDao"/>
+		<property name="gdklsfHisLogic" ref="gdklsfHisLogic"/>
+		<property name="cqsscHisLogic" ref="cqsscHisLogic"/>
+		<property name="hklhcHisLogic" ref="hklhcHisLogic"/>
+		<property name="bjscHisLogic" ref="bjscHisLogic"/>
+    </bean>
+	
+	<!-- 补货 数据库处理类实例 -->
+	<bean id="replenishDao2" class="com.npc.lottery.statreport.dao.hibernate.ReplenishDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 补货 逻辑处理类实例 -->
+	<bean id="replenishLogic2" class="com.npc.lottery.statreport.logic.spring.ReplenishLogic">
+		<property name="replenishDao2" ref="replenishDao2"/>
+	</bean>
+	
+	<!-- 投注历史（北京赛车） add by Aaron 20121111-->
+	<bean id="bjscHisDao" class="com.npc.lottery.statreport.dao.hibernate.BjscHisDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 投注历史（重庆时时彩） 逻辑处理类实例 -->
+	<bean id="bjscHisLogic" class="com.npc.lottery.statreport.logic.spring.BJSCHisLogic">
+		<property name="bjscHisDao" ref="bjscHisDao"/>
+	</bean>
+</beans>

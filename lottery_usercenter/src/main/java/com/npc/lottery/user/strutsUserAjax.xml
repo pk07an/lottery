@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="user_json" extends="struts-default">
+		<!-- 查询用户名是否存在 -->
+		<action name="ajaxQueryUserName" class="com.npc.lottery.user.action.UserManagerAjax" method="queryUserName">
+			<result name="failure">/common/infoPage.jsp</result>	
+		</action>
+		<!-- 查询股东用户名 -->
+		<action name="ajaxQueryStockholerName" class="com.npc.lottery.user.action.UserManagerAjax" method="ajaxQueryStockholerName">
+			<result name="failure">/common/infoPage.jsp</result>	
+		</action>
+			<!-- 查詢中文名是否存在 -->
+		<action name="ajaxQueryChsName" class="com.npc.lottery.user.action.UserManagerAjax" method="queryChsName">
+			<result name="failure">/common/infoPage.jsp</result>	
+		</action>
+		<!-- 查询会员用户名 -->
+		<action name="ajaxQueryMemberName" class="com.npc.lottery.user.action.UserManagerAjax" method="ajaxQueryMemberName">
+			<result name="failure">/common/infoPage.jsp</result>	
+		</action>
+		<!-- 查询后台密码 -->
+		<action name="ajaxQueryPassword" class="com.npc.lottery.user.action.UserManagerAjax" method="ajaxQueryPassword">
+			<result name="failure">/common/infoPage.jsp</result>	
+		</action>
+		
+		<!-- 期數查询 -->
+		<action name="ajaxQueryPeriodsNum" class="com.npc.lottery.user.action.UserManagerAjax" method="ajaxQueryPeriodsNum">
+			<result name="failure">/common/infoPage.jsp</result>	
+		</action>
+		
+		<!-- add by peter for 会员优化 start -->
+		<!-- 当日有没有投注查询 -->
+		<action name="ajaxQueryUserTreeHasBet" class="com.npc.lottery.user.action.UserManagerAjax" method="ajaxQueryUserTreeHasBet">
+			<result name="failure">/common/infoPage.jsp</result>	
+		</action>
+		<!-- 最高可设占成 -->
+		<action name="ajaxQueryBelowMaxRate" class="com.npc.lottery.user.action.UserManagerAjax" method="ajaxQueryBelowMaxRate">
+			<result name="failure">/common/infoPage.jsp</result>	
+		</action>
+		<!-- add by peter for 会员优化 end -->
+	</package>
+</struts>

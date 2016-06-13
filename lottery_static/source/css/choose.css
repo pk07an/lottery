@@ -1,0 +1,48 @@
+﻿/*
+ * FileName: layout.css [公用]
+ * CreateTime: 2012-02-20
+ * Author: Charming Honest Romantic Intellegent Smiling
+ */
+@charset "utf-8";
+body {margin:0; padding:0; color:#333; font-size:12px; line-height:1.8; font-family:Tahoma,SimSun,Arial,serif;background:#5d9be8 url(../images/choose_bg.jpg) repeat-x left top; text-align:left; vertical-align:baseline;}
+div,table,tr,th,td,form,p,ul,li,dl,dt,dd,a,span,img,dl,dt,dd,h1,h2,h3,h4,h5,h6{margin:0; padding:0;}
+/**{margin:0;padding:0;}*/
+table,tr,th,td,form,p {border:none 0;}
+ul,li {margin:0; padding:0; list-style:none; }
+img {border:none 0;}
+.fl{float:left;}
+.fr{float:right;}
+.clear{line-height:0; font-size:0; overflow:hidden;clear:both;}
+a{color:#333;text-decoration:none; }
+a:hover{}
+.g3{color:#333;}
+.red{color:#de0000;}
+.green{color:#069a0c;}
+.ml10{margin-left:10px;}
+.ml6{margin-left:6px;}
+.ml16{margin-left:16px;}
+.mr50{margin-right:50px;}
+.ml22{margin-left:22px;}
+.mr10{margin-right:10px;}
+.main{background:url(../images/choose_background.jpg) no-repeat center top;width:960px;height:560px;margin:0 auto;}
+.side{width:142px;height:236px;border:2px solid #94d3ef;border-right:0;margin-top:20px;}
+.side a, .side a:hover, .side a.current{display:block;height:118px;line-height:118px;text-indent:28px;font-weight:bold;font-size:14px;color:#fff;background-color:#447ecd;}
+.side a:hover, .side a.current{background:#3c86e8 url(../images/side_current.jpg) repeat-x left bottom;}
+.content{position:relative;width:388px;height:274px;border:2px solid #94d3ef;background-color:#f2fbff;}
+.content .corner, .content .corner2{position:absolute;left:-22px;top:65px;width:22px;height:40px; background:url(../images/corner.gif) no-repeat left center;}
+.content .corner2{top:175px;}
+.content ul{margin:20px}
+.content ul li{float:left;width:140px;marin-left:40px;display:inline;height:36px;line-height:36px;font-size:14px;color:#0a3f8d; background:url(../images/dot.gif) no-repeat left center;padding-left:12px;}
+.content ul li a{color:#0a3f8d;}
+.content ul li a:hover{color:#ff0000;}
+/* Clear Fix */ 
+.content ul:after{ content:"."; display:block; height:0; clear:both; visibility:hidden; } 
+.content ul{ display:inline-block; } 
+.content ul{display:block;} 
+.wrap{width:550px;margin:0 auto;padding-top:115px;}
+.member{width:534px;height:26px; background:url(../images/member.png) no-repeat center center;behavior: url("iepngfix.htc");margin-bottom:16px;}
+.code{width:484px;height:77px;padding:36px 0 0 50px;background:#2f4e6c url(../images/code_bg.jpg) no-repeat center top;}
+.code input{ vertical-align:middle;}
+.pt200{padding-top:200px;}
+.code_input{width:270px;height:36px;border:none; background:url(../images/code_input.gif) no-repeat left center;padding:0 10px 0 42px;color:#376c90;line-height:36px;font-size:16px;}
+.code_login{width:102px;height:36px;border:none; background: url(../images/code_login.gif) no-repeat left center;margin-left:3px;}

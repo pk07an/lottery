@@ -1,0 +1,156 @@
+<%@ page pageEncoding="utf-8"%>
+<SCRIPT type=text/javascript>
+var timer;
+$(document).ready(function() {	
+	onChangeSubmit();
+	//showContentMain();
+});
+
+function showContentMain() {
+	var strUrl = context + "/replenish/replenishSetContent.action";
+	var queryUrl = encodeURI(encodeURI(strUrl));
+	$.ajax({
+		type : "POST",
+		url : queryUrl,
+		data : {"subType":$("#subType").val(),"searchArray":"lose",
+			"searchType":"0","plate":"A"},
+		dataType : "html",
+		success : showContentCallbackMain
+	});
+}
+
+function showContentCallbackMain(resultHtml) {
+	$("#content").html(resultHtml);
+	if($("#searchTime").val()=="NO"){
+		$("#refreshBtn").show();
+	}else{
+		$("#refreshTime").show();
+	}
+	$("#onrefresh").hide();
+	onrefresh = false; 
+	setCltime();
+}
+</SCRIPT>
+<DIV id=content style="WIDTH: auto"><!--加载判断用户信息，包括子帐号的信息判断  --><!--内容开始-->
+<FORM id=rForm action=replenishSet.action method=post><INPUT id=subType type=hidden value=CQSSC_BALL_FIRST name=subType> 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0><!--控制表格头部开始-->
+<TBODY>
+<TR>
+<TD background=/images/admin/tab_05.gif height=30>
+<DIV id=Tab_top>
+<TABLE id=Tab_top_right cellSpacing=0 cellPadding=0 border=0>
+<TBODY>
+<TR>
+<TD align=left><SELECT id=searchType onchange=onChangeSubmit() name=searchType> <OPTION value=1>虛注</OPTION> <OPTION value=0 selected>實占</OPTION></SELECT> <SELECT id=plate onchange=onChangePlate() name=plate> <OPTION value=A selected>A盘</OPTION> <OPTION value=B>B盘</OPTION> <OPTION value=C>C盘</OPTION></SELECT></TD>
+<TD align=right width=80><INPUT id=refreshBtn onclick=onChangeSubmit() type=button value=更新> <SPAN id=refreshTime style="DISPLAY: none" jQuery17209626662852275318="1297">更新：<SPAN id=clTime style="MARGIN-RIGHT: 2px">0秒</SPAN></SPAN> <SPAN class=blue id=onrefresh style="DISPLAY: none" jQuery17209626662852275318="1296">載入中...</SPAN> </TD>
+<TD><SELECT id=searchTime onchange=changeTime() name=searchTime> <OPTION value=0>0m</OPTION></SELECT></TD>
+<TD align=right width=16><IMG height=30 src="../images/admin/tab_07.gif" width=16></TD></TR></TBODY></TABLE>
+<TABLE id=Tab_top_left cellSpacing=0 cellPadding=0 border=0>
+<TBODY>
+<TR>
+<TD width=12 height=30><IMG height=30 src="../images/admin/tab_03.gif" width=12></TD>
+<TD align=left width=16><IMG height=16 src="../images/admin/tb.gif" width=16></TD>
+<TD style="PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px"><STRONG class=green>期</STRONG></TD>
+<TD style="PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px"><STRONG class=blue>總項盤口</STRONG></TD>
+<TD style="PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px"><STRONG id=fpTitle style="font-color: #344B50">距離封盤：</STRONG> <STRONG class=red id=kjTitle style="DISPLAY: none">距離開獎：</STRONG> <STRONG><SPAN id=fpTime style="font-color: #344B50">00:00</SPAN></STRONG> <STRONG><SPAN class=red id=kjTime style="DISPLAY: none">00:00</SPAN></STRONG> </TD>
+<TD style="PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px"><STRONG class=red>今天输赢：<SPAN class=red id=todaywin>0.0</SPAN></STRONG></TD></TR></TBODY></TABLE>
+<TABLE id=Tab_top_center style="MARGIN: 0px auto; WIDTH: 273px" cellSpacing=0 cellPadding=0 border=0>
+<TBODY>
+<TR>
+<TD><STRONG class=orange>&nbsp;</STRONG><STRONG>期赛果</STRONG></TD>
+<TD>&nbsp;</TD></TR></TBODY></TABLE></DIV></TD></TR><!--控制表格头部结束--><!--控制中间内容开始-->
+<TR>
+<TD>
+<TABLE id=oddTable cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TBODY>
+<TR>
+<TD width=8 background=/images/admin/tab_12.gif>&nbsp;</TD>
+<TD align=middle><!-- 表格内容开始 一行五列-->
+<TABLE class=mt4 cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TBODY>
+<TR>
+<TD vAlign=top align=left>
+<TABLE class=king cellSpacing=0 cellPadding=0 width="100%" border=0>
+<COLGROUP>
+<COL width="10%">
+<COL width="34%">
+<COL width="28%">
+<COL width="28%"></COLGROUP>
+<TBODY>
+<TR>
+<TH>號</TH>
+<TH>賠率</TH>
+<TH>注額</TH>
+<TH>虧盈</TH></TR>
+<TR class=sub_th>
+<TD colSpan=4>第一球</TD></TR>
+<TR class=sub_th>
+  <TD colSpan=4>第四球</TD></TR></TBODY></TABLE></TD>
+<TD vAlign=top align=left>
+<TABLE class=king cellSpacing=0 cellPadding=0 width="100%" border=0>
+<COLGROUP>
+<COL width="10%">
+<COL width="34%">
+<COL width="28%">
+<COL width="28%"></COLGROUP>
+<TBODY>
+<TR>
+<TH>號</TH>
+<TH>賠率</TH>
+<TH>注額</TH>
+<TH>虧盈</TH></TR>
+<TR class=sub_th>
+<TD colSpan=4>第二球</TD></TR>
+<TR class=sub_th>
+  <TD colSpan=4>第五球</TD></TR></TBODY></TABLE></TD>
+<TD vAlign=top align=left>
+<TABLE class=king cellSpacing=0 cellPadding=0 width="100%" border=0>
+<COLGROUP>
+<COL width="10%">
+<COL width="34%">
+<COL width="28%">
+<COL width="28%"></COLGROUP>
+<TBODY>
+<TR>
+<TH>號</TH>
+<TH>賠率</TH>
+<TH>注額</TH>
+<TH>虧盈</TH></TR>
+<TR class=sub_th>
+<TD colSpan=4>第三球</TD></TR></TBODY></TABLE></TD>
+<TD vAlign=top align=left><!-- 项-->
+<TABLE class=king cellSpacing=0 cellPadding=0 width="100%" border=0>
+<COLGROUP>
+<COL width="10%">
+<COL width="34%">
+<COL width="28%">
+<COL width="28%"></COLGROUP>
+<TBODY>
+<TR>
+<TH>項</TH>
+<TH>賠率</TH>
+<TH>注額</TH>
+<TH>虧盈</TH></TR>
+<TR class=sub_th>
+  <TD colSpan=4>前三</TD></TR>
+<TR class=sub_th>
+  <TD colSpan=4>中三</TD></TR>
+<TR class=sub_th>
+  <TD colSpan=4>后三</TD></TR></TBODY></TABLE><!-- 项结束--></TD>
+<TD vAlign=top align=left width=110><!-- 两面长龙开始-->
+<TABLE class="king changlong" cellSpacing=0 cellPadding=0 width="100%" border=0>
+<COLGROUP>
+<COL width=81>
+<COL width=26></COLGROUP>
+<TBODY>
+<TR>
+<TH width="70%"><B>两面长龙</B></TH></TR></TBODY></TABLE><!-- 两面长龙结束--></TD></TR></TBODY></TABLE><!-- 表格内容结束 一行五列--></TD>
+<TD width=8 background=/images/admin/tab_15.gif>&nbsp;</TD></TR></TBODY></TABLE></TD></TR><!--控制中间内容结束--><!--控制底部操作按钮开始-->
+<TR>
+<TD background=/images/admin/tab_19.gif height=35>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TBODY>
+<TR>
+<TD width=12 height=35><IMG height=35 src="../images/admin/tab_18.gif" width=12></TD>
+<TD align=middle><SPAN>平均虧損：</SPAN><INPUT class=b_g id=avLose maxLength=16 size=16 value=-100000000 name=avLose> <SPAN>赔率：</SPAN><INPUT class=b_g id=avOdd maxLength=16 size=5 value=2 name=avOdd> <SPAN>退水：</SPAN><INPUT class=b_g id=avCommission maxLength=16 size=5 value=100 name=avCommission> <INPUT class="ml10 zs btn2" onClick="return onChangeSubmit()" type=button value=計算補貨 name=computeBtn> <!-- <input name="quickBtn" id="quickBtn" type="button" class="ml10 sl btn2" value="快速補單" disabled="disabled"/> --><INPUT class="ml10 blue_btn btn2" onClick="return openHelp(this)" type=button value=補貨說明 name=helpBtn></TD>
+<TD width=16><IMG height=35 src="../images/admin/tab_20.gif" width=16></TD></TR></TBODY></TABLE></TD></TR><!--控制底部操作按钮结束--></TBODY></TABLE></FORM></DIV><!--内容结束-->

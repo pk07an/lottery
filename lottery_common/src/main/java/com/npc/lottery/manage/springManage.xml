@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="systemDao" class="com.npc.lottery.manage.dao.hibernate.SystemDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="systemLogic" class="com.npc.lottery.manage.logic.spring.SystemLogic">
+		<property name="systemDao" ref="systemDao"/>
+		<property name="periodsInfoLogic" ref="periodsInfoLogic"></property>
+		<property name="icqPeriodsInfoLogic" ref="icqPeriodsInfoLogic"></property>
+		<property name="shopOddsLogic" ref="shopOddsLogic"></property>
+		<property name="playTypeLogic" ref="playTypeLogic"></property>
+		<property name="bjscPeriodsInfoLogic" ref="bjscPeriodsInfoLogic"></property>
+		<property name="replenishLogic" ref="replenishLogic"/>
+		<property name="ncPeriodsInfoLogic" ref="ncPeriodsInfoLogic"/>
+		<property name="wcpTaskExecutor" ref="wcpTaskExecutor"/>
+	</bean>
+	
+	<bean id="shopsDeclarattonDao" class="com.npc.lottery.manage.dao.hibernate.ShopsDeclarattonDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="shopsDeclarattonLogic" class="com.npc.lottery.manage.logic.spring.ShopsDeclarattonLogic">
+		<property name="shopsDeclarattonDao" ref="shopsDeclarattonDao"/>
+	</bean>
+	
+</beans>

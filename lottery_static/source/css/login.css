@@ -1,0 +1,45 @@
+/*
+ * FileName: layout.css [公用]
+ * CreateTime: 2012-02-20
+ * Author: Charming Honest Romantic Intellegent Smiling
+ */
+@charset "utf-8";
+body {margin:0; padding:0; color:#333; font-size:12px; line-height:1.8; font-family:Tahoma,SimSun,Arial,serif;background-color:#0d5ca9; text-align:left; vertical-align:baseline;}
+div,table,tr,th,td,form,p,ul,li,dl,dt,dd,a,span,img,dl,dt,dd,h1,h2,h3,h4,h5,h6{margin:0; padding:0;}
+/**{margin:0;padding:0;}*/
+table,tr,th,td,form,p {border:none 0;}
+ul,li {margin:0; padding:0; list-style:none; }
+img {border:none 0;}
+.fl{float:left;}
+.fr{float:right;}
+.clear{line-height:0; font-size:0; overflow:hidden;clear:both;}
+a{color:#333;text-decoration:none; }
+a:hover{}
+.t_right{text-align:right!important;padding-right:4px;}
+.g3{color:#333;}
+.red{color:#de0000;}
+.green{color:#069a0c;}
+.ml10{margin-left:10px;}
+.ml6{margin-left:6px;}
+.ml16{margin-left:16px;}
+.mr50{margin-right:50px;}
+.ml22{margin-left:22px;}
+.mr10{margin-right:10px;}
+.main_manager{background:url(../images/login_manager.jpg) no-repeat center center;width:960px;height:340px;padding-top:260px;margin:0 auto;}
+.main_member{background:url(../images/login_member.jpg) no-repeat center center;width:960px;height:340px;padding-top:260px;margin:0 auto;}
+.btn_login{width:62px;height:22px;background:url(../images/btn_login.png) no-repeat center center;color:#f6ff00;border:none;cursor:pointer;behavior: url("iepngfix.htc");_line-height:25px;overflow:hidden;}
+table.lg{margin:0 auto;width:190px;}
+table.lg tr td input.sr, table.lg tr td input.safty{width:126px;height:20px;border:1px solid #8f0319;padding-left:4px; background:url(../images/login_input_bg.gif) no-repeat left top;line-height:20px;}
+table.lg tr td input.safty{width:60px;}
+table.lg tr td input, table.lg tr td img{ vertical-align:middle;}
+table.lg tr td{color:#f6ff00;padding:3px;}
+table.lg tr td img{display:inline-block;}
+/*法律声明*/
+.main_fl{background:url(../images/flsm.jpg) no-repeat center center;color:#fff;padding:80px 0 0 0;height:520px;}
+.main_fl .falv{width:800px;margin:0 auto;}
+.main_fl .falv h1, .main_fl .falv h2{text-align:center;font-size:24px;}
+.main_fl .falv h2{font-size:12px;font-weight:normal;margin:12px 0;}
+.falv_con{width:716px;height:300px;overflow-y:auto;margin:10px auto 0;padding:10px;border:1px dashed #6699CC;}
+.agree{width:240px;margin:15px auto 0;}
+.btn, .btn:hover{border:none;cursor:pointer;width:108px;height:30px;color:#fff;font-weight:bold;background: url(../images/agree.png) no-repeat 0 0;behavior: url("iepngfix.htc");}
+.btn:hover{background-position:right 0;}

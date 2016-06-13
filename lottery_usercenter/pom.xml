@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.npc</groupId>
+		<artifactId>lottery</artifactId>
+		<version>1.0</version>
+		<relativePath>../parent/pom.xml</relativePath>
+	</parent>
+
+	<name>lotteryUserCenter</name>
+	<artifactId>lotteryUserCenter</artifactId>
+	<packaging>war</packaging>
+
+
+	<dependencies>
+		<!-- project module -->
+		<dependency>
+			<groupId>com.npc</groupId>
+			<artifactId>lotteryCommon</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.0.1</version>
+				<configuration>
+					<warName>lotUserCenter</warName>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<warFile>target/lotUserCenter.war</warFile>
+					<server>tomcat</server>
+					<username>admin</username>
+					<password>admin</password>
+					<contextFile>./context.xml</contextFile>
+					<path>/</path>
+					<port>7080</port>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

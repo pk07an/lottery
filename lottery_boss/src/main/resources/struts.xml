@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+		<constant name="struts.objectFactory" value="spring" />
+		<!--<constant name="struts.configuration.xml.reload" value="true"/>-->
+	<constant name="struts.action.extension" value="do,action" />
+    <include file="strutsSysmge.xml"/><!-- 系统管理的struts配置文件 -->
+	<include file="strutsBoss.xml"/><!-- 總管struts配置文件 -->
+	<include file="strutsBossAjax.xml"/>
+	<!-- 标签风格 -->
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- 编码类型 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+
+</struts>
+

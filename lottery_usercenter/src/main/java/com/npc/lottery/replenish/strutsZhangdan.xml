@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="zhangdan" extends="struts-default" namespace="/replenish">
+	 	<!-- 增加统一异常处理 start -->
+        <global-results>
+			<!-- 下面定义的结果对所有的Action都有效 -->
+			<result name="exception">/common/error.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="exception"/>
+		</global-exception-mappings>
+		<!-- 增加统一异常处理 end -->
+        <!-- 帳單 -->
+        <action name="queryZhangdan" class="com.npc.lottery.replenish.action.ZhangdanAction" method="queryZhangdan">
+			<result name="list">/jsp/replenish/zhangdanDetail.jsp</result>	
+			<result name="notKp">/jsp/replenish/adminNotkp.jsp</result>
+        </action>
+        <!-- 补货帳單 -->
+        <action name="queryZhangdanReplenish" class="com.npc.lottery.replenish.action.ZhangdanAction" method="queryZhangdanReplenish">
+			<result name="zhangdanGD">/jsp/replenish/zhangdanGD.jsp</result>	
+			<result name="zhangdanNC">/jsp/replenish/zhangdanNC.jsp</result>	
+			<result name="zhangdanCQ">/jsp/replenish/zhangdanCQ.jsp</result>	
+			<result name="zhangdanBJ">/jsp/replenish/zhangdanBJ.jsp</result>	
+			<result name="zhangdanK3">/jsp/replenish/zhangdanK3.jsp</result>	
+			<result name="noZhanDang">/jsp/replenish/notZhanDang.jsp</result>
+			<result name="notKp">/jsp/replenish/adminNotkp.jsp</result>
+        </action>
+		
+		
+    </package>
+	
+</struts>
+
+

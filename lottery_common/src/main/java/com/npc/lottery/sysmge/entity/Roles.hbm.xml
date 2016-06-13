@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.npc.lottery.sysmge.entity.Roles" table="TB_FRAME_ROLES">
+        <id name="ID" type="java.lang.Long">
+            <column name="ID" precision="12" scale="0" />
+            <generator class="sequence">
+				<param name="sequence">SEQ_TB_FRAME_ROLES</param>
+			</generator>
+        </id>
+        <property name="roleCode" type="java.lang.String">
+            <column name="ROLE_CODE" length="20" not-null="true">
+            </column>
+        </property>
+        <property name="roleName" type="java.lang.String">
+            <column name="ROLE_NAME" length="40" not-null="true">
+            </column>
+        </property>
+        <property name="roleLevel" type="java.lang.String">
+            <column name="ROLE_LEVEL" length="1" not-null="true">
+            </column>
+        </property>
+        <property name="roleType" type="java.lang.String">
+            <column name="ROLE_TYPE" length="1" not-null="true">
+            </column>
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" length="100" />
+        </property> 
+		<set name="staffRoleSet" lazy="true" inverse="true" cascade="all">  
+			<key column="ROLE_ID"/>  
+			<one-to-many class="com.npc.lottery.sysmge.entity.StaffRole" />  
+		</set>  
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.user.entity">
+	<joined-subclass
+		name="OutReplenishStaffExt"
+		table="TB_OUT_REPLENISH_STAFF_EXT"
+		extends="com.npc.lottery.sysmge.entity.ManagerStaff"
+	>
+		<key column="MANAGER_STAFF_ID"/>
+		<property
+			name="managerStaffID"
+			column="MANAGER_STAFF_ID"
+			type="java.lang.Long"
+			not-null="false"
+			insert="false" update="false"
+		>
+		</property>
+		
+		<property
+			name="parentStaff"
+			column="PARENT_STAFF"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="plate"
+			column="PLATE"
+			type="string"
+			not-null="true"
+			length="1"
+		/>
+		<!--<many-to-one name="chiefStaffExt" class="com.npc.lottery.user.entity.ChiefStaffExt"  lazy="false">
+            <column name="PARENT_STAFF" />
+        </many-to-one>-->
+		
+	</joined-subclass>
+</hibernate-mapping>

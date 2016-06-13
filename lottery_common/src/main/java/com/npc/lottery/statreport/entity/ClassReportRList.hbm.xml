@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.statreport.entity">
+	<class
+		name="ClassReportRList"
+		table="TB_CLASS_REPORT_R_LIST"
+	>
+
+		<id name="ID" type="java.lang.Long">
+            <column name="ID" precision="12" scale="0" />
+            <generator class="sequence">
+				<param name="sequence">SEQ_TB_CLASS_REPORT_R_LIST</param>
+			</generator>
+        </id>
+		
+		<property
+			name="userID"
+			column="USER_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="userType"
+			column="USER_TYPE"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="turnover"
+			column="COUNT"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="amount"
+			column="AMOUNT"
+			type="double"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="memberAmount"
+			column="MEMBER_AMOUNT"
+			type="double"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="winBackWater"
+			column="WIN_BACK_WATER"
+			type="double"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="backWaterResult"
+			column="BACK_WATER_RESULT"
+			type="double"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="bettingDate"
+			column="BETTING_DATE"
+			type="date"
+			not-null="true"
+			length="7"
+		/>
+		<property
+			name="commissionType"
+			column="COMMISSION_TYPE"
+			type="string"
+			not-null="false"
+			length="15"
+		/>
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.member.entity">
+	<class
+		name="PlayType"
+		table="TB_PLAY_TYPE"
+	>
+		<id name="id" type="java.lang.Long" >
+		 <column name="ID" precision="12" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">SEQ_TB_PLAY_TYPE</param>
+			</generator>
+		</id>
+
+		<property
+			name="typeCode"
+			column="TYPE_CODE"
+			type="string"
+			not-null="false"
+			length="30"
+		/>
+		<property
+			name="typeName"
+			column="TYPE_NAME"
+			type="string"
+			not-null="false"
+			length="20"
+		/>
+		<property
+			name="playType"
+			column="PLAY_TYPE"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="playSubType"
+			column="PLAY_SUB_TYPE"
+			type="string"
+			not-null="false"
+			length="15"
+		/>
+		<property
+			name="playFinalType"
+			column="PLAY_FINAL_TYPE"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="state"
+			column="STATE"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="remark"
+			column="REMARK"
+			type="java.lang.String"
+			not-null="false"
+			length="400"
+		/>
+		<property
+			name="subTypeName"
+			column="SUB_TYPE_NAME"
+			type="string"
+			not-null="false"
+			length="20"
+		/>
+		<property
+			name="finalTypeName"
+			column="FINAL_TYPE_NAME"
+			type="string"
+			not-null="false"
+			length="20"
+		/>
+        <property
+			name="oddsType"
+			column="ODDS_TYPE"
+			type="string"
+			not-null="false"
+			length="30"
+		/>
+		<property
+			name="commissionType"
+			column="COMMISSION_TYPE"
+			type="string"
+			not-null="false"
+			length="15"
+		/>
+		<property
+			name="autoReplenishType"
+			column="AUTO_REPLENISH_TYPE"
+			type="string"
+			not-null="false"
+			length="30"
+		/>
+		
+		<property
+			name="displayOrder"
+			column="DISPLAY_ORDER"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		
+		<property
+			name="commissionTypeDisplayOrder"
+			column="COMMISSION_TYPE_DISPLAY_ORDER"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		
+	</class>	
+</hibernate-mapping>

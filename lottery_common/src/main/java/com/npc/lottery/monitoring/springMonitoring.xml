@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+ 
+<!-- 监控数据库Dao实例 -->
+<bean id="monitoringInfoDao" class="com.npc.lottery.monitoring.dao.hibernate.MonitoringInfoDao">
+			<property name="url">
+				<value>jdbc:mysql://55dadbe50c0c5.sh.cdb.myqcloud.com:15989/MonDB?characterEncoding=UTF-8</value>
+			</property>
+			<property name="userName">
+				<value>cdb_outerroot</value>
+			</property>
+			<property name="password">
+				<value>Abc88888</value>
+	</property>
+</bean>
+
+<!-- 监控数据库Logic实例 -->
+<bean id="monitoringInfoLogic" class="com.npc.lottery.monitoring.logic.spring.MonitoringInfoLogic">
+	<property name="monitoringInfoDao" ref="monitoringInfoDao"/>
+	<property name="wcpTaskExecutor" ref="wcpTaskExecutor"/>
+</bean>
+</beans>

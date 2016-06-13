@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.user.entity">
+	<joined-subclass
+		name="ChiefStaffExt"
+		table="TB_CHIEF_STAFF_EXT"
+		extends="com.npc.lottery.sysmge.entity.ManagerStaff"
+	>
+		<key column="MANAGER_STAFF_ID"/>
+		<property
+			name="managerStaffID"
+			column="MANAGER_STAFF_ID"
+			type="java.lang.Long"
+			not-null="false"
+			insert="false" update="false"
+		>
+		</property>
+			<property
+			name="shopsCode"
+			column="SHOPS_CODE"
+			type="string"
+			not-null="true"
+			length="4"
+		/>
+		
+		<set name="branchStaffExtSet"  inverse="true" lazy= "true">
+            <key>
+                <column name="PARENT_STAFF" />
+            </key>
+            <one-to-many class="com.npc.lottery.user.entity.BranchStaffExt" />
+        </set>	
+		
+		<set name="memberStaffExtSet"  inverse="true" lazy= "true">
+            <key>
+                <column name="PARENT_STAFF" />
+            </key>
+            <one-to-many class="com.npc.lottery.user.entity.MemberStaffExt" />
+        </set>
+		
+		<set name="subAccountInfoSet" inverse="true" lazy= "true">
+            <key>
+                <column name="PARENT_STAFF" />
+            </key>
+            <one-to-many class="com.npc.lottery.user.entity.SubAccountInfo" />
+        </set>		
+		<one-to-one name="managerStaff"/>	
+		
+	</joined-subclass>	
+</hibernate-mapping>

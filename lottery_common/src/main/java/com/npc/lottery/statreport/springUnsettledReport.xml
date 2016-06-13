@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 报表统计 数据库处理类实例 -->
+	<bean id="unsettledReportDao" class="com.npc.lottery.statreport.dao.hibernate.UnsettledReportDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	<!-- 报表统计 逻辑处理类实例 -->
+	<bean id="unsettledReportLogic" class="com.npc.lottery.statreport.logic.spring.UnsettledReportLogic">
+		<property name="statReportDao" ref="statReportDao"/>
+		<property name="unsettledReportDao" ref="unsettledReportDao"/>
+		<property name="subAccountInfoLogic" ref="subAccountInfoLogic"/>
+		<property name="replenishLogic" ref="replenishLogic"/>
+	</bean>
+	
+	
+</beans>

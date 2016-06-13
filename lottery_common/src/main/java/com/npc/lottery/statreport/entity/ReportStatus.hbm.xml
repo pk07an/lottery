@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.statreport.entity">
+	<class
+		name="ReportStatus"
+		table="TB_REPORT_STATUS"
+	>
+    <id name="ID" type="java.lang.Long">
+            <column name="ID" precision="12" scale="0" />
+            <generator class="sequence">
+				<param name="sequence">SEQ_TB_REPORT_STATUS</param>
+			</generator>
+        </id>
+		<property
+			name="opt"
+			column="OPT"
+			type="string"
+			not-null="true"
+			length="1"
+		/>
+		<property
+			name="status"
+			column="STATUS"
+			type="string"
+			not-null="true"
+			length="1"
+		/>
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	
+	<package name="user" extends="struts-default" namespace="/user">
+        <!-- 定义struts token拦截器 start -->
+        <interceptors>
+        	<interceptor-stack name="tokenStackSession-stack">
+        		<interceptor-ref name="defaultStack"/>
+        		<!-- <interceptor-ref name="tokenSession"/> -->
+        	</interceptor-stack>
+        </interceptors>
+        <!-- 定义struts token拦截器 end -->
+        <!-- 增加统一异常处理 start -->
+        <global-results>
+			<!-- 下面定义的结果对所有的Action都有效 -->
+			<result name="exception">/common/error.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="exception"/>
+		</global-exception-mappings>
+		<!-- 增加统一异常处理 end -->
+		
+		<!--登录模块start-->
+		<!-- 管理用户登陆 -->
+		<action name="loginManager" class="com.npc.lottery.user.action.LoginAction" method="loginManager">
+			<result name="success" type="redirect">/user/queryPopupMenus.action?type=message</result>
+			<result name="codeError" type="redirect">/user/loginFailureManager.action?ERROR_TYPE=codeError</result>
+			<result name="userUnexist" type="redirect">/user/loginFailureManager.action?ERROR_TYPE=userUnexist</result>
+			<result name="pwdIncorrect" type="redirect">/user/loginFailureManager.action?ERROR_TYPE=pwdIncorrect</result>
+			<result name="safetyCodeUnLogin" type="redirect">/</result>
+			<result name="safetyCodeError" type="redirect">/</result>
+			<result name="userForbid" type="redirect">/user/loginFailureManager.action?ERROR_TYPE=userForbid</result>
+			<result name="userFreeze" type="redirect">/user/loginFailureManager.action?ERROR_TYPE=userFreeze</result>
+			<result name="failure" type="redirect">/user/loginFailureManager.action</result>
+			<result name="reLogin" type="redirect">/user/loginFailureManager.action?ERROR_TYPE=pwdIncorrect</result>
+			<result name="userAlreadyLoginLocal" type="redirect">/user/loginFailureManager.action?ERROR_TYPE=userAlreadyLoginLocal&amp;userName=${userName}</result>
+			<result name="shopFreeze" type="redirect">/user/loginFailureManager.action?ERROR_TYPE=shopFreeze
+			</result>
+			<result name="shopClose" type="redirect">/user/loginFailureManager.action?ERROR_TYPE=shopClose
+			</result>
+		</action>
+		
+		<!-- 验证码校验 -->
+		<action name="ajaxCheckCode" class="com.npc.lottery.user.action.LoginAction" method="ajaxCheckCode">
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<!-- 管理用户登出 -->
+		<action name="logoutManager" class="com.npc.lottery.user.action.LoginAction" method="logoutManager">
+			<result name="success">/common/loginOutByManager.jsp?type=Y</result>  
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<!-- 管理用户登陆失败 -->
+		<action name="loginFailureManager" class="com.npc.lottery.user.action.LoginAction" method="loginFailureManager">
+			<result name="failure">/common/loginFailureAlert.jsp</result>
+        </action>
+        
+		<!--登录模块end-->
+		
+        <action name="queryChiefStaff" class="com.npc.lottery.user.action.UserManagerAction" method="queryChiefStaff">
+			<result name="success">/jsp/user/userManager.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<action name="userChiefStaffRegister" class="com.npc.lottery.user.action.UserManagerAction" method="userChiefStaffRegister">
+			<result name="success">/jsp/user/userRegister.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<action name="chiefStaffRegister" class="com.npc.lottery.user.action.UserManagerAction" method="chiefStaffRegister">
+			<result name="success" type="redirect">/user/queryChiefStaff</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<!-- 分公司begin-->
+		<action name="queryBranchStaff" class="com.npc.lottery.user.action.UserBranchStaffAction" method="queryBranchStaff">
+			<result name="success">/jsp/user/userBranchStaff.jsp</result>
+			<!-- <result name="success">/jsp/user/userBranchStaff.jsp</result> -->	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- 跳转分公司信息 end-->
+		<action name="saveBranchStaff" class="com.npc.lottery.user.action.UserBranchStaffAction" method="saveBranchStaff">
+			<!-- <result name="success">/jsp/user/userBranchRegister.jsp</result> -->
+			<result name="success">/jsp/user/userBranchRegister_new.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- 注册分公司信息 end-->
+		<action name="saveBranch" class="com.npc.lottery.user.action.UserBranchStaffAction" method="saveBranch">
+			<result name="success"  type="redirect">/user/queryBranchcommission.action?qUserID=${qUserID}&amp;searchUserStatus=${searchUserStatus}</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+			<interceptor-ref name="tokenStackSession-stack"></interceptor-ref>
+        </action>
+		
+		<!-- 查询单个分公司信息 end-->
+		<action name="findByBranchStaff" class="com.npc.lottery.user.action.UserBranchStaffAction" method="findByBranchStaff">
+			<result name="success">/jsp/user/userfindBranchStaff.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- 跳转到修改分公司页面 end-->
+		<action name="updateFindByBranchStaff" class="com.npc.lottery.user.action.UserBranchStaffAction" method="updateFindByBranchStaff">
+			<!-- <result name="success">/jsp/user/userUpdateBranch.jsp</result> -->
+			<result name="success">/jsp/user/userUpdateBranch_new.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- 修改分公司提交数据 end-->
+		<action name="updateByBranchStaff" class="com.npc.lottery.user.action.UserBranchStaffAction" method="updateByBranchStaff">
+			<result name="success" type="redirect">/user/queryBranchStaff.action?searchType=${searchType}&amp;searchValue=${searchValue}&amp;searchUserStatus=${searchUserStatus}</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+			<interceptor-ref name="tokenStackSession-stack"></interceptor-ref>
+        </action>
+		
+		<!-- 分公司提交直属会员数据 end-->
+		<action name="savaImmediateMember" class="com.npc.lottery.user.action.UserMemberStaffExt" method="savaImmediateMember">
+			<result name="success" type="redirect">/user/queryMembercommission.action?qUserID=${qUserID}&amp;searchAccount=${searchAccount}&amp;parentAccount=${parentAccount}&amp;searchUserStatus=${searchUserStatus}&amp;type=${type}</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+			<interceptor-ref name="tokenStackSession-stack"></interceptor-ref>
+        </action>
+		<!-- 这是分公司 end-->
+		
+		<!--股东begin-->
+		<action name="queryStockholder" class="com.npc.lottery.user.action.UserStockholderAction" method="queryStockholder">
+			<result name="success">/jsp/user/userStockholder.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<!-- 跳转股东注册 end-->
+		<action name="saveStockholder" class="com.npc.lottery.user.action.UserStockholderAction" method="saveStockholder">
+			<!-- <result name="success">/jsp/user/userStockRegister.jsp</result>	 -->
+			<result name="success">/jsp/user/userStockRegister_new.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- 跳转带数据到股东注册 end-->
+		<action name="saveFindStockholder" class="com.npc.lottery.user.action.UserStockholderAction" method="saveFindStockholder">
+			<result name="success">/jsp/user/userStockRegister_new.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- 股东注册提交 end-->
+		<action name="saveStock" class="com.npc.lottery.user.action.UserStockholderAction" method="saveStock">
+			<result name="success" type="redirect">/user/queryStockcommission.action?qUserID=${qUserID}&amp;searchAccount=${searchAccount}&amp;parentAccount=${parentAccount}&amp;searchUserStatus=${searchUserStatus}</result>	
+			<result name="failure">/common/infoPage.jsp</result>
+			<interceptor-ref name="tokenStackSession-stack"></interceptor-ref>	
+        </action>
+		
+		<!-- 跳转股东修改页面 end-->
+		<action name="updateFindByStockholder" class="com.npc.lottery.user.action.UserStockholderAction" method="updateFindByStockholder">
+			<result name="success">/jsp/user/userUpdateStock_new.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<!-- 股东修改提交页面 end-->
+		<action name="updateByStockholder" class="com.npc.lottery.user.action.UserStockholderAction" method="updateByStockholder">
+			<result name="success" type="redirect">/user/queryStockholder.action?account=${searchAccount}&amp;parentAccount=${parentAccount}&amp;searchUserStatus=${searchUserStatus}&amp;searchType=${searchType}&amp;searchValue=${searchValue}</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+			<interceptor-ref name="tokenStackSession-stack"></interceptor-ref>
+        </action>
+		<!--股东end-->
+		
+		
+		<!-- 总代理  查询所有begin-->
+		<action name="queryGenAgentStaff" class="com.npc.lottery.user.action.UserGenAgentStaffExt" method="queryGenAgentStaff">
+			<result name="success">/jsp/user/userGenAgentStaff.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- 总代理跳转到注册页面  -->
+		<action name="saveGenAgentStaff" class="com.npc.lottery.user.action.UserGenAgentStaffExt" method="saveGenAgentStaff">
+			<!-- <result name="success">/jsp/user/userGenAgentRegister.jsp</result> -->	
+			 <result name="success">/jsp/user/userGenAgentRegister_new.jsp</result> 
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- 选择不同用户初始化数据到注册页面  -->
+		<action name="saveFindGenAgent" class="com.npc.lottery.user.action.UserGenAgentStaffExt" method="saveFindGenAgent">
+			<result name="success">/jsp/user/userGenAgentRegister.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- 提交注册总代理数据转到查看页面  -->
+		<action name="saveGenAgent" class="com.npc.lottery.user.action.UserGenAgentStaffExt" method="saveGenAgent">
+			<result name="success" type="redirect">/user/queryGenAgentcommission.action?qUserID=${qUserID}&amp;searchAccount=${searchAccount}&amp;parentAccount=${parentAccount}&amp;searchUserStatus=${searchUserStatus}&amp;type=${type}</result>	
+			<result name="failure">/common/infoPage.jsp</result>
+			<interceptor-ref name="tokenStackSession-stack"></interceptor-ref>
+        </action>
+		<!-- 总代理转到修改页面  -->
+		<action name="updateFindByGenAgent" class="com.npc.lottery.user.action.UserGenAgentStaffExt" method="updateFindByGenAgent">
+			<!-- <result name="success">/jsp/user/userUpdateGenAgent.jsp</result>	 -->
+			<result name="success">/jsp/user/userUpdateGenAgent_new.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- 修改成功跳到查看页面  -->
+		<action name="updateGenAgent" class="com.npc.lottery.user.action.UserGenAgentStaffExt" method="updateGenAgent">
+			<result name="success" type="redirect">/user/queryGenAgentStaff.action?account=${searchAccount}&amp;parentAccount=${parentAccount}&amp;searchUserStatus=${searchUserStatus}&amp;type=${type}&amp;searchType=${searchType}&amp;searchValue=${searchValue}</result>	
+			<result name="failure">/common/infoPage.jsp</result>
+			<interceptor-ref name="tokenStackSession-stack"></interceptor-ref>	
+        </action>
+		<!-- 总代理  end-->
+		
+		<!-- 代理  查询所有begin-->
+		<action name="queryAgentStaff" class="com.npc.lottery.user.action.UserAgentStaffAction" method="queryAgentStaff">
+			<result name="success">/jsp/user/userAgentStaff.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<!-- 代理  注册-->
+		<action name="saveAgentStaff" class="com.npc.lottery.user.action.UserAgentStaffAction" method="saveAgentStaff">
+			<!-- <result name="success">/jsp/user/userAgentRegister.jsp</result>	 -->
+			<result name="success">/jsp/user/userAgentRegister_new.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<!-- 代理  查询begin-->
+		<action name="saveFindAgent" class="com.npc.lottery.user.action.UserAgentStaffAction" method="saveFindAgent">
+			<result name="success">/jsp/user/userAgentRegister.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+			<!-- 代理 注册成功后  查询所有-->
+		<action name="saveAgent" class="com.npc.lottery.user.action.UserAgentStaffAction" method="saveAgent">
+			<result name="success" type="redirect">/user/queryAgentcommission.action?qUserID=${qUserID}&amp;searchAccount=${searchAccount}&amp;parentAccount=${parentAccount}&amp;searchUserStatus=${searchUserStatus}&amp;type=${type}</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+			<interceptor-ref name="tokenStackSession-stack"></interceptor-ref>
+        </action>
+				<!-- 代理 跳到修改页面-->
+		<action name="updateFindByAgent" class="com.npc.lottery.user.action.UserAgentStaffAction" method="updateFindByAgent">
+		<!-- 	<result name="success">/jsp/user/userUpdateAgent.jsp</result> -->	
+		<result name="success">/jsp/user/userUpdateAgent_new.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+						<!-- 代理 跳到修改页面-->
+		<action name="updateAgent" class="com.npc.lottery.user.action.UserAgentStaffAction" method="updateAgent">
+			<result name="success" type="redirect">/user/queryAgentStaff.action?account=${searchAccount}&amp;parentAccount=${parentAccount}&amp;searchUserStatus=${searchUserStatus}&amp;type=${type}&amp;searchType=${searchType}&amp;searchValue=${searchValue}</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+			<interceptor-ref name="tokenStackSession-stack"></interceptor-ref>
+        </action>
+		<!-- 代理  end-->
+		
+		<!-- 出貨会员  查询所有begin-->
+		<action name="queryUserOutReplenish" class="com.npc.lottery.user.action.UserOutReplenishAction" method="queryUserOutReplenish">
+			<result name="success">/jsp/user/userOutReplenishStaff.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--进入出货会员注册页面-->
+		<action name="registerUserOutReplenish" class="com.npc.lottery.user.action.UserOutReplenishAction" method="registerUserOutReplenish">
+			<result name="success">/jsp/user/userOutReplenishRegister.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--保存新建出货会员-->
+		<action name="saveUserOutReplenish" class="com.npc.lottery.user.action.UserOutReplenishAction" method="saveUserOutReplenish">
+			<result name="success" type="redirect">/user/queryUserOutReplenish.action</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+			<interceptor-ref name="tokenStackSession-stack"></interceptor-ref>
+        </action>
+		<!--保存修改出货会员-->
+		<action name="updateUserOutReplenish" class="com.npc.lottery.user.action.UserOutReplenishAction" method="updateUserOutReplenish">
+			<result name="success" type="redirect">/user/queryUserOutReplenish.action</result>	
+			<result name="failure">/common/infoPage.jsp</result>
+			<interceptor-ref name="tokenStackSession-stack"></interceptor-ref>	
+        </action>
+		<!--进入修改出货会员界面-->
+		<action name="findUserOutReplenish" class="com.npc.lottery.user.action.UserOutReplenishAction" method="findUserOutReplenish">
+			<result name="success">/jsp/user/userOutReplenishModify.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!--进入修改出货会员拥金界面-->
+		<action name="findUserOutCommission" class="com.npc.lottery.user.action.UserOutReplenishAction" method="findUserOutCommission">
+			<result name="success">/jsp/user/outReplenishCreditInformation.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- AJAX查询出货会员的设定框 -->
+		<action name="ajaxQueryCommission" class="com.npc.lottery.user.action.UserOutReplenishAction" method="ajaxQueryCommission">
+			<result name="failure">/common/infoPage.jsp</result>	
+		</action>
+		<!-- AJAX修改提交出货会员的设定框 -->
+		<action name="updateOutReplenishCommission" class="com.npc.lottery.user.action.UserOutReplenishAction" method="updateOutReplenishCommission">
+			<result name="failure">/common/infoPage.jsp</result>	
+		</action>
+		<!-- 删除出货会员 -->
+		<action name="deleteUserOutReplenish" class="com.npc.lottery.user.action.UserOutReplenishAction" method="deleteUserOutReplenish">
+			<result name="success" type="redirect">/user/queryUserOutReplenish.action</result>	
+			<result name="failure">/common/infoPage.jsp</result>		
+		</action>
+		
+		
+		
+		
+		<!--出貨會員end -->
+		
+		
+		<!-- 会员  查询所有begin-->
+		<action name="queryMemberStaff" class="com.npc.lottery.user.action.UserMemberStaffExt" method="queryMemberStaff">
+			<result name="success">/jsp/user/userMemberStaff.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<!-- 会员注册  查询所有begin-->
+		<action name="saveInitMember" class="com.npc.lottery.user.action.UserMemberStaffExt" method="saveInitMember">
+			<!-- <result name="success">/jsp/user/userMemberRegister.jsp</result> -->	
+			<result name="success">/jsp/user/userMemberRegister_new.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<!-- 会员注册 初始化数据begin-->
+		<action name="saveFindMember" class="com.npc.lottery.user.action.UserMemberStaffExt" method="saveFindMember">
+			<result name="success">/jsp/user/userMemberRegister.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<!-- 会员注册 提交数据begin-->
+		<action name="saveMember" class="com.npc.lottery.user.action.UserMemberStaffExt" method="saveMember">
+			<result name="success" type="redirect">/user/queryMembercommission.action?qUserID=${qUserID}&amp;searchAccount=${searchAccount}&amp;parentAccount=${parentAccount}&amp;searchUserStatus=${searchUserStatus}&amp;type=${type}</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+			<interceptor-ref name="tokenStackSession-stack"></interceptor-ref>
+        </action>
+		
+		<!-- 会员注册 提交数据begin-->
+		<action name="updateFindByMember" class="com.npc.lottery.user.action.UserMemberStaffExt" method="updateFindByMember">
+			<!-- <result name="success" >/jsp/user/userUpdateMember.jsp</result>	 -->
+			<result name="success" >/jsp/user/userUpdateMember_new.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<!-- 会员注册 提交数据begin-->
+		<action name="updateMember" class="com.npc.lottery.user.action.UserMemberStaffExt" method="updateMember">
+			<result name="success" type="redirect">/user/queryMemberStaff.action?account=${searchAccount}&amp;parentAccount=${parentAccount}&amp;searchUserStatus=${searchUserStatus}&amp;type=${type}&amp;searchType=${searchType}&amp;searchValue=${searchValue}</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+			<interceptor-ref name="tokenStackSession-stack"></interceptor-ref>
+        </action>
+		<!-- 会员  end-->
+		
+		<!-- 添加直属会员页面 end-->
+		<action name="savaFindImmediateMember" class="com.npc.lottery.user.action.UserMemberStaffExt" method="savaFindImmediateMember">
+            <result name="branchMember">/jsp/user/userBranchMemberRegister_new.jsp</result>	 
+			<result name="chiefMember">/jsp/user/userChiefMemberRegister_new.jsp</result>   
+			<result name="stockMember">/jsp/user/userStockMemberRegister_new.jsp</result>  
+			<result name="genAgentMember">/jsp/user/userGenAgentMemberRegister_new.jsp</result>  
+			
+		  <!--   <result name="branchMember">/user/queryMembercommission.action?qUserID=${qUserID}</result>	 
+			
+			<result name="stockMember">/user/queryMembercommission.action?qUserID=${qUserID}</result>   
+			<result name="genAgentMember">/jsp/user/userGenAgentMemberRegister_new.jsp</result>   --> 
+			
+			
+			
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- 添加直属会员页面 end-->
+		
+		<!-- 修改密碼-->
+		<action name="updateFindPassword" class="com.npc.lottery.user.action.UserManagerAction" method="updateFindPassword">
+			<result name="success" >/jsp/user/updatePassword.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<action name="updatePassword" class="com.npc.lottery.user.action.UserManagerAction" method="updatePassword">
+			<result name="success">/jsp/user/isPasswordTrue.jsp?accountType=manager</result>		
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- 子帳號 begin-->
+		<action name="savefindSubAccount" class="com.npc.lottery.user.action.SubAccountAction" method="savefindSubAccount">
+			<result name="success" >/jsp/user/subAccountRegister.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<action name="querySubAccount" class="com.npc.lottery.user.action.SubAccountAction" method="querySubAccount">
+			<result name="success" >/jsp/user/userSubAccountManager.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- 保存 -->
+		<action name="saveSubAccount" class="com.npc.lottery.user.action.SubAccountAction" method="saveSubAccount">
+			<result name="success" type="redirect">/user/querySubAccount.action</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+			<interceptor-ref name="tokenStackSession-stack"></interceptor-ref>
+        </action>
+		
+		<action name="updateSubAccount" class="com.npc.lottery.user.action.SubAccountAction" method="updateSubAccount">
+			<result name="success" type="redirect">/user/querySubAccount.action</result>	
+			<result name="failure">/common/infoPage.jsp</result>
+			<interceptor-ref name="tokenStackSession-stack"></interceptor-ref>	
+        </action>
+		
+		<action name="updateFindSubAccount" class="com.npc.lottery.user.action.SubAccountAction" method="updateFindSubAccount">
+			<result name="success">/jsp/user/subAccountUpdate.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		
+		<action name="delSubAccount" class="com.npc.lottery.user.action.SubAccountAction" method="delSubAccount">
+			<result name="success" type="redirect">/user/querySubAccount.action</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- 子帳號 end-->
+		<!--公告 -->
+		<action name="queryAllMessage" class="com.npc.lottery.manage.action.ShopsDeclarattonAction" method="queryAllMessage">
+			 <!--<result name="success">/jsp/admin/manage/shopsDeclaratton.jsp</result>-->
+			 <result name="success">/jsp/admin/manage/news.jsp</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		
+		<!--管理登入弹出信息 -->
+		<action name="queryPopupMenus" class="com.npc.lottery.manage.action.ShopsDeclarattonAction" method="queryPopupMenus">
+			 <result name="success">/jsp/admin/manage/warningShop.jsp</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		
+			<!--创建公告 -->
+		<action name="saveFindMessage" class="com.npc.lottery.manage.action.ShopsDeclarattonAction" method="saveFindMessage">
+			 <result name="success">/jsp/admin/manage/shopChiefRegister.jsp</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		
+		<!--创建公告 -->
+		<action name="saveChiefMessage" class="com.npc.lottery.manage.action.ShopsDeclarattonAction" method="saveChiefMessage">
+			 <result name="success" type="redirect">/admin/queryAllMessage.action?type=privateAdmin_SiteMessage</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		
+		<!--修改公告 -->
+		<action name="updateFindMessage" class="com.npc.lottery.manage.action.ShopsDeclarattonAction" method="updateFindMessage">
+			 <result name="success">/jsp/admin/manage/shopChiefUpdate.jsp</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		
+		<!--提交修改公告 -->
+		<action name="updateChiefMessage" class="com.npc.lottery.manage.action.ShopsDeclarattonAction" method="updateChiefMessage">
+			 <result name="success" type="redirect">/admin/queryAllMessage.action?type=privateAdmin_SiteMessage</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		
+		<!--删除公告 -->
+		<action name="deleteMessage" class="com.npc.lottery.manage.action.ShopsDeclarattonAction" method="deleteMessage">
+			 <result name="success" type="redirect">/admin/queryAllMessage.action</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--公告 end-->
+		<!-- 后台信用资料 end-->
+		<action name="queryCreditInformation" class="com.npc.lottery.user.action.BackstageCreditInformation" method="queryCreditInformation">
+			<result name="success">/jsp/user/backstageCreditInformation.jsp</result>
+			<result name="chiefCredit">/jsp/user/backstageCreditInformationChief.jsp</result>		
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+        
+        <!-- 查詢退水-->
+        <action name="queryBranchcommission" class="com.npc.lottery.user.action.ManagerCommissionAction" method="queryBranchCommission">
+			<result name="success">/jsp/user/managerCommission.jsp</result>		
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+        
+               <!-- 查詢退水-->
+        <action name="saveBranchcommission" class="com.npc.lottery.user.action.ManagerCommissionAction" method="saveBranchCommission">
+			<!-- <result name="success">/jsp/user/managerCommission.jsp</result>		 -->
+			<result name="success" type="redirect">/user/queryBranchcommission.action?qUserID=${qUserID}</result>
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+        
+        
+        
+         <!-- 查詢股东退水-->
+        <action name="queryStockcommission" class="com.npc.lottery.user.action.ManagerCommissionAction" method="queryStockCommission">
+			<result name="success">/jsp/user/managerCommission.jsp</result>		
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+        
+               <!-- 查詢退水-->
+        <action name="saveStockcommission" class="com.npc.lottery.user.action.ManagerCommissionAction" method="saveStockCommission">
+			<!-- <result name="success">/jsp/user/managerCommission.jsp</result>		 -->
+			<result name="success" type="redirect">/user/queryStockcommission.action?qUserID=${qUserID}</result>
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+        
+        
+          <!-- 查詢总代理退水-->
+        <action name="queryGenAgentcommission" class="com.npc.lottery.user.action.ManagerCommissionAction" method="queryGenAgentCommission">
+			<result name="success">/jsp/user/managerCommission.jsp</result>		
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+        
+               <!-- 查詢退水-->
+        <action name="saveGenAgentcommission" class="com.npc.lottery.user.action.ManagerCommissionAction" method="saveGenAgentCommission">
+			<!-- <result name="success">/jsp/user/managerCommission.jsp</result>		 -->
+			<result name="success" type="redirect">/user/queryGenAgentcommission.action?qUserID=${qUserID}</result>
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+        
+        
+          <!-- 查詢代理退水-->
+        <action name="queryAgentcommission" class="com.npc.lottery.user.action.ManagerCommissionAction" method="queryAgentCommission">
+			<result name="success">/jsp/user/managerCommission.jsp</result>		
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+        
+               <!-- 查詢退水-->
+        <action name="saveAgentcommission" class="com.npc.lottery.user.action.ManagerCommissionAction" method="saveAgentCommission">
+			<!-- <result name="success">/jsp/user/managerCommission.jsp</result>		 -->
+			<result name="success" type="redirect">/user/queryAgentcommission.action?qUserID=${qUserID}</result>
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+        
+        
+          <!-- 查詢会员退水-->
+        <action name="queryMembercommission" class="com.npc.lottery.user.action.ManagerCommissionAction" method="queryMemberCommission">
+			<result name="success">/jsp/user/managerCommission.jsp</result>		
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+        
+               <!-- 查詢退水-->
+        <action name="saveMembercommission" class="com.npc.lottery.user.action.ManagerCommissionAction" method="saveMemberCommission">
+			<!-- <result name="success">/jsp/user/managerCommission.jsp</result>		 -->
+			<result name="success" type="redirect">/user/queryMembercommission.action?qUserID=${qUserID}</result>
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+        
+        
+         <action name="userTree" class="com.npc.lottery.user.action.UserManagerAction" method="queryUserTree">
+			<!-- <result name="success">/jsp/user/managerCommission.jsp</result>		 -->
+			<result name="success" >/jsp/user/displayTreeCount.jsp</result>
+	
+        </action>
+        
+        <action name="ajaxUpdateUserStatus" class="com.npc.lottery.user.action.UserManagerAjax" method="ajaxUpdateUserStatus">
+	
+        </action>
+         <action name="ajaxparentCommission" class="com.npc.lottery.user.action.ManagerCommissionAction" method="ajaxParentCommission">
+	
+        </action>
+        
+    </package>
+</struts>
+
+

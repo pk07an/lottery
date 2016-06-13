@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.sysmge.entity">
+
+	<class
+		name="Function"
+		table="TB_FRAME_FUNCTION"
+	>		
+		
+		<id name="ID" type="java.lang.Long">
+            <column name="ID" precision="12" scale="0" />
+            <generator class="sequence">
+				<param name="sequence">SEQ_TB_FRAME_FUNCTION</param>
+			</generator>
+        </id>	
+
+		<property
+			name="funcCode"
+			column="FUNC_CODE"
+			type="string"
+			not-null="true"
+			length="40"
+		/>
+		<property
+			name="funcName"
+			column="FUNC_NAME"
+			type="string"
+			not-null="true"
+			length="40"
+		/>
+		<property
+			name="funcState"
+			column="FUNC_STATE"
+			type="string"
+			not-null="true"
+			length="1"
+		/>
+		<property
+			name="funcUrl"
+			column="FUNC_URL"
+			type="string"
+			not-null="false"
+			length="150"
+		/>
+		<many-to-one
+			name="parentFunc"
+			column="PARENT_FUNC"
+			class="com.npc.lottery.sysmge.entity.Function"
+			not-null="true"
+			cascade="save-update" lazy="false"
+		/>
+		<property
+			name="sortNum"
+			column="SORT_NUM"
+			type="java.lang.Long"
+			not-null="false"
+			length="4"
+		/>
+		<property
+			name="iconPath"
+			column="ICON_PATH"
+			type="string"
+			not-null="false"
+			length="150"
+		/>
+		<property
+			name="funcDesc"
+			column="FUNC_DESC"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<bag name="resources" table="TB_FRAME_RESOURCE" lazy="false" inverse="true" cascade="all">
+			<key column="FUNC_ID" not-null="true"/> 
+			<one-to-many class="com.npc.lottery.sysmge.entity.Resource"/>
+		</bag>
+	</class>	
+</hibernate-mapping>

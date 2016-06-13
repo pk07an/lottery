@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.odds.entity">
+	<class name="ShopsPlayOdds" table="TB_SHOPS_PLAY_ODDS">
+		<id name="id" type="java.lang.Long" column="ID">
+			 <generator class="sequence">
+				<param name="sequence">SEQ_TB_SHOPS_PLAY_ODDS</param>
+			</generator>
+		</id>
+
+		<property
+			name="shopsCode"
+			column="SHOPS_CODE"
+			type="string"
+			not-null="false"
+			length="4"
+		/>
+		<property
+			name="playTypeCode"
+			column="PLAY_TYPE_CODE"
+			type="string"
+			not-null="true"
+			length="30"
+		/>
+		
+		<property
+			name="realOdds"
+			column="REAL_ODDS"
+			type="big_decimal"
+			not-null="true"
+			length="12"
+		/>
+		<property
+			name="realUpdateDate"
+			column="REAL_UPDATE_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+		/>
+		<property
+			name="realUpdateUser"
+			column="REAL_UPDATE_USER"
+			type="java.lang.Long"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="remark"
+			column="REMARK"
+			type="java.lang.String"
+			not-null="false"
+			length="400"
+		/>
+		
+		<property
+			name="state"
+			column="STATE"
+			type="java.lang.String"
+			not-null="false"
+			length="2"
+		/>
+        <property
+			name="oddsType"
+			column="ODDS_TYPE"
+			type="string"
+			not-null="false"
+			length="30"
+		/>
+		<property
+			name="oddsTypeX"
+			column="ODDS_TYPE_X"
+			type="string"
+			not-null="false"
+			length="30"
+		/>
+
+	</class>	
+</hibernate-mapping>

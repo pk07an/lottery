@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.npc</groupId>
+		<artifactId>lottery</artifactId>
+		<version>1.0</version>
+		<relativePath>../../parent/pom.xml</relativePath>
+	</parent>
+
+	<name>lotteryJobWeb</name>
+	<artifactId>lotteryJobWeb</artifactId>
+	<packaging>war</packaging>
+	<dependencies>
+		<dependency>
+			<groupId>com.npc</groupId>
+			<artifactId>lotteryCommon</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.npc</groupId>
+			<artifactId>lotteryJob</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.31</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>3.2.0.RELEASE</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.0.1</version>
+				<configuration>
+					<warName>lotteryJobWeb</warName>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<warFile>target/lotteryJobWeb.war</warFile>
+					<server>tomcat</server>
+					<username>admin</username>
+					<password>admin</password>
+					<contextFile>./context.xml</contextFile>
+					<path>/</path>
+					<port>8091</port>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

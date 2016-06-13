@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.sysmge.entity">
+
+	<class
+		name="BossLog"
+		table="TB_BOSS_LOG"
+	>		
+		
+		<id name="ID" type="java.lang.Long">
+            <column name="ID" precision="12" scale="0" />
+            <generator class="sequence">
+				<param name="sequence">SEQ_TB_BOSS_LOG</param>
+			</generator>
+        </id>	
+
+		<property
+			name="logMessage"
+			column="LOG_MESSAGE"
+			type="string"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="logState"
+			column="LOG_STATE"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="logLevel"
+			column="LOG_LEVEL"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="createDate"
+			column="CREATEDATE"
+			type="date"
+			not-null="false"
+		/>
+	</class>	
+</hibernate-mapping>

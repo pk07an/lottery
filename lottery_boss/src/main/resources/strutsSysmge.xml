@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<!-- 机构信息 -->
+	<package name="sysmge.org" extends="struts-default"  namespace="/sysmge/org">
+		<!-- 查看 Begin -->
+        <action name="viewMain" class="com.npc.lottery.controller.OrgAction" method="viewMain">
+			<result name="viewMain">/jsp/sysmge/org/viewMain.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<action name="viewLocation" class="com.npc.lottery.controller.OrgAction" method="viewLocation">
+			<result name="viewLocation">/jsp/sysmge/org/viewLocation.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+        <action name="viewTreeList" class="com.npc.lottery.controller.OrgAction" method="viewTreeList">
+			<result name="viewTreeList">/jsp/sysmge/org/viewTreeList.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<action name="viewDetail" class="com.npc.lottery.controller.OrgAction" method="viewDetail">
+			<result name="viewDetail">/jsp/sysmge/org/viewDetail.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+        <action name="viewUserinfo" class="com.npc.lottery.controller.OrgAction" method="viewUserinfo"> 
+		    <result name="viewUserinfo">/jsp/sysmge/org/viewUserinfo.jsp</result>
+		    <result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<!-- 查看 End -->
+		
+		<!-- 选择机构 Begin -->
+		<!-- 单选 -->
+		<action name="selectMain" class="com.npc.lottery.controller.OrgAction" method="selectMain">
+			<result name="selectMain">/jsp/sysmge/org/selectMain.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+        <action name="selectTreeList" class="com.npc.lottery.controller.OrgAction" method="selectTreeList">
+			<result name="selectTreeList">/jsp/sysmge/org/selectTreeList.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- 多选 -->
+		<action name="selectMultiMain" class="com.npc.lottery.controller.OrgAction" method="selectMultiMain">
+			<result name="selectMultiMain">/jsp/sysmge/org/selectMultiMain.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+        <action name="selectMultiTreeList" class="com.npc.lottery.controller.OrgAction" method="selectMultiTreeList">
+			<result name="selectMultiTreeList">/jsp/sysmge/org/selectMultiTreeList.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>	
+        </action>
+		<!-- 选择机构 End -->
+    </package>
+
+	<!-- 资源信息 -->
+	<package name="sysmge.resource" extends="struts-default" namespace="/sysmge/resource">
+	   <!-- 新增 -->
+	   <action name="addResource" class="com.npc.lottery.controller.ResourceAction" method="addResource">
+	        <result name="addResource">/jsp/sysmge/resource/addResource.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	   <!-- 保存信息资源 -->
+	   <action name="saveResource" class="com.npc.lottery.controller.ResourceAction" method="saveResource">
+		    <result name="saveResource" type="redirect">/sysmge/resource/viewResource.action?ID=${ID}</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	   <!-- 查看资源信息 -->
+	   <action name="viewResource" class="com.npc.lottery.controller.ResourceAction" method="viewResource">
+		    <result name="viewResource">/jsp/sysmge/resource/viewResource.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	   <!-- 编辑资源信息 -->
+	   <action name="modifyResource" class="com.npc.lottery.controller.ResourceAction" method="modifyResource">
+		    <result name="modifyResource">/jsp/sysmge/resource/modifyResource.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	   <!-- 编辑资源信息（保存） -->
+	   <action name="saveModifyResource" class="com.npc.lottery.controller.ResourceAction" method="saveModifyResource">
+		    <result name="saveModifyResource" type="redirect">/sysmge/resource/viewResource.action?ID=${ID}</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+		<!-- 删除资源信息（保存） -->
+	   <action name="delResource" class="com.npc.lottery.controller.ResourceAction" method="delResource">
+		    <result name="delResource">/common/infoPage.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	</package>
+	
+	<!-- 角色信息 -->
+	<package name="sysmge.roles" extends="struts-default" namespace="/sysmge/roles">
+	   <!-- 列表展示 -->
+	   <action name="list" class="com.npc.lottery.controller.RolesAction" method="list">
+	        <result name="list">/jsp/sysmge/roles/listRoles.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	   <!-- 新增 -->
+	   <action name="addRoles" class="com.npc.lottery.controller.RolesAction" method="addRoles">
+	        <result name="addRoles">/jsp/sysmge/roles/addRoles.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	   <!-- 删除 -->
+	   <action name="del" class="com.npc.lottery.controller.RolesAction" method="del">
+			<result name="del">/common/infoPage.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+       </action>
+	   <!-- 提交新增 -->
+		<action name="submitAddRoles" class="com.npc.lottery.controller.RolesAction" method="submitAddRoles">
+			<result name="saveRoles" type="redirect">/sysmge/roles/viewRoles.action?ID=${ID}</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<!-- 提交修改 -->
+		<action name="submitModifyRoles" class="com.npc.lottery.controller.RolesAction" method="submitModifyRoles">
+			<result name="saveRoles" type="redirect">/sysmge/roles/viewRoles.action?ID=${ID}</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+	   <!-- 修改 -->
+	   <action name="modifyRoles" class="com.npc.lottery.controller.RolesAction" method="modifyRoles">
+	        <result name="modifyRoles">/jsp/sysmge/roles/modifyRoles.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	   <!-- 查询 -->
+	    <action name="searchRoles" class="com.npc.lottery.controller.RolesAction" method="searchRoles">
+	        <result name="searchRoles">/jsp/sysmge/roles/listRoles.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	   <!-- 查看单条详细信息 -->
+	   <action name="viewRoles" class="com.npc.lottery.controller.RolesAction" method="viewRoles">
+	        <result name="viewRoles">/jsp/sysmge/roles/viewRoles.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	</package>
+
+	<!-- 功能信息 -->
+	<package name="sysmge.function" extends="struts-default" namespace="/sysmge/function">
+		<!-- 功能信息查看 -->
+		<action name="viewMain" class="com.npc.lottery.controller.FunctionAction" method="viewMain">
+			<result name="viewMain">/jsp/sysmge/function/viewMain.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="viewLocation" class="com.npc.lottery.controller.FunctionAction" method="viewLocation">
+			<result name="viewLocation">/jsp/sysmge/function/viewLocation.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="viewTreeList" class="com.npc.lottery.controller.FunctionAction" method="viewTreeList">
+			<result name="viewTreeList">/jsp/sysmge/function/viewTreeList.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="viewDetail" class="com.npc.lottery.controller.FunctionAction" method="viewDetail">
+			<result name="viewDetail">/jsp/sysmge/function/viewDetail.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+
+		<!-- 功能信息编辑 -->
+		<action name="modifyMain" class="com.npc.lottery.controller.FunctionAction" method="modifyMain">
+			<result name="modifyMain">/jsp/sysmge/function/modifyMain.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="modifyLocation" class="com.npc.lottery.controller.FunctionAction" method="modifyLocation">
+			<result name="modifyLocation">/jsp/sysmge/function/modifyLocation.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="modifyTreeList" class="com.npc.lottery.controller.FunctionAction" method="modifyTreeList">
+			<result name="modifyTreeList">/jsp/sysmge/function/modifyTreeList.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="modifyDetail" class="com.npc.lottery.controller.FunctionAction" method="modifyDetail">
+			<result name="modifyDetail">/jsp/sysmge/function/modifyDetail.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="modifyInfo" class="com.npc.lottery.controller.FunctionAction" method="modifyInfo">
+			<result name="modifyInfo">/jsp/sysmge/function/modifyInfo.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<!-- 保存修改 -->
+		<action name="functionSave" class="com.npc.lottery.controller.FunctionAction" method="functionSave">
+			<result name="functionSave">/common/back.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<!-- 删除 -->
+		<action name="del" class="com.npc.lottery.controller.FunctionAction" method="del">
+			<result name="del">/common/back.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="addSame" class="com.npc.lottery.controller.FunctionAction" method="addSame">
+			<result name="addSame">/jsp/sysmge/function/addSame.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<!-- 提交新增同级 -->
+		<action name="submitAddSame" class="com.npc.lottery.controller.FunctionAction" method="submitAddSame">
+			<result name="submitAddSame">/common/back.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="addNext" class="com.npc.lottery.controller.FunctionAction" method="addNext">
+			<result name="addNext">/jsp/sysmge/function/addNext.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+	</package>
+	
+	<package name="sysmge.param" extends="struts-default" namespace="/sysmge/param">
+         
+       <!-- 列表展示 -->
+	   <action name="list" class="com.npc.lottery.controller.ParamAction" method="list">
+	        <result name="list">/jsp/sysmge/param/listParam.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	   <!-- 新增 -->
+	   <action name="addParam" class="com.npc.lottery.controller.ParamAction" method="addParam">
+	        <result name="addParam">/jsp/sysmge/param/addParam.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	    <!-- 修改 -->
+	   <action name="modifyParam" class="com.npc.lottery.controller.ParamAction" method="modifyParam">
+	        <result name="modifyParam">/jsp/sysmge/param/modifyParam.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	   <!-- 删除 -->
+	   <action name="delParam" class="com.npc.lottery.controller.ParamAction" method="delParam">
+	        <result name="delParam">/common/infoPage.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	   <!-- 提交数据-->
+		<action name="saveParam" class="com.npc.lottery.controller.ParamAction" method="saveParam">
+			<result name="saveParam" type="redirect">/sysmge/param/viewParam.action?ID=${ID}</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>  
+	   <!-- 查询 -->
+	    <action name="searchParam" class="com.npc.lottery.controller.ParamAction" method="searchParam">
+	        <result name="searchParam">/jsp/sysmge/param/listParam.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	   <!-- 查看单条详细信息 -->
+	   <action name="viewParam" class="com.npc.lottery.controller.ParamAction" method="viewParam">
+	        <result name="viewParam">/jsp/sysmge/param/viewParam.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	   
+	    <!-- 查看单条参数值信息 -->
+	    <action name="addParamValue" class="com.npc.lottery.controller.ParamAction" method="addParamValue">
+	        <result name="addParamValue">/jsp/sysmge/param/addParamValue.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	   <action name="viewParamValue" class="com.npc.lottery.controller.ParamAction" method="viewParamValue">
+	        <result name="viewParamValue">/jsp/sysmge/param/viewParamValue.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	        <result name="input">/jsp/sysmge/param/error.jsp</result>	       
+	   </action>
+	    <action name="modifyParamValue" class="com.npc.lottery.controller.ParamAction" method="modifyParamValue">
+	        <result name="modifyParamValue">/jsp/sysmge/param/modifyParamValue.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	   <action name="delParamValue" class="com.npc.lottery.controller.ParamAction" method="delParamValue">
+	        <result name="delParamValue">/common/infoPage.jsp</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	   <action name="saveParamValue" class="com.npc.lottery.controller.ParamAction" method="saveParamValue">
+	        <result name="saveParamValue" type="redirect">/sysmge/param/viewParamValue.action?paramValueID=${paramValueID}</result>
+	        <result name="failure">/common/infoPage.jsp</result>
+	   </action>	 
+    </package>
+	
+	<!-- 授权 -->
+	<package name="sysmge.authoriz" extends="struts-default" namespace="/sysmge/authoriz">
+		<!-- 角色授权 -->
+		<action name="authorizRoleMain" class="com.npc.lottery.controller.AuthorizAction" method="authorizRoleMain">
+			<result name="authorizRoleMain">/jsp/sysmge/authoriz/authorizRoleMain.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="selectFunc" class="com.npc.lottery.controller.AuthorizAction" method="selectFunc">
+			<result name="selectFunc">/jsp/sysmge/authoriz/selectFunc.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="authorizRoleSubmit" class="com.npc.lottery.controller.AuthorizAction" method="authorizRoleSubmit">
+			<result name="authorizRoleSubmit">/common/infoPage.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="authorizRoleView" class="com.npc.lottery.controller.AuthorizAction" method="authorizRoleView">
+			<result name="authorizRoleView">/jsp/sysmge/authoriz/authorizRoleView.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		
+		<!-- 用户授权 -->
+		<action name="authorizUserRoleMain" class="com.npc.lottery.controller.AuthorizAction" method="authorizUserRoleMain">
+			<result name="authorizUserRoleMain">/jsp/sysmge/authoriz/authorizUserRoleMain.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="userRoleData" class="com.npc.lottery.controller.AuthorizAction" method="userRoleData">
+			<result name="userRoleData">/jsp/sysmge/authoriz/userRoleData.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="userRoleSelectList" class="com.npc.lottery.controller.AuthorizAction" method="userRoleSelectList">
+			<result name="userRoleSelectList">/jsp/sysmge/authoriz/userRoleSelectList.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="authorizUserRoleSubmit" class="com.npc.lottery.controller.AuthorizAction" method="authorizUserRoleSubmit">
+			<result name="authorizUserRoleSubmit">/common/infoPage.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+        <action name="authorizUserPrivate" class="com.npc.lottery.controller.AuthorizAction" method="authorizUserPrivate">
+            <result name="authorizUserPrivate">/jsp/sysmge/authoriz/authorizUserPrivate.jsp</result>
+            <result name="failure">/common/infoPage.jsp</result>
+        </action>
+        <action name="userPrivateSelectFunc" class="com.npc.lottery.controller.AuthorizAction" method="userPrivateSelectFunc">
+            <result name="userPrivateSelectFunc">/jsp/sysmge/authoriz/userPrivateSelectFunc.jsp</result>
+            <result name="failure">/common/infoPage.jsp</result>
+        </action>
+        <action name="authorizUserPrivateSubmit" class="com.npc.lottery.controller.AuthorizAction" method="authorizUserPrivateSubmit">
+            <result name="authorizUserPrivateSubmit">/common/infoPage.jsp</result>
+            <result name="failure">/common/infoPage.jsp</result>
+        </action>
+        <action name="authorizUserViewMain" class="com.npc.lottery.controller.AuthorizAction" method="authorizUserViewMain">
+            <result name="authorizUserViewMain">/jsp/sysmge/authoriz/authorizUserViewMain.jsp</result>
+            <result name="failure">/common/infoPage.jsp</result>
+        </action>
+        <action name="userViewFunc" class="com.npc.lottery.controller.AuthorizAction" method="userViewFunc">
+            <result name="userViewFunc">/jsp/sysmge/authoriz/userViewFunc.jsp</result>
+            <result name="failure">/common/infoPage.jsp</result>
+        </action>
+        <action name="userViewRole" class="com.npc.lottery.controller.AuthorizAction" method="userViewRole">
+            <result name="userViewRole">/jsp/sysmge/authoriz/userViewRole.jsp</result>
+            <result name="failure">/common/infoPage.jsp</result>
+        </action>
+	</package>
+	
+	<!-- 基础管理用户信息 -->
+	<package name="sysmge.manageruser" extends="struts-default" namespace="/sysmge/manageruser">
+		<action name="list" class="com.npc.lottery.controller.ManagerUserAction" method="list">
+			<result name="userList">/jsp/sysmge/manageruser/userList.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="create" class="com.npc.lottery.controller.ManagerUserAction" method="create">
+			<result name="create">/jsp/sysmge/manageruser/create.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="createSubmit" class="com.npc.lottery.controller.ManagerUserAction" method="createSubmit">
+			<result name="success">/common/infoPage.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="search" class="com.npc.lottery.controller.ManagerUserAction" method="search">
+			<result name="userList">/jsp/sysmge/manageruser/userList.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="view" class="com.npc.lottery.controller.ManagerUserAction" method="view">
+			<result name="view">/jsp/sysmge/manageruser/viewDetail.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		
+		<action name="modify" class="com.npc.lottery.controller.ManagerUserAction" method="modify">
+			<result name="modify">/jsp/sysmge/manageruser/modify.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		
+		<action name="modifySubmit" class="com.npc.lottery.controller.ManagerUserAction" method="modifySubmit">
+			<result name="success">/common/infoPage.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		
+		<action name="modifyPassword" class="com.npc.lottery.controller.ManagerUserAction" method="modifyPassword">
+			<result name="modifyPassword">/jsp/sysmge/manageruser/modifyPassword.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		
+		<action name="modifyPasswordSubmit" class="com.npc.lottery.controller.ManagerUserAction" method="modifyPasswordSubmit">
+			<result name="success">/common/infoPage.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		
+		<action name="deleteInfo" class="com.npc.lottery.controller.ManagerUserAction" method="deleteInfo">
+			<result name="success">/common/infoPage.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 会员用户信息 -->
+	<package name="sysmge.memberuser" extends="struts-default" namespace="/sysmge/memberuser">
+		<action name="list" class="com.npc.lottery.controller.MemberUserAction" method="list">
+			<result name="userList">/jsp/sysmge/memberuser/userList.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="create" class="com.npc.lottery.controller.MemberUserAction" method="create">
+			<result name="create">/jsp/sysmge/memberuser/create.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="createSubmit" class="com.npc.lottery.controller.MemberUserAction" method="createSubmit">
+			<result name="success">/common/infoPage.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="search" class="com.npc.lottery.controller.MemberUserAction" method="search">
+			<result name="userList">/jsp/sysmge/memberuser/userList.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		<action name="view" class="com.npc.lottery.controller.MemberUserAction" method="view">
+			<result name="view">/jsp/sysmge/memberuser/viewDetail.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		
+		<action name="modify" class="com.npc.lottery.controller.MemberUserAction" method="modify">
+			<result name="modify">/jsp/sysmge/memberuser/modify.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		
+		<action name="modifySubmit" class="com.npc.lottery.controller.MemberUserAction" method="modifySubmit">
+			<result name="success">/common/infoPage.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		
+		<action name="modifyPassword" class="com.npc.lottery.controller.MemberUserAction" method="modifyPassword">
+			<result name="modifyPassword">/jsp/sysmge/memberuser/modifyPassword.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		
+		<action name="modifyPasswordSubmit" class="com.npc.lottery.controller.MemberUserAction" method="modifyPasswordSubmit">
+			<result name="success">/common/infoPage.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+		
+		<action name="deleteInfo" class="com.npc.lottery.controller.MemberUserAction" method="deleteInfo">
+			<result name="success">/common/infoPage.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 系统监控功能 -->
+	<package name="sysmge.monitor" extends="struts-default" namespace="/sysmge/monitor">
+	   <!-- 列表展示 -->
+	   <action name="sessionList" class="com.npc.lottery.controller.MonitorAction" method="sessionList">
+	        <result name="sessionList">/jsp/sysmge/monitor/sessionList.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>
+	   </action>
+	</package>
+	
+</struts>
+
+

@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.user.entity">
+	<joined-subclass
+		name="AgentStaffExt"
+		table="TB_AGENT_STAFF_EXT"
+		extends="com.npc.lottery.sysmge.entity.ManagerStaff"
+	>
+		<key column="MANAGER_STAFF_ID"/>
+		<property
+			name="managerStaffID"
+			column="MANAGER_STAFF_ID"
+			type="java.lang.Long"
+			not-null="false"
+			insert="false" update="false"
+		>
+		</property>
+		
+		<property
+			name="parentStaff"
+			column="PARENT_STAFF"
+			type="integer"
+			not-null="false"
+			length="10"
+			insert="false"
+			update="false"
+		/>
+		<property
+			name="replenishment"
+			column="REPLENISHMENT"
+			type="string"
+			not-null="true"
+			length="1"
+		/>
+		<property
+			name="agentRate"
+			column="AGENT_RATE"
+			type="integer"
+			not-null="false"
+			length="5"
+		/>
+		<property
+			name="totalCreditLine"
+			column="TOTAL_CREDIT_LINE"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="availableCreditLine"
+			column="AVAILABLE_CREDIT_LINE"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="genAgentRate"
+			column="GEN_AGENT_RATE"
+			type="integer"
+			not-null="false"
+			length="5"
+		/>
+		<property
+			name="pureAccounted"
+			column="PURE_ACCOUNTED"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="stockholderStaff"
+			column="STOCKHOLDER_STAFF"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="branchStaff"
+			column="BRANCH_STAFF"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="chiefStaff"
+			column="CHIEF_STAFF"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+		/> 
+			<property
+			name="rateRestrict"
+			column="RATE_RESTRICT"
+			type="string"
+			not-null="true"
+			length="1"
+		/>
+		<property
+			name="belowRateLimit"
+			column="BELOW_RATE_LIMIT"
+			type="integer"
+			not-null="false"
+			length="2"
+		/>
+		<many-to-one name="genAgentStaffExt" class="com.npc.lottery.user.entity.GenAgentStaffExt" cascade="save-update" >
+            <column name="PARENT_STAFF"  />
+        </many-to-one>
+		
+		<set name="memberStaffExtSet" inverse="true" lazy= "true">
+            <key>
+                <column name="PARENT_STAFF" />
+            </key>
+            <one-to-many class="com.npc.lottery.user.entity.MemberStaffExt" />
+        </set>	
+		
+		<set name="subAccountInfoSet" inverse="true" lazy= "true">
+            <key>
+                <column name="PARENT_STAFF" />
+            </key>
+            <one-to-many class="com.npc.lottery.user.entity.SubAccountInfo" />
+        </set>		
+		
+	</joined-subclass>
+</hibernate-mapping>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- odds -->
+	<!-- 赔率 设置相关action -->
+	<package name="replenishauto" extends="default" namespace="/replenishauto">
+		<!-- 增加统一异常处理 start -->
+        <global-results>
+			<!-- 下面定义的结果对所有的Action都有效 -->
+			<result name="exception">/common/error.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="exception"/>
+		</global-exception-mappings>
+		<!-- 增加统一异常处理 end -->
+		<!-- 自动补货入口 -->
+        <action name="autoReplenish" class="com.npc.lottery.replenish.action.AutoReplenishAction" method="autoReplenish">
+			 <result name="input">/jsp/replenish/autoReplenishForSet.jsp</result>	
+        </action>
+        <action name="updateAutoReplenish" class="com.npc.lottery.replenish.action.AutoReplenishAction" method="updateAutoReplenish">
+			 <result name="success" type="chain">autoReplenish</result>	
+			 <result name="successHK" type="chain">autoReplenishHK</result>	
+			 <result name="exception">/common/infoPage.jsp</result>	
+        </action>
+        <action name="ajaxAutoReplenishSet" class="com.npc.lottery.replenish.action.AutoReplenishAction" method="checkSet">
+			 <result name="input">/common/infoPage.jsp</result>	
+        </action>
+        <action name="autoReplenishHK" class="com.npc.lottery.replenish.action.AutoReplenishAction" method="autoReplenish">
+			 <result name="input">/jsp/replenish/autoReplenishForHK.jsp</result>	
+        </action>
+        <action name="changeReplenish" class="com.npc.lottery.replenish.action.AutoReplenishAction" method="changeReplenish">
+			 <result name="input" type="chain">autoReplenish</result>	
+			 <result name="inputHK" type="chain">autoReplenishHK</result>	
+        </action>
+		
+		<!-- 自动补货日志 -->
+        <action name="autoReplenishLog" class="com.npc.lottery.replenish.action.AutoReplenishAction" method="autoReplenishLog">
+			 <result name="success">/jsp/replenish/autoReplenishLog.jsp</result>	
+			 <result name="input">/common/infoPage.jsp</result>		
+        </action>
+        
+        
+    </package>
+	
+</struts>
+
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 这个文件部署在 /usr/local/<tomcat>/conf/Catalina/localhost 路径下，并修改该tomcat对应的商铺数据库连接-->
+<!-- 
+	docBase=程序位置，固定在/home/npc/Project/lottery路径下
+	workDir=tomcat工作临时路径，以shopcode(商铺号)区分路径
+ -->
+<Context
+	path=""
+	reloadable="false"
+	docBase="/home/npc/Project/lottery"
+	workDir="/home/npc/Project/work/<shopcode>"
+>
+	<Resource
+		name="npc/lot"
+		scope="Shareable"
+		type="com.mchange.v2.c3p0.ComboPooledDataSource"
+		factory="org.apache.naming.factory.BeanFactory"
+		jdbcUrl="jdbc:oracle:thin:@192.168.1.252:1521:orcl"
+		driverClass="oracle.jdbc.driver.OracleDriver"
+		user="lottery1210"
+		password="npc1979cai"
+		maxPoolSize="30"
+		minPoolSize="10"
+		initialPoolSize="10"
+		maxIdleTime="30"
+		maxStatements="0" />
+</Context>

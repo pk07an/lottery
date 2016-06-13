@@ -1,0 +1,87 @@
+/*
+ * FileName: top.css
+ * CreateTime: 2012-10-07
+ * Author: Charming Honest Romantic Intellegent Smiling
+ */
+@charset "utf-8";
+body{
+	background-image: url(../../images/admin/top_right.jpg);
+	background-repeat: repeat-x;
+	margin:0;
+	padding:0;
+}
+body, div, span, p, b, textarea, input, select, form, table,tr,td {
+	color:#f8ff2d;
+}
+a{
+	text-decoration:none;
+	color:#F8FFFF;
+}
+a:hover{
+	cursor: hand;
+	text-decoration:underline;
+	color:#C3F1F6;
+}
+/*contruct new start*/
+
+#container{
+/*margin-top:-2px;*/
+min-width:1074px; /*For FF*/
+_width:expression((document.documentElement.clientWidth||document.body.clientWidth)<1074?"1074px":"auto"); /*For IE6*/
+}
+#scrollnote:after, .head_col:after, .menu:after{
+content:".";
+visibility:hidden;
+display:block;
+height:0;
+clear:both;
+}
+#scrollnote, .head_col, .menu{
+display:inline-block;
+}
+#scrollnote, .head_col, .menu{
+display:block;
+}
+#scrollnote{
+clear:both;
+width:100%;
+margin:0 auto;
+padding:0;
+height:40px;
+line-height:40px;
+}
+#scrollleft{float:left;width:150px;text-align:left;padding-left:5px;}
+#scrollright{float:right;width:150px;text-align:right;padding-right:5px;}
+#scrollleft strong, #scrollright strong{color:#deff00!important;}
+#scrollcenter {min-width:56.3%;_width:expression((document.documentElement.clientWidth||document.body.clientWidth)<1000?"56.1%":"auto");margin:0 155px;}
+
+.Tab_col{padding-left:4px;float:left;}
+.Tab_col a{display:inline-block;line-height:30px;text-align:center;color:#84a1af;font-family:"宋体", arial;}
+.Tab_col a:hover{text-decoration:none;color:#84a1af;}
+a.tab_1_s, a.tab_2_s, a.tab_3_s, a.tab_1_s:hover, a.tab_2_s:hover, a.tab_3_s:hover, a.tab_4_s, a.tab_4_s, a.tab_5_s, a.tab_5_s:hover{color:#fff;}
+.tab_1, .tab_1_s, .tab_2, .tab_2_s, .tab_3, .tab_3_s, .tab_4, .tab_4_s, .tab_5, .tab_5_s{border:none;background:#0c0d11 url('../../images/admin/But_S2.png');height: 30px;}
+.tab_1{background-position:0;width: 104px;}
+.tab_1_s{background-position:-410px;width: 104px;}
+.tab_2{background-position:-104px;width: 102px;}
+.tab_2_s{background-position:-514px;width: 102px;}
+.tab_3{background-position:-206px;width: 102px;}
+.tab_3_s{background-position:-616px;width: 102px;}
+.tab_4{background-position:-308px;width: 102px;}
+.tab_4_s{background-position:-718px;width: 102px;}
+.tab_5{background-position:-308px;width: 102px;}
+.tab_5_s{background-position:-718px;width: 102px;}
+
+.col_link{float:left;height:29px;padding-top:2px;_padding-top:1px;padding-left:2px;vertical-align:middle;color:#fdffbd;}
+.col_link span{display:inline-block;padding:5px 0;}
+.col_link a{color:#f8ff2d;padding:4px 4px;display:inline-block;}
+.col_link a:hover{border:1px solid #145398;padding:3px 3px;background-color:#0d3b76;color:#f8ff2d;text-decoration:none;}
+.col_link a.special, .col_link a.special:hover{color:#bfffc4;}
+
+/*menu*/
+.menu{height:27px;text-align:left;clear:both;}
+/*.menu a, .menu a:hover{color:#fff;border:none; background:#B3C5EF url('../../images/admin/But_S.jpg') no-repeat -78px 0;height:26px;line-height:26px;text-align:center;width:78px;display:inline-block;cursor:pointer;margin:1px 0 0 0;}*/
+.menu a, .menu a:hover{color:#fff;border:none; background:#B3C5EF url('../../images/admin/But_S.jpg') no-repeat -78px 0;height:26px;line-height:26px;text-align:center;width:78px;display:inline-block;cursor:pointer;margin:1px 0 0 0;_float:left;_display:block;_margin:1px 4px 0 0;}
+.menu a:hover{background-position:0 0;text-decoration:none;}
+
+.Font_New {color: #deff00;}
+.Font_Count {color: #ededed;}

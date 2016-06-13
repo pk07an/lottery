@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 商鋪 数据库处理类实例 -->
+	<bean id="shopsDao" class="com.npc.lottery.boss.dao.hibernate.ShopsDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 商鋪 数据库处理类实例 -->
+	<bean id="shopsExtDao" class="com.npc.lottery.boss.dao.hibernate.ShopsExtDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 商鋪租约数据库处理类实例 -->
+	<bean id="shopsRentDao" class="com.npc.lottery.boss.dao.hibernate.ShopsRentDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 商鋪 逻辑处理类实例 -->
+	<bean id="shopsLogic" class="com.npc.lottery.boss.logic.spring.ShopsLogic" parent="baseLogic">
+		<property name="shopsDao" ref="shopsDao"/>
+		<property name="shopsExtDao" ref="shopsExtDao"/>
+		<property name="shopsRentDao" ref="shopsRentDao"/>
+		<property name="chiefStaffExtDao" ref="chiefStaffExtDao"/>
+		<property name="playTypeDao" ref="playTypeDao"/>
+		<property name="shopOddsDao" ref="shopOddsDao"/>
+		<property name="openPlayOddsJdbcDao" ref="openPlayOddsJdbcDao"/>
+		<property name="playAmountJdbcDao" ref="playAmountJdbcDao"/>
+		<property name="betDao" ref="betDao"/>
+		<property name="gdPeriodsInfoLogic" ref="periodsInfoLogic"/>
+		<property name="icqPeriodsInfoLogic" ref="icqPeriodsInfoLogic"/>
+		<property name="jssbPeriodsInfoLogic" ref="jssbPeriodsInfoLogic"/>
+		<property name="bjscPeriodsInfoLogic" ref="bjscPeriodsInfoLogic"/>
+		<property name="ncPeriodsInfoLogic" ref="ncPeriodsInfoLogic"/>
+		<property name="memberStaffExtDao" ref="memberStaffExtDao"/>
+	</bean>
+	
+	<!-- 广东快乐十分盘期 逻辑处理类实例 -->
+	<bean id="gdPeriodsInfoBossLogic" class="com.npc.lottery.boss.logic.spring.GDPeriodsInfoBossLogic">
+		<property name="periodsInfoDao" ref="periodsInfoDao"/>
+	</bean>
+	
+	<!-- NC盘期 逻辑处理类实例 -->
+	<bean id="ncPeriodsInfoBossLogic" class="com.npc.lottery.boss.logic.spring.NCPeriodsInfoBossLogic">
+		<property name="ncPeriodsInfoDao" ref="ncPeriodsInfoDao"/>
+	</bean>
+	
+	<!-- 北京赛车盘期 逻辑处理类实例 -->
+	<bean id="bjscPeriodsInfoBossLogic" class="com.npc.lottery.boss.logic.spring.BJSCPeriodsInfoBossLogic">
+		<property name="bjscPeriodsInfoDao" ref="bjscPeriodsInfoDao"/>
+	</bean>
+	
+	<!-- 重庆时时彩盘期 逻辑处理类实例 -->
+	<bean id="icqPeriodsInfoBossLogic" class="com.npc.lottery.boss.logic.spring.CQPeriodsInfoBossLogic">
+		<property name="icqPeriodsInfoDao" ref="icqPeriodsInfoDao"/>
+	</bean>
+	
+	
+</beans>

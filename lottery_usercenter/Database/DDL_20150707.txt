@@ -1,0 +1,113 @@
+-- Create table
+create table TB_CANCEL_PET
+(
+  id          NUMBER(10) not null,
+  create_date DATE not null,
+  table_id    NUMBER(10) not null,
+  win_state   CHAR(1) not null,
+  bill_type   VARCHAR2(10) not null
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table TB_CANCEL_PET
+  is '记录被注销的注单记录';
+-- Add comments to the columns 
+comment on column TB_CANCEL_PET.create_date
+  is '创建时间';
+comment on column TB_CANCEL_PET.table_id
+  is '对应各历史表的ID';
+comment on column TB_CANCEL_PET.win_state
+  is '输赢结果';
+comment on column TB_CANCEL_PET.bill_type
+  is '填GDKLSF等或R(代表补货)';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table TB_CANCEL_PET
+  add constraint PK_TB_CANCEL primary key (ID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    minextents 1
+    maxextents unlimited
+  );
+
+-- Create sequence 
+create sequence SEQ_TB_CANCEL_PET
+minvalue 1
+maxvalue 99999999999
+start with 1
+increment by 1
+cache 5000;
+
+
+
+-- Create table
+create table TB_CANCEL_PET_LOG
+(
+  id          NUMBER(10) not null,
+  create_date DATE not null,
+  table_id    NUMBER(10) not null,
+  type   CHAR(1) not null,
+  bill_type   VARCHAR2(10) not null,
+  ip VARCHAR2(10) not null
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table TB_CANCEL_PET_LOG
+  is '记录注单注销和恢复的操作日志';
+-- Add comments to the columns 
+comment on column TB_CANCEL_PET_LOG.create_date
+  is '创建时间';
+comment on column TB_CANCEL_PET_LOG.table_id
+  is '对应各历史表的ID';
+comment on column TB_CANCEL_PET_LOG.type
+  is '类型，1：注销 ，2：恢复';
+comment on column TB_CANCEL_PET_LOG.bill_type
+  is '填GDKLSF等或R(代表补货)'; 
+comment on column TB_CANCEL_PET_LOG.ip
+  is 'ip';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table TB_CANCEL_PET_LOG
+  add constraint PK_TB_CANCEL_PET_LOG primary key (ID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    minextents 1
+    maxextents unlimited
+  );
+
+
+-- Create sequence 
+create sequence SEQ_TB_CANCEL_PET_LOG
+minvalue 1
+maxvalue 99999999999
+start with 1
+increment by 1
+cache 5000;

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 这个文件是本地测试时数据库的连接配置，不需要部署到生产环境 -->
+<Context>
+	<!-- Default set of monitored resources -->
+	<WatchedResource>WEB-INF/web.xml</WatchedResource>
+	<!-- tomcat 里配置数据源，通过jndi连接 -->
+	<Resource
+		name="npc/lot"
+		scope="Shareable"
+		type="javax.sql.DataSource"
+		factory="com.alibaba.druid.pool.DruidDataSourceFactory"
+		url="jdbc:oracle:thin:@192.168.1.253:1521:orcl"
+		driverClassName="oracle.jdbc.driver.OracleDriver"
+		username="lot8866"
+		password="8866test"
+		maxActive="20"
+		initialSize="5" 
+		maxWait="60000"
+		minIdle="5"
+		 timeBetweenEvictionRunsMillis="3000"
+		 minEvictableIdleTimeMillis="300000"
+		 validationQuery="SELECT 1 FROM DUAL"
+		 testWhileIdle="true"
+		 poolPreparedStatements="true"
+		  maxPoolPreparedStatementPerConnectionSize="20" 
+		 />
+</Context>

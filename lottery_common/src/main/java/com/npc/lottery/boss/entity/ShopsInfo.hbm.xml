@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.boss.entity">
+	<class
+		name="ShopsInfo"
+		table="TB_SHOPS_INFO"
+	>
+		<id name="ID" type="java.lang.Long" column="ID">
+			<generator class="sequence">
+			    <param name="sequence">SEQ_TB_SHOPS_INFO</param>
+		    </generator>
+		</id>
+
+		<property
+			name="shopsCode"
+			column="SHOPS_CODE"
+			type="string"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="shopsName"
+			column="SHOPS_NAME"
+			type="java.lang.String"
+			not-null="true"
+			length="20"
+		/>
+		<property
+			name="state"
+			column="STATE"
+			type="string"
+			not-null="true"
+			length="1"
+		/>
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="java.lang.Long"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+		/>
+		
+		<property
+			name="css"
+			column="CSS"
+			type="string"
+			not-null="true"
+			length="1"
+		/>
+		<property
+			name="remark"
+			column="REMARK"
+			type="java.lang.String"
+			not-null="false"
+			length="400"
+		/>
+		<property
+			name="enableBetDelete"
+			column="ENABLE_BET_DELETE"
+			type="java.lang.String"
+			not-null="false"
+			length="400"
+		/>
+		<property
+			name="enableBetCancel"
+			column="ENABLE_BET_CANCEL"
+			type="java.lang.String"
+			not-null="false"
+			length="400"
+		/>
+		<!--<property
+			name="sendMailAccount"
+			column="SEND_MAIL_ACCOUNT"
+			type="java.lang.String"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="sendMailPassword"
+			column="SEND_MAIL_PASSWORD"
+			type="java.lang.String"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="sendMailSMTP"
+			column="SEND_MAIL_SMTP"
+			type="java.lang.String"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="sendMailAddress"
+			column="SEND_MAIL_ADDRESS"
+			type="java.lang.String"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="getMailAddress1"
+			column="GET_MAIL_ADDRESS1"
+			type="java.lang.String"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="getMailAddress2"
+			column="GET_MAIL_ADDRESS2"
+			type="java.lang.String"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="getMailAddress3"
+			column="GET_MAIL_ADDRESS3"
+			type="java.lang.String"
+			not-null="false"
+			length="200"
+		/>-->
+		<set name="shopsRent" table="TB_SHOPS_RENT" lazy="false" inverse="true" cascade="all">
+        	 <key column="SHOPS_CODE" property-ref="shopsCode"/>        
+			 <one-to-many class="com.npc.lottery.boss.entity.ShopsRent"/>
+       </set>
+       <many-to-one property-ref="shopsCode" name="ChiefStaffExt" column="SHOPS_CODE" update="false" insert="false" unique="true" />
+		
+		
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.member.entity">
+	<class
+		name="PlayWinInfo"
+		table="TB_PLAY_WIN_INFO"
+	>
+		<id name="id" type="java.lang.Long" >
+		 <column name="ID" precision="12" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">SEQ_TB_PLAY_WIN_INFO</param>
+			</generator>
+		</id>
+
+		<property
+			name="typeCode"
+			column="TYPE_CODE"
+			type="string"
+			not-null="false"
+			length="30"
+		/>
+		
+		<property
+			name="playType"
+			column="PLAY_TYPE"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
+		
+		
+		<property
+			name="win"
+			column="WIN"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="string"
+			not-null="false"
+			length="20"
+		/>
+		<property
+			name="periodsNum"
+			column="PERIODS_NUM"
+			type="string"
+			not-null="false"
+			length="20"
+		/>
+ 
+		
+		
+	</class>	
+</hibernate-mapping>

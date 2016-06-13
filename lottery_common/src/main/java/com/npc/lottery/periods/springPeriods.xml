@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 广东快乐十分盘期 数据库处理类实例 -->
+	<bean id="periodsInfoDao" class="com.npc.lottery.periods.dao.hibernate.GDPeriodsInfoDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 广东快乐十分盘期 逻辑处理类实例 -->
+	<bean id="periodsInfoLogic" class="com.npc.lottery.periods.logic.spring.GDPeriodsInfoLogic">
+		<property name="periodsInfoDao" ref="periodsInfoDao"/>
+		<property name="checkLogic" ref="checkLogic"/>
+		<property name="shopSchemeService" ref="shopSchemeService"/>
+	</bean>
+	
+	
+	<!--  北京赛车盘期 数据库处理类实例 -->
+	<bean id="bjscPeriodsInfoDao" class="com.npc.lottery.periods.dao.hibernate.BJSCPeriodsInfoDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 北京赛车盘期 逻辑处理类实例 -->
+	<bean id="bjscPeriodsInfoLogic" class="com.npc.lottery.periods.logic.spring.BJSCPeriodsInfoLogic">
+		<property name="bjscPeriodsInfoDao" ref="bjscPeriodsInfoDao"/>
+		<property name="checkLogic" ref="checkLogic"/>
+		<property name="shopSchemeService" ref="shopSchemeService"/>
+	</bean>
+	
+	
+	<!-- 重庆时时彩盘期 数据库处理类实例 -->
+	<bean id="icqPeriodsInfoDao" class="com.npc.lottery.periods.dao.hibernate.CQPeriodsInfoDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 重庆时时彩盘期 逻辑处理类实例 -->
+	<bean id="icqPeriodsInfoLogic" class="com.npc.lottery.periods.logic.spring.CQPeriodsInfoLogic">
+		<property name="icqPeriodsInfoDao" ref="icqPeriodsInfoDao"/>
+		<property name="checkLogic" ref="checkLogic"/>
+		<property name="shopSchemeService" ref="shopSchemeService"/>
+	</bean>
+	
+	<!-- 香港盘期 数据库处理类实例 -->
+	<bean id="hkperiodsInfoDao" class="com.npc.lottery.periods.dao.hibernate.HKPeriodsInfoDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 香港盘期 逻辑处理类实例 -->
+	<bean id="skperiodsInfoLogic" class="com.npc.lottery.periods.logic.spring.HKPeriodsInfoLogic">
+		<property name="hkperiodsInfoDao" ref="hkperiodsInfoDao"/>
+		<property name="periodsDao" ref="periodsDao"/>
+	</bean>
+	
+	<!-- 香港盘期状态 数据库处理类实例 -->
+	<bean id="periodsDao" class="com.npc.lottery.periods.dao.hibernate.HKPeriodsDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	<!-- 香港盘期状态 逻辑处理类实例 -->
+	<bean id="hkperiodsLogic" class="com.npc.lottery.periods.logic.spring.HKPeriodsLogic">
+		<property name="periodsDao" ref="periodsDao"/>
+	</bean>
+	
+	<!--  江苏骰宝盘期 数据库处理类实例 -->
+	<bean id="jssbPeriodsInfoDao" class="com.npc.lottery.periods.dao.hibernate.JSSBPeriodsInfoDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 江苏骰宝盘期 逻辑处理类实例 -->
+	<bean id="jssbPeriodsInfoLogic" class="com.npc.lottery.periods.logic.spring.JSSBPeriodsInfoLogic">
+		<property name="jssbPeriodsInfoDao" ref="jssbPeriodsInfoDao"/>
+		<property name="checkLogic" ref="checkLogic"/>
+		<property name="shopSchemeService" ref="shopSchemeService"/>
+	</bean>
+	
+	<!--  幸运农场盘期 数据库处理类实例 -->
+	<bean id="ncPeriodsInfoDao" class="com.npc.lottery.periods.dao.hibernate.NCPeriodsInfoDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!--幸运农场盘期 逻辑处理类实例 -->
+	<bean id="ncPeriodsInfoLogic" class="com.npc.lottery.periods.logic.spring.NCPeriodsInfoLogic">
+		<property name="ncPeriodsInfoDao" ref="ncPeriodsInfoDao"/>
+		<property name="checkLogic" ref="checkLogic"/>
+		<property name="shopSchemeService" ref="shopSchemeService"/>
+	</bean>
+</beans>

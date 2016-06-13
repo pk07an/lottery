@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<decorators defaultdir="/jsp/layout">
+	
+<decorator name="boss" page="/jsp/layout/bossTemple.jsp">
+        <pattern>/boss/*.action</pattern>
+		<pattern>/boss/*.do</pattern>
+		<pattern>/boss/*.jsp</pattern>
+</decorator>	
+	
+<decorator name="sysmge" page="/jsp/layout/sysmgeTemple.jsp">
+	 <pattern>/sysmge/*.action</pattern>
+	 <pattern>/sysmge/*.do</pattern>
+</decorator> 
+	
+	<excludes>  
+		<pattern>/member/klsfStraightthroughSub.action*</pattern>  
+		<pattern>/boss/ajax*.action*</pattern>
+		<pattern>/user/queryPopupMenus.action*</pattern>
+		<pattern>/member/queryMemberPopupMenus.action*</pattern>
+		<pattern>/member/queryMemberWarmomgStatent.action*</pattern>
+		<pattern>/user/ajax*.action*</pattern>
+		<pattern>/admin/ajax*.action*</pattern>
+		<pattern>/member/ajax*.action*</pattern>
+		<pattern>/replenish/ajax*.action*</pattern>
+		<pattern>/jsp/member/shopLogin.jsp</pattern>
+		<pattern>/member/shopLogin.action</pattern>
+		<pattern>/member/chooseLogin.action</pattern>
+		<pattern>/member/userLogin.action</pattern>
+		<pattern>/sysmge/authoriz/*.action*</pattern>
+	   
+		<!-- 系统管理 功能、资源信息 -->
+		<pattern>/sysmge/function/modifyTreeList.action*</pattern>
+		<pattern>/sysmge/function/modifyInfo.action*</pattern>
+		<pattern>/sysmge/function/modifyDetail.action*</pattern>
+		<pattern>/sysmge/function/addNext.action*</pattern>
+		<pattern>/sysmge/function/addSame.action*</pattern>
+		<pattern>/sysmge/function/submitAddSame.action*</pattern>
+		<pattern>/sysmge/function/submitAddNext.action*</pattern>
+		<pattern>/sysmge/function/functionSave.action*</pattern>
+		<pattern>/sysmge/function/del.action*</pattern>
+		<pattern>/sysmge/resource/addResource.action*</pattern>
+		<pattern>/sysmge/resource/viewResource.action*</pattern>
+		<pattern>/sysmge/resource/modifyResource.action*</pattern>
+		<pattern>/sysmge/resource/delResource.action*</pattern>
+		<pattern>/sysmge/ajaxCheckCode.action*</pattern>
+		
+		<!-- 管理登陆功能 -->	
+		<pattern>/sysmge/logoutManager.action*</pattern>
+		<pattern>/common/ModalDialogPage.jsp*</pattern>
+		<pattern>/sysmge/loginFailureManager.action*</pattern>
+		<pattern>/sysmge/loginManager.action*</pattern>
+		<pattern>/sysmge/safetyCodeLogin.action*</pattern>
+		
+		<!-- 会员登陆功能 -->
+		<pattern>/sysmge/logoutMember.action*</pattern>
+		<pattern>/sysmge/loginFailureMember.action*</pattern>
+		<pattern>/sysmge/loginMember.action*</pattern>
+		
+		<!-- 参数值功能 -->	
+		<pattern>/sysmge/param/addParamValue.action*</pattern>
+		<pattern>/sysmge/param/viewParamValue.action*</pattern>
+		<pattern>/sysmge/param/modifyParamValue.action*</pattern>
+		<pattern>/sysmge/param/delParamValue.action*</pattern>
+		
+		<!-- 交收报表明细 -->
+		<!-- <pattern>/statreport/detailedReport.action*</pattern>
+		<pattern>/statreport/detailedList.action*</pattern>
+		<pattern>/statreport/replenishDetailedList.action*</pattern> -->
+		
+		<!-- 总管交收报表明细 -->
+		<pattern>/boss/srDetailedReport.action*</pattern>
+		<pattern>/boss/srDetailedList.action*</pattern>
+		<pattern>/boss/srReplenishDetailedList.action*</pattern>
+		
+		
+		<!--后台管理全改为IFRAME-->
+		<!-- <pattern>/admin/*.action</pattern>
+	 	<pattern>/user/*.action</pattern>
+		 <pattern>/periods/*.action</pattern>
+		 <pattern>/admin/*.do</pattern>
+		 <pattern>/statreport/*.action</pattern>
+		 <pattern>/replenishauto/*.action</pattern>
+		
+			会员投注
+		 <pattern>/member/*.action</pattern>
+		<pattern>/member/*.do</pattern>
+		
+		补货相关
+		 <pattern>/replenish/*.action</pattern>
+		 <pattern>/replenish/*.do</pattern>
+		 <pattern>/jsp/replenish/replenishPop.jsp</pattern> -->
+		
+    </excludes>
+	
+</decorators>

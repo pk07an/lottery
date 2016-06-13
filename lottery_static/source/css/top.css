@@ -1,0 +1,154 @@
+/*
+ * FileName: layout.css [公用]
+ * CreateTime: 2012-03-09
+ * Author: Charming Honest Romantic Intellegent Smiling
+ */
+@charset "utf-8";
+body {margin:0; padding:0; color:#FED7AD; font-size:12px; line-height:1.8; font-family:Tahoma,SimSun,Arial,serif; text-align:left; /*vertical-align:baseline;*/background:#240e01 url(../images/TopMenu_Top.jpg) repeat-x left top;}
+div,table,tr,th,td,form,p,ul,li,dl,dt,dd,a,span,img,dl,dt,dd,h1,h2,h3,h4,h5,h6{margin:0; padding:0;}
+/*{margin:0;padding:0;}*/
+
+table,tr,th,td,form,p {border:none 0;}
+ul,li {margin:0; padding:0; list-style:none; }
+img {border:none 0;}
+.fl{float:left;}
+.fr{float:right;}
+.clear{line-height:0; font-size:0; overflow:hidden;clear:both;}
+a{color:#333;text-decoration:none; }
+a:hover{}
+.g3{color:#333;}
+.red{color:#de0000;}
+.green{color:#069a0c;}
+.blue{color:#0000ff;}
+.l_blue{color:#09F;}
+.ml10{margin-left:10px;}
+.mr50{margin-right:50px;}
+.ml22{margin-left:22px;}
+.mr10{margin-right:10px;}
+.ml6{margin-left:6px;}
+.mt10{margin-top:10px;}
+.nb{border:medium none!important;}
+.header{height:40px;position:relative;padding:0;}
+.logo{width:196px;height:40px;position:absolute;left:0;top:0; vertical-align:middle; background:url(../images/logo_bg.png) no-repeat left top;}
+.logo h1, .logo h1 a{font-size:22px;font-family:Microsoft YaHei,SimSun,Arial;color:#fefb00;line-height:40px;text-shadow:1px 1px #000300;}
+.nav{font-size:16px;line-height:40px;overflow:hidden;height:40px;color:#af9a68;}
+.nav a{text-align:center;color:#fff; text-shadow:1px 1px #664906;display:inline-block;padding:0 12px;height:40px;font-family:Microsoft YaHei,SimSun,Arial;}
+.nav a:hover, .nav a.current{color:#FFFF00;background:url(../images/top_a_current.jpg) no-repeat center top;}
+#menu{/*background:url(../images/left_top.gif) no-repeat left top;*/height:29px;padding-left:231px;}
+.menu{height:29px;color:#fff;line-height:28px;overflow:hidden}
+.menu a{color:#fff;display:inline-block;padding:0 12px;text-align:center;overflow:hidden;}
+.menu a:hover, .menu a.current{color:#FFFF00;background:url(../images/menu_current.jpg) no-repeat center top;}
+
+
+
+
+body, div, span, p, b, textarea, input, select, form, table,tr,td{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	font-size:12px;
+	z-index:auto;
+	font-family:Verdana, "宋体", Arial,Sans;
+	color:#fed7ad;
+}
+body {
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+img, table{border:0px none;border-collapse:collapse}
+td{
+	cursor: default;
+}
+a{
+	text-decoration:none;
+	color:#4f260d;
+}
+.T_a{
+	text-decoration:none;
+	color:#fed7ad;
+}
+a:hover{
+	text-decoration:none;
+	color:#f1ad45;
+	font-weight: bold;
+}
+.NewS_Fone {
+	color: #FFFFA2;
+}
+.LeftBackdrop {
+	background-repeat: no-repeat;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-align: center;
+	text-indent: -30px;
+}
+.T2 {
+	background-repeat: no-repeat;
+	background-image: url(../images/T2.jpg);
+}
+.T3 {
+	background-repeat: no-repeat;
+	background-image: url(../images/T3.jpg);
+	font-weight: bold;
+	color: #FFFFFF;
+}
+.top {
+	background-image: url(../images/m_top.jpg);
+	background-repeat: repeat-x;
+}
+
+.Menu_WB{
+	border: 0px solid #FF9224; 
+	background-color: #FFFFFF; 
+	background-image: url('../images/menu_WB.jpg');
+	width: 99px; 
+	height: 25px; 
+	background-position:0 0px
+}
+
+.bST_1, .bST_1_s, a.bST_1, a.bST_1_s{
+	/*border: 0px solid #FF9224;*/ 
+	background:#8f3510 url('../images/But1.jpg') no-repeat left top;
+	height: 36px;
+	width: 132px;
+	font-weight: bold;
+}
+a.bST_1, a.bST_1_s{display:inline;text-align:center;line-height:36px;cursor:pointer;height: 36px;width: 132px;vertical-align:middle;float:left;}
+.bST_1, a.bST_1{
+	background-position:left top;
+	color:#fff5d7;
+}
+.bST_1_s, a.bST_1_s{
+	background-position:-132px top;
+	color:#4f260d;
+}
+
+.bSB_1, .bSB_1_m, .bSB_2, .bSB_2_m {
+	border: 0px solid #FF9224; 
+	background-color: #B3C5EF; 
+	background-image: url('../images/But2.jpg');
+	height: 36px;
+	font-weight: bold;
+	cursor: hand;
+}
+.bSB_1 {
+	background-position:0px;
+	width: 77px;
+}
+.bSB_1_m {
+	background-position:-171px;
+	width: 77px;
+}
+.bSB_2 {
+	background-position:-77px;
+	width: 94px;
+}
+.bSB_2_m {
+	background-position:-248px;
+	width: 94px;
+}
+.Font_R {
+	color: #FF0000;
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@page import="java.text.SimpleDateFormat"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*,com.npc.lottery.util.Page,com.npc.lottery.periods.entity.JSSBPeriodsInfo,com.npc.lottery.rule.BJSCRule" %>
+
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="lottery" uri="/WEB-INF/tag/pagination.tld" %>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/index.css" />
+ <script>
+ function forwardToLotteryHistory(optValue)
+ {
+	 window.parent.mainFrame.location.href="${pageContext.request.contextPath}/admin/enterLotResultHistoryAdmin.action?subType="+optValue;
+ }
+ </script>
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<!--控制表格头部开始-->
+			  <td height="30" background="${pageContext.request.contextPath}/images/admin/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+			      <tr>
+			        <td width="12" height="30"><img src="${pageContext.request.contextPath}/images/admin/tab_03.gif" width="12" height="30" /></td>
+			        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+			          <tr>
+			            <td width="21" align="left"><img src="${pageContext.request.contextPath}/images/admin/tb.gif" width="16" height="16" /></td>
+			            <td width="124" align="left" class="F_bold">歷史開獎結果</td>
+						<td width="1035" align="center"><table border="0" cellspacing="0" cellpadding="0">
+						
+						    <tr>
+			                <td width="56">&nbsp;</td>
+			                <td width="102">&nbsp;</td>
+			                <td width="60" align="right">&nbsp;</td>
+			                <td width="120" align="right">&nbsp;</td>
+			                <td width="139" align="left">&nbsp;</td>
+			              </tr>
+			            </table></td>
+			            <td class="t_right" width="229">
+			                 <select style="width:120px" class="mr10" name="" onChange="forwardToLotteryHistory(this.options[this.options.selectedIndex].value)">
+						       <option value="GDKLSF"  <s:if test="subType.indexOf('GDKLSF')>-1">selected</s:if> >廣東快樂十分</option>
+						      <option value="CQSSC"  <s:if test="subType.indexOf('CQSSC')>-1">selected</s:if> >重慶時時彩</option>
+						      <option value="BJSC"  <s:if test="subType.indexOf('BJSC')>-1">selected</s:if> >北京賽車(PK10)</option>
+						      <option value="K3"  <s:if test="subType.indexOf('K3')>-1">selected</s:if> >江苏骰寶(快3)</option> 
+						      <option value="NC"  <s:if test="subType.indexOf('NC')>-1">selected</s:if> >幸运农场</option> 
+						    </select>
+			            </td>
+			            </tr></table></td>
+			        <td width="16"><img src="${pageContext.request.contextPath}/images/admin/tab_07.gif" width="16" height="30" /></td>
+			      </tr>
+			    </table></td>
+			<!--控制表格头部结束-->
+			 <tr>
+			    <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+			      <tr>
+			        <td width="8" background="${pageContext.request.contextPath}/images/admin/tab_12.gif">&nbsp;</td>
+			        <td align="center" valign="top">
+					<!-- 表格内容开始 一行六列-->
+					<!-- 表格内容结束 一行六列-->
+		<table width="376" border="0" cellspacing="0" cellpadding="0" class="king mt4" style="width:376px;margin:0 auto;">
+ <tbody>
+    <tr>
+	    <th width="100">期数</th>
+	    <th width="110">开奖时间</th>
+	    <th width="84" colspan="3">开出骰子</th>
+	    <th width="66" colspan="2">总和</th>
+    </tr>
+    <tr>
+    <%
+    Page<JSSBPeriodsInfo> pageResult=(Page)request.getAttribute("page");
+    List<JSSBPeriodsInfo> result=pageResult.getResult();
+    for(int i=0;i<result.size();i++)
+    {
+    	List<Integer> ballList=new ArrayList<Integer>();
+    	
+    	JSSBPeriodsInfo periodsInfo=result.get(i);
+    	String periondNum=periodsInfo.getPeriodsNum();
+        Integer b1=periodsInfo.getResult1();ballList.add(b1);
+        Integer b2=periodsInfo.getResult2();ballList.add(b2);
+        Integer b3=periodsInfo.getResult3();ballList.add(b3);
+       
+        Date lotteryTime=periodsInfo.getLotteryTime();
+        SimpleDateFormat sm=new SimpleDateFormat("MM-dd E HH:mm");
+        String lotteryStrTime= sm.format(lotteryTime);
+        lotteryStrTime= lotteryStrTime.replaceAll("星期", "");
+        
+        int sum = b1+b2+b3;
+        String sumResult="";
+        if(b1.equals(b2) && b2.equals(b3)){
+        	sumResult = "K3_WS";
+        }else if(sum >=4 && sum <=10){
+        	sumResult ="K3_X";
+        }else if(sum >=11 && sum <=17){
+        	sumResult ="K3_DA";
+        }
+        
+    
+    %>
+   
+       
+        
+      <tr onmouseout="this.style.backgroundColor=''" onmouseover="this.style.backgroundColor='#FFFFA2'" style="" <%if(i%2!=0)out.print("class=\"even\""); %>>
+      <td><%=periondNum %></td>
+      <td><%=lotteryStrTime %></td>
+	<% if("6".equals(periodsInfo.getState().trim()) ){ %><td width="150" colspan="5"><strong class="blue">官方停售，獎期取消</strong></td><%}else{ %>
+      <td  width="2%"><% if("6".equals(periodsInfo.getState().trim()) ){ %> &nbsp;<%}else{ %><span ><img src="../images/4_<%=b1 %>.gif"/></span><%} %></td>
+      <td  width="2%"><% if("6".equals(periodsInfo.getState().trim()) ){ %> &nbsp;<%}else{ %><span ><img src="../images/4_<%=b2 %>.gif"/></span><%} %></td>
+      <td  width="2%"><% if("6".equals(periodsInfo.getState().trim()) ){ %> &nbsp;<%}else{ %><span ><img src="../images/4_<%=b3 %>.gif"/></span><%} %></td>
+     
+      
+      <td  width="10%"><%=sum%></td>
+      
+      <td  width="10%">
+      <%if("K3_X".equals(sumResult)){ %>
+      		小 
+      	<%} 
+      	else if("K3_DA".equals(sumResult)){%>
+      		<span class="red">大</span>
+      	<%} 
+      	else if("K3_WS".equals(sumResult)){%>
+      		<span class="green">通吃</span>
+      	<%}%>
+      </td>
+<%} %>
+    </tr>
+ <%}%>
+</tbody>
+			</table></td>
+	        <td width="8" background="${pageContext.request.contextPath}/images/admin/tab_15.gif">&nbsp;</td>
+	      </tr>
+	    </table></td>
+	  </tr>
+		<tr>
+		    <td height="35" background="${pageContext.request.contextPath}/images/admin/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+		      <tr>
+		        <td width="12" height="35"><img src="${pageContext.request.contextPath}/images/admin/tab_18.gif" width="12" height="35" /></td>
+		        <td align="center">
+		            <lottery:paginate url="${pageContext.request.contextPath}/admin/enterLotResultHistoryAdmin.action" param="subType=K3" recordType=" 期記錄"/>
+		        </td>
+			   <td width="16"><img src="${pageContext.request.contextPath}/images/admin/tab_20.gif" width="16" height="35" /></td>
+		      </tr>
+		    </table></td>
+		  </tr>
+<!--控制底部操作按钮结束-->
+     </table>
+  </div>
+</td></tr></tbody></table>   
+</body>
+<script language="javascript" src="../js/public.js" type="text/javascript"></script>
+<script language="javascript" src="../js/jquery-1.4.2.min.js" type="text/javascript"></script> 
+</html>

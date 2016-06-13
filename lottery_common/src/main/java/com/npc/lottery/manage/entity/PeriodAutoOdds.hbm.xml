@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.manage.entity">
+	<class
+		name="PeriodAutoOdds"
+		table="TB_PERIODS_AUTO_ODDS"
+	>
+		<id name="id" type="java.lang.Long" >
+		 <column name="ID" precision="12" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">SEQ_TB_PERIODS_AUTO_ODDS</param>
+			</generator>
+		</id>
+
+		<property
+			name="shopCode"
+			column="SHOPS_CODE"
+			type="string"
+			not-null="false"
+			length="4"
+		/>
+		<property
+			name="type"
+			column="TYPE"
+			type="string"
+			not-null="false"
+			length="30"
+		/>
+		<property
+			name="name"
+			column="NAME"
+			type="string"
+			not-null="false"
+			length="30"
+		/>
+		<property
+			name="autoOdds"
+			column="AUTO_ODDS"
+			type="big_decimal"
+			length="12"
+		/>
+		<property
+			name="createUserID"
+			column="CREATE_USER"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="createDate"
+			column="CREATE_TIME"
+			type="date"
+			not-null="false"
+			length="10"
+		/>
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,52 @@
+@charset "utf-8";
+/*
+ * FileName: global.css
+ * CreateTime: 2013-05-27
+ * Author: Charming Honest Romantic Intellegent Smiling
+ * Copyright NPC All Rights Reserved
+ */
+body {margin:0; padding:0; color:#333333; font-size:12px; line-height:18px; font-family:"宋体",arial;text-align:left;vertical-align:baseline;background:#81d2ef url(../images/chooseV1.2/xz_content_bg.jpg) no-repeat center top;}
+div,table,tr,th,td,form,p,ul,li,dl,dt,dd,a,span,img{margin:0; padding:0;}
+table,tr,th,td,form,p {border:none 0;}
+ul,li {margin:0; padding:0; list-style:none; }
+dl,dt,dd,h1,h2,h3,h4,h5{margin:0; padding:0;}
+img {border:none 0;}
+a{color:#fff;text-decoration:none;}
+a:hover{color:#fff;text-decoration:underline;}
+/* float */
+.fl{float:left;}
+.fr{float:right;}
+.nofont{font-size:0;line-height:0;overflow:hidden;}
+.ml10{margin-left:10px;}
+.mr10{margin-right:10px;}
+.mt10{margin-top:10px;}
+.mt15{margin-top:15px;}
+.mb10{margin-bottom:10px;}
+.mt5{margin-top:5px;}
+.red{color:#d9362b;}
+/* clear float */
+.clear{clear:both;height:0;font-size:0;overflow:hidden;display:block;line-height:0;}
+/* clearfix */
+.clearfix:after,.xz-content ul:after,.xz-content:after,.xz-content .main-content .xxk ul:after{ content:"."; display:block; height:0; clear:both; visibility:hidden; } 
+.clearfix,.xz-content ul,.xz-content,.xz-content .main-content .xxk ul{display:inline-block; } 
+.clearfix,.xz-content ul,.xz-content,.xz-content .main-content .xxk ul{display:block;}
+
+.xz-content{width:752px;height:268px;margin:131px auto 0;position:relative;}
+.xz-content .main-content{float:left;width:456px;margin-left:8px;}
+.xz-content .main-content .xxk ul{margin:12px 0 0 30px;}
+.xz-content .main-content .xxk ul li{cursor:pointer;display:block;width:92px;height:44px;background:url(../images/chooseV1.2/xxk_bg.jpg) no-repeat center top;float:left;text-align:center;font-size:14px;color:#000;font-weight:bold;line-height:40px;margin-right:6px;}
+.xz-content .main-content .xxk ul li.hover{background:url(../images/chooseV1.2/xxk_bg_current.jpg) no-repeat center top;color:#972b00;}
+
+.xz-content .con{margin:10px 0 0 30px;}
+.xz-content .con ul{}
+.xz-content .con ul li{float:left;margin-right:14px;height:54px;}
+.xz-content .con ul li a{display:block;background:#fbffc8 url(../images/chooseV1.2/lx_bg.png) no-repeat 8px center;padding-left:18px;width:50px;height:24px;line-height:24px;color:#333;}
+.xz-content .hy ul li a{background:#dfffff url(../images/chooseV1.2/lx_bg2.png) no-repeat 8px center;}
+.xz-content .con ul li a:hover{background:#fff url(../images/chooseV1.2/lx_bg.png) no-repeat 8px center;text-decoration:none;}
+.xz-content .hy ul li a:hover{background:#fff url(../images/chooseV1.2/lx_bg2.png) no-repeat 8px center;}
+.xz-content .con ul li .time{display:block;background:#a6eb32;width:68px;height:24px;line-height:24px;color:#000;text-align:center;margin-top:1px;}
+.xz-content .con .by{padding:10px 0;font-size:14px;}
+.xz-content .mobile{width:288px;line-height:18px;padding-top:116px;float:left;text-align:center;color:#333;}
+.xz-content .mobile .tit{font-weight:bold;font-size:14px;color:#333;margin-top:10px;}
+.xz-content .mobile a{text-decoration:underline;color:#fe6600;}
+.xz-content .mobile a:hover{color:#fe6600;text-decoration:none;}

@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.sysmge.entity">
+
+	<class
+		name="Resource"
+		table="TB_FRAME_RESOURCE"
+	>		
+		<id name="ID" type="java.lang.Long">
+            <column name="ID" precision="12" scale="0" />
+            <generator class="sequence">
+				<param name="sequence">SEQ_TB_FRAME_RESOURCE</param>
+			</generator>
+        </id>	
+		<property
+			name="resCode"
+			column="RES_CODE"
+			type="string"
+			not-null="true"
+			length="40"
+		/>
+		<property
+			name="resName"
+			column="RES_NAME"
+			type="string"
+			not-null="true"
+			length="40"
+		/>
+		<property
+			name="resState"
+			column="RES_STATE"
+			type="string"
+			not-null="true"
+			length="1"
+		/>
+		<property
+			name="resType"
+			column="RES_TYPE"
+			type="string"
+			not-null="true"
+			length="1"
+		/>
+		<property
+			name="sortNum"
+			column="SORT_NUM"
+			type="java.lang.Long"
+			not-null="false"
+			length="4"
+		/>
+		<many-to-one
+			name="function"
+			column="FUNC_ID"
+			class="com.npc.lottery.sysmge.entity.Function"
+			not-null="true"
+			lazy="false"
+			update="false"
+		/>
+		<property
+			name="url"
+			column="URL"
+			type="string"
+			not-null="false"
+			length="150"
+		/>
+		<property
+			name="resDesc"
+			column="RES_DESC"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+
+	</class>	
+</hibernate-mapping>

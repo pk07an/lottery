@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.member.entity">
+	<class
+		name="CancelPet"
+		table="TB_CANCEL_PET"
+	>
+		<id name="ID" type="java.lang.Long" >
+		 <column name="ID" precision="12" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">SEQ_TB_CANCEL_PET</param>
+			</generator>
+		</id>
+
+		<property
+			name="createDate"
+			column="create_date"
+			type="timestamp"
+			not-null="false"
+			length="7"
+		/>
+		<property
+			name="tableId"
+			column="TABLE_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="winState"
+			column="win_state"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="billType"
+			column="bill_type"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
+		
+	</class>	
+</hibernate-mapping>

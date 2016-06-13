@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.periods.entity">
+	<class
+		name="CQPeriodsInfo"
+		table="TB_CQSSC_PERIODS_INFO"
+	>
+		<id
+			name="ID"
+			type="long"
+			column="ID"
+		>
+			 <generator class="sequence">
+				<param name="sequence">SEQ_TB_CQSSC_PERIODS_INFO</param>
+			</generator>
+		</id>
+
+		<property
+			name="periodsNum"
+			column="PERIODS_NUM"
+			type="string"
+			not-null="true"
+			length="11"
+			
+		/>
+		<property
+			name="openQuotTime"
+			column="OPEN_QUOT_TIME"
+			type="timestamp"
+			not-null="true"
+			length="7"
+		/>
+		<property
+			name="lotteryTime"
+			column="LOTTERY_TIME"
+			type="timestamp"
+			not-null="true"
+			length="7"
+		/>
+		<property
+			name="stopQuotTime"
+			column="STOP_QUOT_TIME"
+			type="timestamp"
+			not-null="true"
+			length="7"
+		/>
+		<property
+			name="result1"
+			column="RESULT1"
+			type="integer"
+			not-null="false"
+			length="22"
+		/>
+		<property
+			name="result2"
+			column="RESULT2"
+			type="integer"
+			not-null="false"
+			length="22"
+		/>
+		<property
+			name="result3"
+			column="RESULT3"
+			type="integer"
+			not-null="false"
+			length="22"
+		/>
+		<property
+			name="result4"
+			column="RESULT4"
+			type="integer"
+			not-null="false"
+			length="22"
+		/>
+		<property
+			name="result5"
+			column="RESULT5"
+			type="integer"
+			not-null="false"
+			length="22"
+		/>
+		<property
+			name="state"
+			column="STATE"
+			type="string"
+			not-null="true"
+			length="1"
+		/>
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="true"
+			length="7"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

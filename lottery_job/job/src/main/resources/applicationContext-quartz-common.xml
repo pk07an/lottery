@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+	default-autowire="byName">
+	<!-- 定时器配置 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="MemberTrigger" />       <!--凌晨两点半把会员的可用信用额度全部改成跟当前信用额度一样 -->
+				<ref bean="GDcronTrigger" />      	<!--生成广东盘期 -->
+				<ref bean="CQcronTrigger" />      	<!--生成重庆盘期 -->
+				<ref bean="BJcronTrigger" />		<!--生成北京盘期 -->
+				<ref bean="JScronTrigger" /> 		<!-- 江苏生成盘期 -->
+				<ref bean="NCcronTrigger" /> 		<!-- 幸运农场盘期生成 -->
+				
+				
+				<!-- 广东 -->
+				<ref bean="GDopenTrigger" />        <!--广东開盤1-84期号码 -->
+				
+				<!-- 重庆 -->
+				<ref bean="CQOpencron1To24Trigger" />             <!--获取重庆开盘号码1-24的开盘Job -->
+				<ref bean="CQOpencron25To97Trigger" />          <!--获取重庆开盘号码25-97的开盘Job -->
+				<ref bean="CQOpencron98To120Trigger" />          <!--获取重庆开盘号码98-120-1的开盘Job -->
+		
+				<!-- 北京 -->
+				<ref bean="BJOpencronTrigger" />
+				<!-- 江苏 -->
+				<ref bean="JSOpenTrigger" />
+				<!-- 农场 -->
+				<ref bean="NC2To13openTrigger" /> 	<!-- 幸运农场2到13期开盘 -->
+				<ref bean="NC14To97To1openTrigger" /> 		<!-- 幸运农场14-97-1期开盘 -->
+				
+				<ref bean="GDReLotteryEODcronTrigger" />  	<!-- 广东重新每日结束兑奖 -->
+				<ref bean="CQReLotteryEODcronTrigger" /> 	<!-- 重庆重新每日结束兑奖 -->
+				<ref bean="BJReLotteryEODcronTrigger" /> 	<!-- 北京重新每日结束兑奖 -->
+				<ref bean="JSSBReLotteryEODcronTrigger" /> 	<!-- 江苏重新每日结束兑奖 -->
+				<ref bean="NCReLotteryEODcronTrigger" />  <!--农场凌晨异常开奖Job -->
+				
+				<ref bean="ReSentLotterycronTrigger" />  <!-- 异常开奖补发job -->
+				<ref bean="DeleteTempTablecronTrigger" />  <!-- 每天凌晨4点定时删除临时表job -->
+			</list>
+		</property>
+		<property name="taskExecutor">
+			<!-- 配置线程池 -->
+			<bean
+				class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+				<!--核心线程数 -->
+				<property name="corePoolSize" value="10" />
+				<!--最大线程数 -->
+				<property name="maxPoolSize" value="100" />
+				<!--队列最大长度 -->
+				<property name="queueCapacity" value="500" />
+				<!-- 线程池维护线程所允许的空闲时间 -->
+				<property name="keepAliveSeconds" value="3600" />
+			</bean>
+		</property>
+		<property name="jobFactory">
+			<bean class="com.npc.lottery.BeanJobFactory" />
+		</property>
+		<property name="applicationContextSchedulerContextKey" value="applicationContextKey" />
+		<property name="configLocation" value="classpath:quartz.properties" />
+		<property name="dataSource" ref="dataSource_job" />
+		<property name="schedulerName" value="job-common" />
+	</bean>
+	
+	<bean id="jdbcTemplateMysql" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource"><ref bean="dataSource_mysql"/></property>
+	</bean>
+
+	<!-- 广东 START -->
+	<!--广东快乐十分盘期盘期Job -->
+	<bean id="GDcronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="jobDetail" />
+		<property name="cronExpression" value="0 0 0 * * ?" />
+	</bean>
+
+	<bean name="jobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass" value="com.npc.lottery.job.common.gdklsf.GDPeriodsJob" />
+		<property name="jobDataAsMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+
+	<!--广东快乐十分开盘状态Job -->
+	<bean id="GDopenTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="GDopenjobDetail" />
+		<property name="cronExpression" value="10 0/10 8-22 * * ?" />
+	</bean>
+
+	<bean name="GDopenjobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass" value="com.npc.lottery.job.common.gdklsf.GDopenPeriodsJob" />
+		<property name="jobDataAsMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+
+	<!-- 广东 END -->
+
+	<!-- 重庆 START -->
+	<!--重庆时时彩盘期Job -->
+	<bean id="CQcronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="cqjobDetail" />
+		<property name="cronExpression" value="0 30 23 * * ?" />
+	</bean>
+
+	<bean name="cqjobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass" value="com.npc.lottery.job.common.cqssc.CQPeriodsJob" />
+		<property name="jobDataAsMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+
+	
+	
+	<!--重庆时时彩开盘1-24状态Job -->
+	<bean id="CQOpencron1To24Trigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="cqOpenjobDetail" />
+		<property name="cronExpression" value="10 0/5 0-1 * * ?" />
+	</bean>
+
+	<!--重庆时时彩开盘25-97状态Job -->
+	<bean id="CQOpencron25To97Trigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="cqOpenjobDetail" />
+		<property name="cronExpression" value="10  0/10 10-21 * * ?" />
+	</bean>
+
+	
+	
+		<!--重庆时时彩开盘98-120-1状态Job -->
+	<bean id="CQOpencron98To120Trigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="cqOpenjobDetail" />
+		<property name="cronExpression" value="10 0/5 22-23 * * ?" />
+	</bean>
+
+	<bean name="cqOpenjobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass" value="com.npc.lottery.job.common.cqssc.CQOpenPeriodsJob" />
+		<property name="jobDataAsMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+
+	
+	<!-- 北京START -->
+	<!--北京赛车盘起Job -->
+	<bean id="BJcronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="bjjobDetail" />
+		<property name="cronExpression" value="0 30 0 * * ?" />
+	</bean>
+
+	<bean name="bjjobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass" value="com.npc.lottery.job.common.bjsc.BJSCPeriodsJob" />
+		<property name="jobDataAsMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+
+	<!--北京赛车开盘状态Job -->
+	<bean id="BJOpencronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="bjOpenjobDetail" />
+		<property name="cronExpression" value="30 2/5 9-23 * * ?" />
+	</bean>
+
+	<bean name="bjOpenjobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass" value="com.npc.lottery.job.common.bjsc.BJOpenPeriodsJob" />
+		<property name="jobDataAsMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+
+	
+	<!-- 北京END -->
+	
+
+	<!-- 江苏骰宝 job start -->
+	<!--江苏骰宝生成盘期Job -->
+	<bean id="JScronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="JSPeriodsjobDetail" />
+		<property name="cronExpression" value="0 0 0 * * ?" />
+	</bean>
+
+	<bean name="JSPeriodsjobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass" value="com.npc.lottery.job.common.jssb.JSSBPeriodsJob" />
+		<property name="jobDataAsMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+
+	<!--江苏骰宝开盘状态Job -->
+	<bean id="JSOpenTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="JSOpenjobDetail" />
+		<property name="cronExpression" value="15 0/10 8-22 * * ?" />
+	</bean>
+	<bean name="JSOpenjobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass"
+			value="com.npc.lottery.job.common.jssb.JSSBopenPeriodsJob" />
+		<property name="jobDataAsMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+
+	<!-- 江苏骰宝job end -->
+
+	
+	<!-- 幸运农场job设置 start -->
+	<!--幸运农场盘期Job -->
+	<bean id="NCcronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="ncjobDetail" />
+		<property name="cronExpression" value="0 30 23 * * ?" />
+	</bean>
+
+	<bean name="ncjobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass" value="com.npc.lottery.job.common.nc.NCPeriodsJob" />
+		<property name="jobDataAsMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+
+	<!--幸运农场开盘状态Job -->
+	<bean id="NC2To13openTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="NCopenjobDetail" />
+		<property name="cronExpression" value="10 3/10 0-1 * * ?" />
+	</bean>
+	<bean id="NC14To97To1openTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="NCopenjobDetail" />
+		<property name="cronExpression" value="10 3/10 9-23 * * ?" />
+	</bean>
+	
+
+	<bean name="NCopenjobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass" value="com.npc.lottery.job.common.nc.NCopenPeriodsJob" />
+		<property name="jobDataAsMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+	
+	<!--每一天凌晨两点半还原可用信用额度Job -->
+	<bean id="MemberTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="memberDetail" />
+		<property name="cronExpression" value="0 30 2 * * ?" />
+	</bean>
+
+	<bean name="memberDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass" value="com.npc.lottery.job.common.MemberJob" />
+		<property name="jobDataAsMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+	
+	<!--农场每日早上8点处理前一天开奖异常盘期获取开奖号码Job -->
+	<bean id="NCReLotteryEODcronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="NCReLotteryEODjobDetail" />
+		<property name="cronExpression" value="0 0 8 * * ?" />
+	</bean>
+	<bean name="NCReLotteryEODjobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass"
+			value="com.npc.lottery.job.common.nc.NCReLotteryEOD" />
+		<property name="jobDataAsMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+	<!-- 幸运农场job设置 end -->
+	
+	<!--广东快乐十分每日结束重新兑奖JoB -->
+	<bean id="GDReLotteryEODcronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="GDReLotteryEODjobDetail" />
+		<property name="cronExpression" value="0 10 23 * * ?" />
+	</bean>
+
+	<bean name="GDReLotteryEODjobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass" value="com.npc.lottery.job.common.gdklsf.GDReLotteryEOD" />
+		<property name="jobDataAsMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+	<!--重庆时时彩每日结束重新兑奖JoB -->
+	<bean id="CQReLotteryEODcronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="CQReLotteryEODjobDetail" />
+		<property name="cronExpression" value="0 10 2 * * ?" />
+	</bean>
+
+	<bean name="CQReLotteryEODjobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass" value="com.npc.lottery.job.common.cqssc.CQReLotteryEOD" />
+		<property name="jobDataAsMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+	<!--北京赛车每日结束重新兑奖JoB -->
+	<bean id="BJReLotteryEODcronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="BJReLotteryEODjobDetail" />
+		<property name="cronExpression" value="0 10 0 * * ?" />
+	</bean>
+
+	<bean name="BJReLotteryEODjobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass" value="com.npc.lottery.job.common.bjsc.BJReLotteryEOD" />
+		<property name="jobDataAsMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+	<!-- 江苏每日结束重新兑奖JoB -->
+	<bean id="JSSBReLotteryEODcronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="JSSBReLotteryEODjobDetail" />
+		<property name="cronExpression" value="0 30 22 * * ?" />
+	</bean>
+
+	<bean name="JSSBReLotteryEODjobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass" value="com.npc.lottery.job.common.jssb.JSSBReLotteryEOD" />
+		<property name="jobDataAsMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="ReSentLotterycronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="ReSentLotteryjobDetail" />
+		<property name="cronExpression" value="0/30 * * * * ?" />
+	</bean>
+
+	<bean name="ReSentLotteryjobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass" value="com.npc.lottery.job.common.ReSentLotteryJob" />
+	</bean>
+	
+	<!-- 	每天凌晨4点定时删除临时表 -->
+	<bean id="DeleteTempTablecronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="DeleteTempTablejobDetail" />
+		<property name="cronExpression" value="0 0 4 * * ?" />
+	</bean>
+
+	<bean name="DeleteTempTablejobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass" value="com.npc.lottery.job.common.DeleteTempTableJob" />
+	</bean>
+</beans>

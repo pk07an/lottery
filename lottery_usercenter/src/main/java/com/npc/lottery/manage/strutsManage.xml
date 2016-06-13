@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- odds -->
+	<!-- 赔率 设置相关action -->
+	<package name="manage" extends="default" namespace="/admin">
+	 	<!-- 增加统一异常处理 start -->
+        <global-results>
+			<!-- 下面定义的结果对所有的Action都有效 -->
+			<result name="exception">/common/error.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="exception"/>
+		</global-exception-mappings>
+		<!-- 增加统一异常处理 end -->
+		<!--內部管理菜單-->
+		<action name="getInManageMenu" class="com.npc.lottery.manage.action.SystemConfigAction" method="getInManageMenu">
+			 <result name="success">/jsp/admin/frame/topMenu.jsp</result>
+		</action>
+		<!--個人管理菜單-->
+		<action name="getPersonalAdminMenu" class="com.npc.lottery.manage.action.SystemConfigAction" method="getPersonalAdminMenu">
+			 <result name="success">/jsp/admin/frame/topMenu.jsp</result>
+		</action>
+		<!--用戶管理菜單-->
+		<action name="getUserMenu" class="com.npc.lottery.manage.action.SystemConfigAction" method="getUserMenu">
+			 <result name="success">/jsp/admin/frame/topMenu.jsp</result>
+		</action>
+		<!--进入管理首页-->
+		<action name="enterManage" class="com.npc.lottery.manage.action.SystemConfigAction" method="enterManage">
+			<result name="enterManage">/jsp/admin/frame/main.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>		
+         </action>
+			
+       <!-- 进入下注的入口页面 默认进入六合彩過關的下注提交action-->
+		 <action name="systemConfig" class="com.npc.lottery.manage.action.SystemConfigAction" method="enterSystemConfig">
+			<result name="success">/jsp/admin/manage/systemInitConfig.jsp</result>			 		 		 
+			<result name="failure">/common/infoPage.jsp</result>				
+         </action>
+		 <action name="updateAutoOddsDoubleSide" class="com.npc.lottery.manage.action.SystemConfigAction" method="updateAutoOddsDoubleSide">
+			<result name="success" type="redirect">systemConfig.action?type=privateAdmin&amp;autoOddsType=${autoOddsType}</result>			 		 		 
+         </action>
+		<!--进入交易设定页面 默认进入广东快乐十分界面-->
+		<action name="enterTradingSet" class="com.npc.lottery.manage.action.SystemConfigAction" method="enterTradingSet">
+			 <result name="gd">/jsp/admin/manage/gdTradingSet.jsp</result>
+			 <result name="cq">/jsp/admin/manage/cqTradingSet.jsp</result>
+			 <result name="bjsc">/jsp/admin/manage/bjscTradingSet.jsp</result>				
+			 <result name="K3">/jsp/admin/manage/k3TradingSet.jsp</result>
+			 <result name="NC">/jsp/admin/manage/ncTradingSet.jsp</result>
+		     <result name="input">/common/infoPage.jsp</result>				
+        </action>
+		<!--更新广东交易設定 -->
+		<action name="updateGdTradingSet" class="com.npc.lottery.manage.action.SystemConfigAction" method="updateGdTradingSet">
+			 <result name="success" type="redirect">/admin/enterTradingSet.action?subType="GDKLSF"</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--更新农场交易設定 -->
+		<action name="updateNCTradingSet" class="com.npc.lottery.manage.action.SystemConfigAction" method="updateNCTradingSet">
+			 <result name="success" type="redirect">/admin/enterTradingSet.action?subType="NC"</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--更新重庆交易設定 -->
+		<action name="updateCqTradingSet" class="com.npc.lottery.manage.action.SystemConfigAction" method="updateCqTradingSet">
+			 <result name="success" type="redirect">/admin/enterTradingSet.action?subType="CQSSC"</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--更新北京交易設定 -->
+		<action name="updateBjTradingSet" class="com.npc.lottery.manage.action.SystemConfigAction" method="updateBjTradingSet">
+			 <result name="success" type="redirect">/admin/enterTradingSet.action?subType="BJSC"</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		<!--更新快3交易設定 -->
+		<action name="updateK3TradingSet" class="com.npc.lottery.manage.action.SystemConfigAction" method="updateK3TradingSet">
+			 <result name="success" type="redirect">/admin/enterTradingSet.action?subType="K3"</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		
+		<!--公告 总监-->
+		<action name="queryAllMessage" class="com.npc.lottery.manage.action.ShopsDeclarattonAction" method="queryAllMessage">
+			 <result name="success">/jsp/admin/manage/shopsDeclaratton.jsp</result>
+			 <result name="input">/common/infoPage.jsp</result>
+		</action>
+		
+		<!--公告end -->
+		
+		<!-- 賠率設置日誌  -->
+		<action name="playOddsLogAction" class="com.npc.lottery.manage.action.ShopsPlayOddsLogAction" method="viewMain">
+			<result name="success">/jsp/admin/manage/shopsPlayOddsLog.jsp</result>
+		</action>
+		<!-- 注單搜索  -->
+		<action name="searchBill" class="com.npc.lottery.manage.action.BillSearchAction" method="searchBill">
+			<result name="success">/jsp/admin/manage/petReportSearch.jsp</result>
+		</action>
+		<!-- 注單搜索 总管  -->
+		<!-- <action name="queryBill" class="com.npc.lottery.manage.action.BillSearchAction" method="queryBill">
+			<result name="success">/jsp/admin/manage/petReportSearch.jsp</result>
+		</action> -->
+		<!-- 注單搜索 总监 -->
+		<action name="queryBillAdmin" class="com.npc.lottery.manage.action.BillSearchAction" method="queryBillAdmin">
+			<result name="success">/jsp/admin/playDetailBill.jsp</result>
+		</action>
+		<!-- 注單注銷和恢復操作日誌 -->
+		<action name="queryCancelPetLog" class="com.npc.lottery.manage.action.BillSearchAction" method="queryCancelPetLog">
+			<result name="success">/jsp/admin/manage/cancelPetLog.jsp</result>
+		</action>
+		
+		
+		<!-- 快乐十分钟历史开奖-->
+		<action name="enterLotResultHistoryAdmin" class="com.npc.lottery.manage.action.SystemConfigAction" method="enter">
+			<result name="gdlotResultHistory">/jsp/admin/manage/gdklsfLotResultHistory.jsp</result>	
+			<result name="nclotResultHistory">/jsp/admin/manage/ncLotResultHistory.jsp</result>	
+			<result name="cqlotResultHistory">/jsp/admin/manage/cqsscLotResultHistory.jsp</result>
+			<result name="bjlotResultHistory">/jsp/admin/manage/bjscLotResultHistory.jsp</result>
+			<result name="jslotResultHistory">/jsp/admin/manage/jssbLotResultHistory.jsp</result>
+			<result name="failure">/common/infoPage.jsp</result>			
+        </action>
+		
+		
+		<!-- 后台跑马灯息action 通过<s:action 标签在页面上进行显示 -->		
+		 <action name="marquee" class="com.npc.lottery.manage.action.MarqueeAction" method="enter">
+			<result name="marquee">/jsp/admin/manage/marquee.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>			
+         </action>
+		
+		<!-- 登錄日志 -->
+        <action name="loginLog" class="com.npc.lottery.manage.action.SystemConfigAction" method="loginLog">
+			 <result name="success">/jsp/admin/manage/loginLog.jsp</result>	
+			 <result name="input">/common/infoPage.jsp</result>		
+        </action>
+		
+		<!-- 查询登錄日志 -->
+        <action name="queryLoginLog" class="com.npc.lottery.manage.action.SystemConfigAction" method="queryLoginLog">
+			<result name="list">/jsp/admin/manage/loginLog.jsp</result>	 
+			<result name="input">/common/infoPage.jsp</result>
+        </action>
+		
+		<!--管理框架-->
+		<action name="topMenu" class="com.npc.lottery.manage.action.SystemConfigAction" method="getTopMenu">
+			<result name="topMenu">/jsp/admin/frame/topMenu.jsp</result>	
+			<result name="failure">/common/infoPage.jsp</result>		
+         </action>
+		
+		<!-- 注單搜索  总监删除注單-->
+		<!-- <action name="ajaxDeleteBillSubmitForChief" class="com.npc.lottery.manage.action.BillSearchAction" method="ajaxDeleteBillSubmitForChief">
+			<result name="input">/common/infoPage.jsp</result>	
+		</action> -->
+		<!-- 注單搜索  总监注销注單-->
+		<action name="ajaxCancelBillSubmitForChief" class="com.npc.lottery.manage.action.BillSearchAction" method="ajaxCancelBillSubmitForChief">
+			<result name="input">/common/infoPage.jsp</result>	
+		</action>
+		<!-- 注單搜索  总监恢复注單-->
+		<action name="ajaxRecoveryBillSubmit" class="com.npc.lottery.manage.action.BillSearchAction" method="ajaxRecoveryBillSubmitForChief">
+			<result name="input">/common/infoPage.jsp</result>	
+		</action>
+    </package>
+	
+</struts>

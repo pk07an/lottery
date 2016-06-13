@@ -1,0 +1,11 @@
+tb_default_play_odds
+tb_play_type
+tb_play_win_info
+
+TB_FRAME_MANAGER_STAFF
+
+tb_frame_org
+TB_FRAME_FUNCTION
+TB_FRAME_ROLES
+TB_FRAME_RESOURCE
+TB_FRAME_ROLE_FUNC

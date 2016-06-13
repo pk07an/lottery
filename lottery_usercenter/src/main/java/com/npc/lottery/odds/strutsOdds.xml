@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- odds -->
+	<!-- 赔率 设置相关action -->
+	<package name="odds" extends="default" namespace="/admin">
+	  	<!-- 增加统一异常处理 start -->
+        <global-results>
+			<!-- 下面定义的结果对所有的Action都有效 -->
+			<result name="exception">/common/error.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="exception"/>
+		</global-exception-mappings>
+		<!-- 增加统一异常处理 end -->
+       <!-- 进入下注的入口页面 默认进入六合彩過關的下注提交action-->
+		 <action name="oddsSet" class="com.npc.lottery.odds.action.OddsAction" method="enterOddSet">
+			 <result name="memberCenter">/jsp/admin/odds/gdklsfBall.jsp</result>
+			 <result name="klsfBall">/jsp/admin/odds/gdklsfBall.jsp</result>
+			 <result name="klsfDoubleSide">/jsp/admin/odds/gdklsfDoubleSide.jsp</result>	
+			 <result name="klsfSumDragonTiger">/jsp/admin/odds/gdklsfSumDragonTiger.jsp</result>
+			 <result name="klsfStraightthrough">/jsp/admin/odds/gdklsfStraightthrough.jsp</result>
+			 <result name="cqsscBall">/jsp/admin/odds/cqsscBall.jsp</result>
+		 		 
+			<result name="failure">/common/infoPage.jsp</result>				
+        </action>
+		
+		<action name="ajaxgdBalloddsUpdate" class="com.npc.lottery.odds.action.GDKLSFBallOddsAction" method="ajaxSetOdds">
+		</action>
+		<action name="ajaxNCBalloddsUpdate" class="com.npc.lottery.odds.action.NCBallOddsAction" method="ajaxSetOdds">
+		</action>
+		<action name="ajaxCQBalloddsUpdate" class="com.npc.lottery.odds.action.CQSSCOddsAction" method="ajaxSetOdds">
+		</action>
+		<action name="ajaxBJBalloddsUpdate" class="com.npc.lottery.odds.action.BjscOddsAction" method="ajaxSetOdds">
+		</action>
+		<action name="ajaxK3BalloddsUpdate" class="com.npc.lottery.odds.action.K3OddsAction" method="ajaxSetOdds">
+		</action>
+		<action name="ajaxFengHao" class="com.npc.lottery.odds.action.GDKLSFBallOddsAction" method="ajaxFengHao">
+		</action>
+		
+		<action name="balloddsUpdate" class="com.npc.lottery.odds.action.GDKLSFBallOddsAction" method="updateOdds">
+			 <result name="success" type="redirectAction">oddsSet?subType=${subType}&amp;periodsState=${periodsState}</result>
+		</action>
+		
+		<action name="doubleSideOddsUpdate" class="com.npc.lottery.odds.action.GDKLSFDoubleSideOddsAction" method="updateOdds">
+			 <result name="success" type="redirectAction">oddsSet?subType=${subType}&amp;periodsState=${periodsState}</result>
+		</action>
+		
+		<action name="zhlhOddsUpdate" class="com.npc.lottery.odds.action.GDKLSFDoubleSideOddsAction" method="updateOdds">
+			 <result name="success" type="redirectAction">oddsSet?subType=${subType}&amp;periodsState=${periodsState}</result>
+		</action>
+		
+		<action name="lmOddsUpdate" class="com.npc.lottery.odds.action.GDKLSFStraightthroughOddsAction" method="updateOdds">
+			 <result name="success" type="redirectAction">oddsSet?subType=${subType}&amp;periodsState=${periodsState}</result>
+		</action>
+		
+		<action name="cqsscoddsUpdate" class="com.npc.lottery.odds.action.CQSSCOddsAction" method="updateOdds">
+			 <result name="success" type="chain">oddsSet</result>
+		</action>
+		
+		<!--開盤賠率設置-->
+		
+		<action name="enterOpenOdds" class="com.npc.lottery.odds.action.OddsAction" method="enterOpenOdds">
+			 <result name="gd">/jsp/admin/odds/gdklsfLotOpenOdds.jsp</result>
+			 <result name="cq">/jsp/admin/odds/cqsscLotOpenOdds.jsp</result>
+			 <result name="bjsc">/jsp/admin/odds/bjscLotOpenOdds.jsp</result>
+			 <result name="K3">/jsp/admin/odds/k3LotOpenOdds.jsp</result>
+			 <result name="NC">/jsp/admin/odds/ncLotOpenOdds.jsp</result>
+		</action>
+		<!--更新广东开盘赔率 -->
+		<action name="updateGdOpenOdds" class="com.npc.lottery.odds.action.OddsAction" method="updateGdOpenOdds">
+			 <result name="success" type="redirect">/admin/enterOpenOdds.action</result>
+			 <result name="input" type="chain">enterOpenOdds</result>
+		</action>
+		<!--更新农场开盘赔率 -->
+		<action name="updateNCOpenOdds" class="com.npc.lottery.odds.action.OddsAction" method="updateNCOpenOdds">
+			 <result name="success" type="redirect">/admin/enterOpenOdds.action?subType="NC"</result>
+			 <result name="input" type="chain">enterOpenOdds</result>
+		</action>
+		<!--更新北京賽車开盘赔率 -->
+		<action name="updateBjOpenOdds" class="com.npc.lottery.odds.action.OddsAction" method="updateBjOpenOdds">
+			 <result name="success" type="redirect">/admin/enterOpenOdds.action?subType="BJSC"</result>
+			 <result name="input" type="chain">enterOpenOdds</result>
+		</action>
+		<!--更新重庆开盘赔率 -->
+		<action name="updateCqOpenOdds" class="com.npc.lottery.odds.action.OddsAction" method="updateCqOpenOdds">
+			 <result name="success" type="redirect">/admin/enterOpenOdds.action?subType="CQSSC"</result>
+			 <result name="input" type="chain">enterOpenOdds</result>
+		</action>
+		<!--更新K3开盘赔率 -->
+		<action name="updateK3OpenOdds" class="com.npc.lottery.odds.action.OddsAction" method="updateK3OpenOdds">
+			 <result name="success" type="redirect">/admin/enterOpenOdds.action?subType="K3"</result>
+			 <result name="input" type="chain">enterOpenOdds</result>
+		</action>
+		<!--更新香港开盘赔率 -->
+		<!--<action name="updateHkOpenOdds" class="com.npc.lottery.odds.action.OddsAction" method="updateHkOpenOdds">
+			 <result name="success" type="redirect">/admin/enterOpenOdds.action?subType="HKLHC"</result>
+			 <result name="input" type="chain">enterOpenOdds</result>
+		</action>-->
+    </package>
+	
+</struts>
+
+

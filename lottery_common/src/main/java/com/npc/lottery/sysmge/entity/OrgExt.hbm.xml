@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.npc.lottery.sysmge.entity">
+	<class
+		name="OrgExt"
+		table="TB_FRAME_ORG_EXT"
+	>
+		<id	name="orgID" column="ORGID" type="java.lang.Long"/>
+	
+		<property
+			name="channelID"
+			column="CHANNEL_ID"
+			type="string"
+			not-null="false"
+			length="3"
+		/>
+		<property
+			name="saleType"
+			column="SALE_TYPE"
+			type="string"
+			not-null="false"
+			length="3"
+		/>
+		<property
+			name="cmmsOrgID"
+			column="CMMS_ORG_ID"
+			type="java.lang.Long"
+			not-null="false"
+		/>
+		<property
+			name="cmmsOrgName"
+			column="CMMS_ORG_NAME"
+			type="string"
+			not-null="false"
+			length="60"
+		/>
+		<property
+			name="orgType1"
+			column="ORG_TYPE1"
+			type="string"
+			not-null="false"
+			length="3"
+		/>
+		<property
+			name="orgType2"
+			column="ORG_TYPE2"
+			type="string"
+			not-null="false"
+			length="3"
+		/>
+		<property
+			name="accessOrg"
+			column="ACCESS_ORG"
+			type="java.lang.Long"
+			not-null="false"
+		/>
+
+	</class>	
+</hibernate-mapping>
